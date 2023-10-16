@@ -3,4 +3,5 @@
     //esto sirve para poder hacer esto
     //header("Location:".url.'?controller=pedido');
     echo "preubas config";
+    
 ?>
