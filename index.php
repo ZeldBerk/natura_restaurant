@@ -1,18 +1,10 @@
 <?php
-include_once('controller/pedidoController.php');
-include_once('config/parameters.php');
-/*if(isset($_GET['controller'])){
-    echo 'Quieres realizar una accion sobre '.$GET['controller'];
-    if(isset($_GET['action'])){
-        echo 'Sobre '.$GET['controller'].' quieres mostrar la pagina '.$GET['action']; 
-    }else{
-        echo 'No me has pasado controller';
-    }
-}*/
+include_once 'controller/ProductoController.php';
+include_once 'config/Parameters.php';
 
 if(!isset($GET['controller'])){
     //Si no se pasa nada, se mostrara pagina principal de pedidos
-    header("Location:".url.'?controller=pedido');
+    header("Location:".url.'?controller=producto');
 }else{
     $nombre_controller = $GET['controller'].' Controller ';
 
@@ -27,11 +19,23 @@ if(!isset($GET['controller'])){
         }else{
             $action = action_default;
         }
-echo 'hola';
         $controller->$action();
     }else{
-        header("Location:".url.'?controller=pedido');
+        header("Location:".url.'?controller=producto');
     }
+
 }
 
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natura Restaurant</title>
+</head>
+<body>
+    <h1>Natura Restaurant</h1>    
+</body>
+</html>

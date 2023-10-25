@@ -5,9 +5,8 @@ class DataBase{
         $con = new mysqli($host,$user,$pasword,$db);
         if ($con == false) {
             die('DATABASE ERROR');
-
         }else{
-            
+            return $con;
         }
     }
 }
