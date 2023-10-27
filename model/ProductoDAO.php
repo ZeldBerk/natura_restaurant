@@ -45,6 +45,7 @@ class ProductoDAO{
 
         $con->close();
         
+        return $result->fetch_object('id');
         /*
         //almaceno el resultado en una lista
         $listaProductos = [];

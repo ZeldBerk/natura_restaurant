@@ -3,16 +3,16 @@ include_once("model/ProductoDAO.php");
 
 class ProductoController {
     public function index() {
-        // Descomenta y completa la lógica para obtener y mostrar todos los productos.
-        // $allProducts = ProductoDao::getAllProducts();
+        
+        $allProducts = ProductoDao::getAllProducts();
         // include "header.php";
-        // include "panel.php";
+        include_once 'view/PanelPedido.php';
         // include "footer.php";
-        echo 'estas en el index';
     }
 
     public function compra() {
-        echo 'Página de compra';
+
+        include_once 'view/PanelPedido.php';
     }
 
     public function eliminar(){
@@ -27,6 +27,7 @@ class ProductoController {
     public function editar(){
         echo 'Actualizar producto';
         $id_producto = $_POST['id'];
+        ProductoDao::getAllById($_POST['id']);
 
         include_once 'view/editarPedido.php';
         

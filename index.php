@@ -13,8 +13,8 @@ if(!isset($_GET['controller'])){
         //si no mostramos por defecto
         $controller = new $nombre_controller();
 
-        if(isset($GET['action']) && method_exists($controller, $_GET['action'])){
-            $action = $GET['action'];
+        if(isset($_GET['action']) && method_exists($controller, $_GET['action'])){
+            $action = $_GET['action'];
         }else{
             $action = action_default;
         }
@@ -27,14 +27,4 @@ if(!isset($_GET['controller'])){
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natura Restaurant</title>
-</head>
-<body>
-    <h1>Natura Restaurant</h1>    
-</body>
-</html>
+
