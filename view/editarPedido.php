@@ -12,9 +12,10 @@ echo 'Este es tu panel de pedido';
 </head>
 <body>
     <td>
-        <form action=<?=url."?controller=producto&action=eliminar"?> method="POST">
-            <input name="id" value="<?= $product->getId()?>" hidden />
-            <button type="submit">Eliminar</button>
+        <form action=<?=url."?controller=producto&action=editar"?> method="POST">
+            <input name="id" value="<?= $product->getId()?>" />
+            <input name="id" value="<?= $product->getName()?>" />
+            <button type="submit">Modificar</button>
         </form>    
     </td>
 </body>

@@ -1,28 +1,48 @@
 <?php
-//Creamos el controlador de pedidos
 include_once("model/ProductoDAO.php");
 
-class productoController{
-
-    public function index(){
-        //Llamo al modelo para obtrener los datos
-        $allProducts = ProductoDao::getAllProducts();
-        //cabecera
-        include_once '';
-        //panel
-        include_once '';
-        //footer
-        include_once '';
+class ProductoController {
+    public function index() {
+        // Descomenta y completa la lógica para obtener y mostrar todos los productos.
+        // $allProducts = ProductoDao::getAllProducts();
+        // include "header.php";
+        // include "panel.php";
+        // include "footer.php";
+        echo 'estas en el index';
     }
 
+    public function compra() {
+        echo 'Página de compra';
+    }
 
-        public function compra(){
-            echo 'Pagina de compra';
-        }
+    public function eliminar(){
+        echo 'Producto a Eliminar';
+        //falta if
+        $id_producto = $_POST['id'];
+        ProductoDao::deleteProduct($id_producto);
+        header("Location:".url.'?controller=producto');
 
-        public function producto(){
-            echo 'Pagina de producto';
-        }
+    }
+
+    public function editar(){
+        echo 'Actualizar producto';
+        $id_producto = $_POST['id'];
+
+        include_once 'view/editarPedido.php';
+        
+        //ProductoDao::updateProduct($nombre,$tipo,$id);
+    }
+
+    public function actualizar(){
+        echo 'Actualizar producto';
+        //falta if
+        $nombre = $_POST['name'];
+        $tipo = $_POST['tipo'];
+        $id = $_POST['id'];
+
+        //ProductoDao::updateProduct($nombre,$tipo,$id);
+
+    }
 }
 
 

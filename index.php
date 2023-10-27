@@ -2,16 +2,15 @@
 include_once 'controller/ProductoController.php';
 include_once 'config/Parameters.php';
 
-if(!isset($GET['controller'])){
+if(!isset($_GET['controller'])){
     //Si no se pasa nada, se mostrara pagina principal de pedidos
     header("Location:".url.'?controller=producto');
 }else{
-    $nombre_controller = $GET['controller'].' Controller ';
+    $nombre_controller = $_GET['controller'] . 'Controller';
 
     if(class_exists($nombre_controller)){
         //Miramos si nos pasa una accion
         //si no mostramos por defecto
-
         $controller = new $nombre_controller();
 
         if(isset($GET['action']) && method_exists($controller, $_GET['action'])){
