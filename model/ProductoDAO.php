@@ -3,9 +3,26 @@ include_once('config/DataBase.php');
 
 class ProductoDAO{
     public static function getAllProducts(){
-        $con = DataBase::connect();
-        //if($result)
 
+        // Realizamos la conexión
+        $con = DataBase::connect();
+    
+        // Preparamos la conexión
+        $stmt = $con->prepare("SELECT * FROM productos");
+    
+        // Ejecutamos la consulta
+        $stmt->execute();
+    
+        // Obtenemos el resultado
+        $result = $stmt->get_result();
+    
+        // Almacenamos la consulta en una lista
+        $allProductsList = [];
+        while($productoDB = $result->fetch_object()){
+            $allProductsList[] = $productoDB;
+        }
+    
+        return $allProductsList;
     }
 
     public static function getAllByType($tipo){

@@ -1,8 +1,3 @@
-<?php
-echo 'Este es tu panel de pedido';
-    //esto va dentro de un una tabla que se hace con html y entre medias hay que meter un foreach
-    
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
