@@ -17,7 +17,7 @@ class ProductoDAO{
         //preparamos la consulta
         $con = DataBase::connect();
 
-        $stmt = $con->prepare("SELECT  * FROM product WHERE tipo=?");
+        $stmt = $con->prepare("SELECT  * FROM product WHERE type=?");
         $stmt->bind_param("s", $tipo);
 
         //ejecutamos la consulta
@@ -40,7 +40,7 @@ class ProductoDAO{
         //preparamos la consulta
         $con = DataBase::connect();
 
-        $stmt = $con->prepare("SELECT  * FROM product WHERE tipo=?");
+        $stmt = $con->prepare("SELECT  * FROM product WHERE product_id=?");
         $stmt->bind_param("i", $id);
 
         //ejecutamos la consulta
@@ -49,7 +49,7 @@ class ProductoDAO{
 
         $con->close();
         
-        return $result->fetch_object('id');
+        return $result->fetch_object($id);
         /*
         //almaceno el resultado en una lista
         $listaProductos = [];
