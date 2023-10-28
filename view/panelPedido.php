@@ -15,11 +15,12 @@
         <?php
             foreach($allProducts as $product){?>
             <!--Creamos una fila por cada producto de la base de datos -->
-            <td><?=$product->getId()?></td>
+            <td><?=$product->getProductId()?></td>
             <td><?=$product->getName()?></td>
+            <td><?=$product->getType()?></td>
             <td>
                 <form action=<?=url."?controller=producto&action=eliminar"?> method="POST">
-                    <input name="id" value="<?= $product->getId()?>" hidden />
+                    <input name="id" value="<?= $product->getProductId()?>" hidden />
                     <input name="nombre" value="<?= $product->getName()?>" hidden />
                     <button type="submit" name="eliminar">Eliminar</button>
                 </form>    

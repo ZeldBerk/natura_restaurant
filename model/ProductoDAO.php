@@ -3,26 +3,13 @@ include_once('config/DataBase.php');
 
 class ProductoDAO{
     public static function getAllProducts(){
+        
+        //Obntengo la lista de las dos clases 
+        $listAllProducts = array_merge(ProductoDAO::getAllById('smoothie'),ProductoDAO::getAllById('bol'));
 
-        // Realizamos la conexión
-        $con = DataBase::connect();
-    
-        // Preparamos la conexión
-        $stmt = $con->prepare("SELECT * FROM productos");
-    
-        // Ejecutamos la consulta
-        $stmt->execute();
-    
-        // Obtenemos el resultado
-        $result = $stmt->get_result();
-    
-        // Almacenamos la consulta en una lista
-        $allProductsList = [];
-        while($productoDB = $result->fetch_object()){
-            $allProductsList[] = $productoDB;
-        }
-    
-        return $allProductsList;
+        //devuelvo el resulatado
+        return $listAllProducts;
+        
     }
 
     public static function getAllByType($tipo){
@@ -41,7 +28,7 @@ class ProductoDAO{
 
         //almaceno el resultado en una lista
         $listaProductos = [];
-        while($productoDB = $result->fetch_objcet($tipo)){
+        while($productoDB = $result->fetch_object($tipo)){
             $listaProductos[] = $productoDB;
         }
 

@@ -3,30 +3,28 @@
         const PRECIOSMOOTHIE = 4.99;
         const PRECIOBOLES = 9.99;
 
-        protected $id;
+        protected $product_id;
         protected $name;
-        protected $tipo;
+        protected $type;
 
-        public function __construct($id, $name, $tipo){
-            $this->id = $id;
-            $this->name = $name;
-            $this->tipo = $tipo;
+        public function __construct(){
+        
         }
 
         /**
-         * Get the value of id
+         * Get the value of product_id
          */
-        public function getId()
+        public function getProductId()
         {
-                return $this->id;
+                return $this->product_id;
         }
 
         /**
-         * Set the value of id
+         * Set the value of product_id
          */
-        public function setId($id): self
+        public function setProductId($product_id): self
         {
-                $this->id = $id;
+                $this->product_id = $product_id;
 
                 return $this;
         }
@@ -50,23 +48,23 @@
         }
 
         /**
-         * Get the value of tipo
+         * Get the value of type
          */
-        public function getTipo()
+        public function getType()
         {
-                return $this->tipo;
+                return $this->type;
         }
 
         /**
-         * Set the value of tipo
+         * Set the value of type
          */
-        public function setTipo($tipo): self
+        public function setType($type): self
         {
-                $this->tipo = $tipo;
+                $this->type = $type;
 
                 return $this;
         }
 
-        public abstract function calculaPrecioTotal($numDias);
-        public abstract function devuelvePrecioDia();
+        //public abstract function calculaPrecioTotal($numDias);
+        //public abstract function devuelvePrecioDia();
     }
