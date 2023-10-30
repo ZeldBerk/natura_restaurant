@@ -27,7 +27,7 @@ class ProductoController {
     public function editar(){
         echo 'Actualizar producto';
         $id_producto = $_POST['id'];
-        ProductoDao::getAllById($_POST['id']);
+        ProductoDao::getProductById($_POST['id']);
 
         include_once 'view/editarPedido.php';
         

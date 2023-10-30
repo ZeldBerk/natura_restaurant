@@ -6,22 +6,31 @@
     <title>Document</title>
 </head>
 <body>
-    <table id='products'></table>
+    <table border="1">
         <tr>
             <th>Id</th>
             <th>Nombre</th>
-        </tr>
-        <tr> 
+            <th>Precio</th>
+            <th>Descripcion</th>
+            <th>Tipo</th>
+            <th>Id Categoria</th>
+            <th>Imagen</th>
+        </tr> 
         <?php
             foreach($allProducts as $product){?>
+        <tr>
             <!--Creamos una fila por cada producto de la base de datos -->
-            <td><?=$product->getProductId()?></td>
-            <td><?=$product->getName()?></td>
-            <td><?=$product->getType()?></td>
+            <td><?=$product->getIdProducto()?></td>
+            <td><?=$product->getNombre()?></td>
+            <td><?=$product->getPrecio()?></td>
+            <td><?=$product->getDescripcion()?></td>
+            <td><?=$product->getAllByType()?></td>
+            <td><?=$product->getIdCategoria()?></td>
+            <td><?=$product->getImagen()?></td>
             <td>
                 <form action=<?=url."?controller=producto&action=eliminar"?> method="POST">
-                    <input name="id" value="<?= $product->getProductId()?>" hidden />
-                    <input name="nombre" value="<?= $product->getName()?>" hidden />
+                    <input name="id" value="<?= $product->getIdProducto()?>" hidden />
+                    <input name="nombre" value="<?= $product->getNombre()?>" hidden />
                     <button type="submit" name="eliminar">Eliminar</button>
                 </form>    
             </td>
