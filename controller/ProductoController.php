@@ -16,10 +16,10 @@ class ProductoController {
     }
 
     public function eliminar(){
-        echo 'Producto a Eliminar';
-        //falta if
-        $id_producto = $_POST['id'];
-        ProductoDao::deleteProduct($id_producto);
+        if(isset($_POST['id'])){
+            $id_producto = $_POST['id'];
+            ProductoDao::deleteProduct($id_producto);
+        } 
         header("Location:".url.'?controller=producto');
 
     }
