@@ -24,9 +24,16 @@
                     <td><?=$product->getNombre()?></td>
                     <td><?=$product->getPrecio()?></td>
                     <td><?=$product->getDescripcion()?></td>
-                    <td><?=$product->getAllByType()?></td>
+                    <td><?=$product->getTipo()?></td>
                     <td><?=$product->getIdCategoria()?></td>
                     <td><?=$product->getImagen()?></td>
+                    <td>
+                        <form action=<?=url."?controller=producto&action=editar"?> method="POST">
+                            <input name="id" value="<?= $product->getIdProducto()?>" hidden />
+                            <input name="nombre" value="<?= $product->getNombre()?>" hidden />
+                            <button type="submit" name="editar">Editar</button>
+                        </form>    
+                    </td>
                     <td>
                         <form action=<?=url."?controller=producto&action=eliminar"?> method="POST">
                             <input name="id" value="<?= $product->getIdProducto()?>" hidden />

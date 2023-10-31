@@ -25,9 +25,8 @@ class ProductoController {
     }
 
     public function editar(){
-        echo 'Actualizar producto';
         $id_producto = $_POST['id'];
-        ProductoDao::getProductById($_POST['id']);
+        $product = ProductoDao::getProductById($id_producto);
 
         include_once 'view/editarPedido.php';
         
@@ -35,12 +34,11 @@ class ProductoController {
     }
 
     public function actualizar(){
-        echo 'Actualizar producto';
         //falta if
-        $nombre = $_POST['name'];
-        $tipo = $_POST['tipo'];
-        $id = $_POST['id'];
-
+        //$nombre = $_POST['name'];
+        //$tipo = $_POST['tipo'];
+        //$id = $_POST['id'];
+        header("Location:".url.'?controller=producto');
         //ProductoDao::updateProduct($nombre,$tipo,$id);
 
     }

@@ -47,16 +47,28 @@ class ProductoDAO{
         //preparamos la consulta
         $con = DataBase::connect();
 
-        $stmt = $con->prepare("SELECT  * FROM productos WHERE id_producto=?");
+        $stmt = $con->prepare("SELECT tipo FROM productos WHERE id_producto=?");
+        $stmt->bind_param("i", $id);
+
+        //Ejecutamos la consulta y guardamos el 'tipo' para poder indicar-le una clase al fetch_object
+        $stmt->execute();
+        $tipo = $stmt->get_result()->fetch_object()->tipo;
+
+        //Preparamos la consulta del producto
+        $stmt = $con->prepare("SELECT * FROM productos WHERE id_producto=?");
         $stmt->bind_param("i", $id);
 
         //ejecutamos la consulta
         $stmt->execute();
         $result = $stmt->get_result();
 
+        //Cerramos la conexión
         $con->close();
-        
-        return $result->fetch_object($id);
+
+        //Almacenamos el resultado en una lista y devolvemos el resultado
+        $producto = $result->fetch_object($tipo);
+
+        return $producto;
     }
 
 

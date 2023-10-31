@@ -137,7 +137,7 @@
         /**
          * Get the value of tipo
          */
-        public function getAllByType()
+        public function getTipo()
         {
                 return $this->tipo;
         }
