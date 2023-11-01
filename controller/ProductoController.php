@@ -2,6 +2,7 @@
 include_once("model/ProductoDAO.php");
 
 class ProductoController {
+
     public function index() {
         
         $allProducts = ProductoDao::getAllProducts();
@@ -10,10 +11,12 @@ class ProductoController {
         // include "footer.php";
     }
 
+
     public function compra() {
 
         include_once 'view/PanelPedido.php';
     }
+
 
     public function eliminar(){
 
@@ -25,6 +28,7 @@ class ProductoController {
 
     }
 
+
     public function editar(){
 
         $id_producto = $_POST['id'];
@@ -33,6 +37,7 @@ class ProductoController {
         include_once 'view/editarPedido.php';
         
     }
+
 
     public function actualizar(){
 
@@ -55,6 +60,36 @@ class ProductoController {
         
         header("Location:".url.'?controller=producto');
     
+    }
+
+
+    public function insertar(){
+
+        include_once 'view/insertarProducto.php';
+
+    }
+
+
+    public function insertarbbdd(){
+
+        //Verificamos que se pase lo necesario por POST
+        if (isset($_POST['nombre']) && isset($_POST['precio']) && isset($_POST['tipo']) && isset($_POST['categoria'])){
+
+            //Guardamos los valores recogido por post en variables
+            $nombre = $_POST['nombre'];
+            $precio = $_POST['precio'];
+            $tipo = $_POST['tipo'];
+            $categoria = $_POST['categoria'];
+            $descripcion = $_POST['descripcion'];
+            $imagen = $_POST['imagen'];
+
+            //Pasamos los valores a la funcion para que actualize los productos
+            ProductoDAO::insertarbbdd($nombre,$precio,$descripcion,$tipo,$categoria,$imagen);
+            
+        }
+
+        header("Location:".url.'?controller=producto');
+
     }
 }
 

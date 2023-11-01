@@ -24,7 +24,7 @@
         <input type="text" name="categoria" value="<?= $product->getIdCategoria()?>" required><br><br>
 
         <label for="descripcion">Descripción:</label>
-        <textarea type="text" name="descripcion" required><?= $product->getDescripcion()?></textarea><br><br>
+        <textarea type="text" name="descripcion"><?= $product->getDescripcion()?></textarea><br><br>
 
         <label for="imagen">Imagen:</label>
         <input type="file" name="imagen"  value="<?= $product->getImagen()?>" accept="image/*"><br><br>

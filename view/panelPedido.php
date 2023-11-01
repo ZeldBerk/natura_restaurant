@@ -45,5 +45,8 @@
         <?php
             }?>
     </table>
+    <form action=<?=url."?controller=producto&action=insertar"?> method="POST">
+        <button type="submit" name="insertar">Añadir Nuevo Producto</button>
+    </form>  
 </body>
 </html>

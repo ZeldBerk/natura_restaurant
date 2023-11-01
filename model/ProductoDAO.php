@@ -6,7 +6,6 @@ include_once('model/Boles.php');
 
 class ProductoDAO{
 
-
     public static function getAllProducts(){
         
         //Obntengo la lista de las dos clases 
@@ -87,13 +86,32 @@ class ProductoDAO{
         return $result;
     }
 
-    //falta poner los valores correctos de la base de datos de natura restaurant
+
     public static function updateProduct($id,$nombre,$precio,$descripcion,$tipo,$categoria,$imagen){
         //preparamos la consulta
         $con = DataBase::connect();
 
         $stmt = $con->prepare("UPDATE productos SET nombre=? , precio=? , descripcion=? , tipo=? , id_categoria=? , imagen=? WHERE id_producto=?");
         $stmt->bind_param("sdssisi", $nombre,$precio,$descripcion,$tipo,$categoria,$imagen,$id);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $con->close();
+        return $result;
+    }
+
+
+    public static function insertarbbdd($nombre,$precio,$descripcion,$tipo,$categoria,$imagen){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        // Usar una sentencia preparada con marcadores de posición
+        $stmt = $con->prepare("INSERT INTO `productos` (`nombre`, `precio`, `descripcion`, `tipo`, `id_categoria`, `imagen`) VALUES (?, ?, ?, ?, ?, ?)");
+
+        // Vincular los valores a los marcadores de posición
+        $stmt->bind_param("sdssis", $nombre, $precio, $descripcion, $tipo, $categoria, $imagen);
 
         //ejecutamos la consulta
         $stmt->execute();
