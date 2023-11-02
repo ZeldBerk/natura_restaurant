@@ -1,11 +1,13 @@
 <?php
 include_once("model/ProductoDAO.php");
+include_once("model/Categorias.php");
 
 class ProductoController {
 
     public function index() {
         
         $allProducts = ProductoDao::getAllProducts();
+        //$allCategorias = ProductoDao::getAllCategorias();
         // include "header.php";
         include_once 'view/PanelPedido.php';
         // include "footer.php";

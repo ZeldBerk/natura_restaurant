@@ -16,6 +16,28 @@ class ProductoDAO{
         
     }
 
+    /**
+    public static function getAllCategorias(){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        $stmt = $con->prepare("SELECT id_categoria, nombre FROM categorias");
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $con->close();
+
+        //almaceno el resultado en una lista
+        $listaCategorias = [];
+        while($categoriaDB = $result->fetch_object('Categorias')){
+            $listaCategorias[] = $categoriaDB;
+        }
+        
+        return $listaCategorias;
+    }
+    */
 
     public static function getAllByType($tipo){
 
