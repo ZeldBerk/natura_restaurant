@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <a href=<?=url."?controller=producto&action=compra"?>><?=count($_SESSION['selecciones'])?></a>
 </body>
 </html>

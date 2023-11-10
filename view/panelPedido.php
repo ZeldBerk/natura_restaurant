@@ -41,6 +41,13 @@
                             <button type="submit" name="eliminar">Eliminar</button>
                         </form>    
                     </td>
+                    <td>
+                        <form action=<?=url."?controller=producto&action=sel"?> method="POST">
+                            <input name="id" value="<?= $product->getIdProducto()?>" hidden />
+                            <input name="tipo" value="<?= $product->getTipo()?>" hidden />
+                            <button type="submit" name="sel">Añadir</button>
+                        </form>    
+                    </td>
                 </tr>
         <?php
             }?>

@@ -1,11 +1,31 @@
 <?php
 include_once("model/ProductoDAO.php");
 include_once("model/Categorias.php");
+include_once("model/Pedido.php");
 
 class ProductoController {
 
     public function index() {
         
+        //Iniciamos y tratamos la sesion
+        session_start();
+
+        if(!isset($_SESSION['selecciones'])){
+            $_SESSION['selecciones'] = array();
+        }else{
+            if(isset($_POST['id'])){
+                $id_producto = $_POST['id'];
+
+                $product = ProductoDao::getProductById($id_producto);
+
+                $pedido = new Pedido($product);
+
+                array_push($_SESSION['selecciones'], $pedido);
+            }
+            
+        }
+        //Cabecera
+        include_once 'view/Cabecera.php';
         $allProducts = ProductoDao::getAllProducts();
         //$allCategorias = ProductoDao::getAllCategorias();
         // include "header.php";
@@ -15,8 +35,11 @@ class ProductoController {
 
 
     public function compra() {
+        session_start();
+        //cabecera
 
-        include_once 'view/PanelPedido.php';
+        //panel
+        include_once 'view/panelCompra.php';
     }
 
 
@@ -93,6 +116,7 @@ class ProductoController {
         header("Location:".url.'?controller=producto');
 
     }
+
 }
 
 
