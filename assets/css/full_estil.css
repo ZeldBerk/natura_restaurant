@@ -1,0 +1,547 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* FONTS */
+@font-face {
+    font-family: "Larsseit-Bold";
+    src: url("../fonts/LarsseitBold.otf") format("opentype");
+}
+@font-face {
+    font-family: "Larsseit-ExtraBold";
+    src: url("../fonts/LarsseitExtraBold.otf") format("opentype");
+}
+@font-face {
+    font-family: "Larsseit-Ligth";
+    src: url("../fonts/LarsseitLight.otf") format("opentype");
+}
+@font-face {
+    font-family: "Larsseit-Medium";
+    src: url("../fonts/LarsseitMedium.otf") format("opentype");
+}
+@font-face {
+    font-family: "Larsseit-Thin";
+    src: url("../fonts/LarsseitThin.otf") format("opentype");
+}
+
+/*Variables CSS*/
+/*
+:root {
+    --main-bg-color: #004733;
+}
+*/
+
+/*Media query*/
+@media only screen and (max-width: 600px) {
+    /* body {
+      background-color: lightblue;
+    } */
+}
+
+header{
+    height: 183.99px;
+
+}
+
+h2{
+    color: #004733;
+    font-family: "Larsseit-ExtraBold";
+    font-size: 40px;
+    margin-bottom: 0px;
+}
+
+p{
+    color: #004733;
+    font-family: "Larsseit-Ligth";
+    font-size: 24px;
+}
+
+.sombra{
+    text-shadow: 
+    -0.17px -0.17px 0 #004733,
+     0.17px -0.17px 0 #004733,
+    -0.17px  0.17px 0 #004733,
+     0.17px  0.17px 0 #004733;
+}
+
+
+/*Separacion entre las col-6*/
+.section1 .col-6{
+    padding: 4px;
+}
+
+.section2 .col-6{
+    padding: 4px;
+}
+
+div .col-6{
+    padding: 0px 12px;
+}
+
+.ticket .col-5{
+    padding-left: 5px;
+}
+
+/*Separacion entre las col-1 y 2*/
+
+.col-2{
+    padding: 0px;
+}
+
+.col-3{
+    padding: 0px;
+}
+
+/*Separacion pequña de 4px*/
+.separacion_lite{
+    height: 4px;
+}
+
+/*Separación grande de 60px*/
+.separacion_big{
+    height: 60px;
+}
+
+/*Estilos header*/
+.headerTopBar{
+    background-color: #295639;
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+    padding-bottom: 8px;
+}
+
+.headerTopBar p{  
+    color: #ffffff;
+    font-family: "Larsseit-Ligth";
+    font-size: 13.5px;
+    margin: 0px;
+}
+
+.container-fluid{
+    padding-top: 24.5px;
+    padding-left: 47.5px;
+    padding-right: 47.5px;
+    background-color: #ffffff;
+}
+
+.padB{
+    padding-bottom: 24.5px;
+}
+
+.logo{
+    width: 157px;
+    height: 27px;
+}
+
+.mr-manual{
+    margin-right: 101px;
+}
+
+.navlinkP{
+    color: #004733;
+    text-decoration: none;
+    font-family: "Larsseit-Ligth";
+    font-size: 14px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid transparent;
+    transition: border-bottom 0.1s;
+}
+
+.navlinkP:hover{
+    border-bottom: 1px solid #004733;
+}
+
+.navlinkP img{
+    height: 20px;
+    width: 20px;
+}
+
+.navbar{
+    padding: 0px;
+}
+
+.menu{
+    color: #004733;
+    text-decoration: none;
+    font-family: "Larsseit-Ligth";
+    font-size: 16px;
+    padding-bottom: 4px;
+    position: relative;
+    display: inline-block;
+}
+
+.menu:after {    
+    background: none repeat scroll 0 0 transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 3.5px;
+    left: 50%;
+    position: absolute;
+    background: #004733;
+    transition: width 0.4s ease 0s, left 0.4s ease 0s;
+    width: 0;
+}
+
+.menu:hover:after {
+    width: 100%; 
+    left: 0; 
+}
+
+.buscar{
+    width: 159px;
+    font-family: "Larsseit-Ligth";
+    font-size: 14px;
+    border: none;
+    padding-bottom: 9px;
+}
+.buscar:focus{
+    outline: none;
+}
+
+.buscador{
+    border-bottom: 1px solid #004733;
+    
+}
+
+/*Estilos articulos Section 1*/
+.articleS1L{
+    min-height: 464px;
+    background-color: #F1EEE7;
+    padding-top: 320px;
+    padding-left: 47.5px;
+   
+}
+
+.articleS1R{
+    min-height: 464px;
+    background-color: #F1EEE7;
+    padding-top: 320px;
+    padding-left: 47.5px;
+    
+}
+
+.articleS1B{
+    min-height: 464px;
+    background-color: #D0F0FF;
+    padding-top: 162.5px;
+    padding-bottom: 162.5px;
+}
+
+/*Estilos articulos Section 2*/
+.articleS2L {
+    min-height: 464px; 
+    text-align: center; 
+    padding-top: 168px;
+}
+
+.articleS2R{
+    background-color: #F1EEE7;
+    min-height: 464px;
+    padding-top: 137px;
+}
+
+.marginP{
+    padding-left: 65px;
+    padding-right: 65px;
+    padding-top: 5px;
+}
+
+.h2white{
+    color: white;
+    margin-bottom: 133px;
+}
+
+/*Estilos articulos Section 3*/
+
+
+/*Estilos Carta*/
+
+.mCarta{
+    margin-left: 79.6px;
+    margin-right: 79.6px;
+}
+
+.mCarta .col-4{
+    padding: 0px;
+}
+
+.productoTexto{
+    background-color: #FFFFFF;
+}
+
+.productoTexto p{
+    font-size: 14px;
+    margin-bottom: 4.9px;
+}
+
+.imgProducto{
+    background-color: #F1EEE7;
+    margin-bottom: 10px;
+    min-height: 560px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.anadirCarrito {
+    position: absolute;
+    bottom: -65.6px;
+    width: 100%;
+    background-color: #f0f0f0;
+    padding: 10px;
+    box-sizing: border-box;
+    height: 65.6px;
+    transition: all 0.5s; 
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imgProducto:hover .anadirCarrito {
+    bottom: 0;
+    opacity: 1;
+    background: linear-gradient(to bottom, #FAF6ED, white);
+}
+
+.producto{
+    margin-left: 9.8px;
+    margin-right: 9.8px;
+    margin-bottom: 39.2px;
+}
+
+/*Estilos pag de compra*/
+
+.pagCompra{
+    width: 100%;
+}
+
+.compra{
+    width: 90%;
+    margin: auto;
+}
+
+.compra h2{
+    font-size: 30px;
+    font-family: "Larsseit-Medium";
+}
+
+.compra p{
+    font-size: 14px;
+}
+
+.detallesC{
+    padding: 29.4px;
+    padding-bottom: 49px;
+    border-bottom: 2px solid #004733;
+}
+
+.detallesC img{
+    margin-top: 19.6px;
+}
+
+.detallesC p{
+    margin: 0px;
+
+}
+
+.labelCantidad{
+    font-size: 14px;
+}
+
+.ticket{
+    padding: 29.4px;
+    padding-top: 19.6px;
+}
+
+.ticket p{
+    font-size: 12px;
+    margin: 0px;
+}
+
+.ticket .col-6 .align-self-end p{
+    font-size: 14px;
+    font-family: "Larsseit-Medium";
+    margin-bottom: 4.9px;
+}
+
+.ticket .col-6 .align-self-end p.diezSeispx{
+    font-size: 16px;
+    margin-bottom: 4.9px;
+}
+.ticket .col-6 .align-self-end .price p.diezSeispx{
+    font-size: 16px;
+    margin-bottom: 4.9px;
+}
+
+.inputCompra{
+    width: 257px;
+    border: 1px solid rgba(0, 71, 51, 0.6);
+    font-size: 14px;
+    font-family: "Larsseit-Ligth";
+    padding: 9.8px;
+}
+
+.inputCompra::placeholder{
+    color: #004733;
+    opacity: 0.6;
+}
+
+.codigoDescuento{
+    margin-bottom: 10px;
+}
+
+/*Estilos pagina de login y Crear cuenta*/
+
+.pagLogin{
+    width: 100%;
+}
+
+.login{
+    width: 90%;
+    margin: auto;
+}
+
+/*Estilos footer*/
+
+.bgf{
+    background-color: #004733;
+}
+
+.st0{
+    fill: #FFFFFF;
+}
+
+.svgf{
+    transition: opacity 0.3s ease;
+    opacity: 0.5;
+}
+
+.svgf:hover{   
+    opacity: 1;
+}
+
+footer p{
+    color: #FFFFFF;
+    font-family: "Larsseit-Medium";
+    font-size: 16px;
+    margin-right: 40px;
+}
+
+footer .nav{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/*Estilos botones*/
+/*Boton general*/
+button{
+    border: 1px solid #004733;
+    border-radius: 100px;
+    background-color: transparent;
+    color: #004733;
+    cursor: pointer;
+    transition: background-color 0.5s, color 0.5s;
+    font-family: "Larsseit-Bold";
+    font-size: 16px;
+    height: 43px;
+    width: 170px;
+}
+
+button:hover{
+    background-color: #004733;
+    color: white;
+}
+
+/*Boton blanco*/
+.buttonWhite{
+    border: 1px solid white;
+    color: white;
+}
+
+.buttonWhite:hover{
+    background-color: white;
+    color: #004733;
+}
+
+/*Boton carrito*/
+.bCarrito{
+    border: none;
+    border-radius: none;
+    background-color: none;
+    font-family: "Larsseit-Ligth";
+    font-size: 14px;
+}
+
+.bCarrito:hover{
+    background-color: transparent;
+    color: #004733;
+    font-family: "Larsseit-Medium";
+}
+
+/*Boton compra*/
+
+.butonCantidad{
+    border: none;
+    border-radius: none;
+    background-color: none;
+    font-family: "Larsseit-Ligth";
+    height: 24px;
+    width: 24px;
+    font-size: 25px;
+    opacity: 0.5;
+    margin-right: 10px;
+}
+
+.butonCantidad:hover{
+    border: none;
+    border-radius: none;
+    color: #004733;
+    background-color: transparent;
+}
+
+.marginLeftBcantidad{
+    margin-left: 10px;
+    margin-right: 0px;
+}
+
+/*Boton para eliminar*/
+
+.buttonDelete{
+    margin-left: auto;
+    height: 24px;
+    width: 24px;
+    border: none;
+    border-radius: 0;
+    background-color: transparent;
+    fill: #004733;
+}
+
+.buttonDelete:hover{
+    background-color: transparent;
+}
+
+.buttonCompra{
+    height: 42.59px;
+    width: 78px;
+    border: none;
+    border-radius: 0;
+    color: #FFFFFF;
+    background-color: #1E3E35;
+    font-size: 14px;
+    font-family: "Larsseit-Ligth";
+}
+
+.buttonDark{
+    padding: 14.7px 24.5px;
+    height: auto;
+    width: auto;
+    border: none;
+    border-radius: 0;
+    color: #FFFFFF;
+    background-color: #1E3E35;
+    font-size: 14px;
+    font-family: "Larsseit-Ligth";
+}
