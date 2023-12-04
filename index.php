@@ -15,24 +15,28 @@
     ?>
     <section class="section1">
         <div class="row">
-            <div class="col-6">
+            <div class="col-6 position-relative">
                 <article class="articleS1L">
-                    <h2>NUEVOS SABORES A PROBAR</h2>
+                    <img src="retocadas/smoothie_platano_home.png" alt="Smoothie de platano" class="img-fluid position-absolute top-0 end-0" style="z-index: 1; max-width: 325px; max-height: 406px; transform: scaleX(-1); padding: 4px;">
+                    <h2 class="position-relative" style="z-index: 2;">NUEVOS SABORES A PROBAR</h2>
                     <button type="button" onclick="#">Nuevos Smoothies</button>
                 </article>
             </div>
-            <div class="col-6">
+            <div class="col-6 position-relative">
                 <article class="articleS1R">
-                    <h2>NUEVOS DESAYUNOS</h2>
+                    <img src="retocadas/bol_fresas_home.png" alt="Smoothie de platano" class="img-fluid position-absolute top-0 end-0" style="z-index: 1; max-width: 428px; max-height: 416px; transform: scaleY(-1); padding: 4px;">
+                    <h2 class="position-relative" style="z-index: 2;">NUEVOS DESAYUNOS</h2>
                     <button type="button" onclick="#">Nuevos Desayunos</button>        
                 </article>
             </div>
         </div>
         <div class="separacion_lite"></div>
         <div class="row">
-            <div class="col-12 text-center">
+            <div class="col-12 text-center position-relative">
                 <article class="articleS1B">
-                    <h2>NUEVOS PRODUCTOS</h2>
+                    <img src="retocadas/bol_fresas_home.png" alt="Smoothie de platano" class="img-fluid position-absolute top-0 start-0" style="z-index: 1; max-width: 428px; max-height: 416px; transform: scaleY(-1); transform: scaleX(-1); padding: 4px;">
+                    <img src="retocadas/bol_fresas_home.png" alt="Smoothie de platano" class="img-fluid position-absolute top-0 end-0" style="z-index: 1; max-width: 428px; max-height: 416px; transform: scaleY(-1); padding: 4px;">
+                    <h2 class="position-relative" style="z-index: 2;">NUEVOS PRODUCTOS</h2>
                     <h2>OTOÑALES</h2>
                     <button type="button" onclick="#">Sabores Otoño</button>        
                 </article>
