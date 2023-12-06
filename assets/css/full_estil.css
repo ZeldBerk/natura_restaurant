@@ -65,12 +65,14 @@ p{
 
 
 /*Separacion entre las col-6*/
-.section1 .col-6{
+.section1 .col-xl-6{
     padding: 4px;
+    max-width: 950px;
 }
 
-.section2 .col-6{
+.section2 .col-xl-6{
     padding: 4px;
+    max-width: 950px;
 }
 
 div .col-6{
@@ -119,8 +121,8 @@ div .col-6{
 
 .container-fluid{
     padding-top: 24.5px;
-    padding-left: 47.5px;
-    padding-right: 47.5px;
+    padding-left: 0px;
+    padding-right: 0px;
     background-color: #ffffff;
 }
 

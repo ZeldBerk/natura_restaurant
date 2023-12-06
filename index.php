@@ -14,15 +14,15 @@
         include("header.html");
     ?>
     <section class="section1">
-        <div class="row">
-            <div class="col-6 position-relative">
+        <div class="row mx-auto">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 position-relative">
                 <article class="articleS1L">
                     <img src="retocadas/smoothie_platano_home.png" alt="Smoothie de platano" class="img-fluid position-absolute top-0 end-0" style="z-index: 1; max-width: 325px; max-height: 406px; transform: scaleX(-1); padding: 4px;">
                     <h2 class="position-relative" style="z-index: 2;">NUEVOS SABORES A PROBAR</h2>
                     <button type="button" onclick="#">Nuevos Smoothies</button>
                 </article>
             </div>
-            <div class="col-6 position-relative">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 position-relative">
                 <article class="articleS1R">
                     <img src="retocadas/bol_fresas_home.png" alt="Smoothie de platano" class="img-fluid position-absolute top-0 end-0" style="z-index: 1; max-width: 428px; max-height: 416px; transform: scaleY(-1); padding: 4px;">
                     <h2 class="position-relative" style="z-index: 2;">NUEVOS DESAYUNOS</h2>
@@ -45,14 +45,14 @@
     </section>
     <div class="separacion_big"></div>
     <section class="section2">
-        <div class="row">
-            <div class="col-6 text-center">
+        <div class="row mx-auto">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 text-center">
                 <article class="articleS2L" style="background-image: url('assets/images/fondoS2L.png'); background-size: cover; background-position: center;">
                     <h2 class="h2white">SMOOTHIES CLÁSICOS</h2>
                     <button class="buttonWhite" type="button" onclick="#">Mejores Clásicos</button> 
                 </article>
             </div>
-            <div class="col-6 text-center">
+            <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 text-center">
                 <article class="articleS2R">
                     <h2>SABOR DE SIEMPRE EN CADA SORBO</h2>
                     <div class="marginP">
@@ -70,7 +70,7 @@
     <div class="separacion_big"></div>
     <section class="section3">
         <div class="row">
-            <div class="col-5">
+            <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5">
                 <div class="row">
                     <div class="col-6 text-center">
                         <article class="articleS3L1">
@@ -84,10 +84,10 @@
                     </div>
                 </div>
             </div>
-            <article class="col-2 articulo_promo d-flex justify-content-center align-items-center">
+            <article class="col-sm-12 col-md-12 col-lg-2 col-xl-2 articulo_promo d-flex justify-content-center align-items-center">
                 <button type="button" onclick="#">Promociones</button>
             </article>
-            <div class="col-5">
+            <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5">
                 <div class="row">
                     <div class="col-6 text-center">
                         <article class="articleS3R1">
