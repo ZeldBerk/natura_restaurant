@@ -281,6 +281,10 @@ div .col-6{
     padding: 0px;
 }
 
+.mCarta h2{
+    margin-bottom: 50px;
+}
+
 .productoTexto{
     background-color: #FFFFFF;
 }
