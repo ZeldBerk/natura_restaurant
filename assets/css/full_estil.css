@@ -230,6 +230,11 @@ div .col-6{
     padding-bottom: 162.5px;
 }
 
+.articleS1B .col-1{
+    max-width: 100px;
+    padding: 0px;
+}
+
 /*Estilos articulos Section 2*/
 .articleS2L {
     min-height: 464px; 
@@ -252,6 +257,14 @@ div .col-6{
 .h2white{
     color: white;
     margin-bottom: 133px;
+}
+
+.section1 h2{
+    z-index: 2;
+}
+
+.section1 button {
+    z-index: 2;
 }
 
 /*Estilos articulos Section 3*/
