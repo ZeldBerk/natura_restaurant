@@ -334,21 +334,12 @@ div .col-6{
 
 /*Estilos pag de compra*/
 
-.pagCompra{
-    width: 100%;
-}
-
-.compra{
-    width: 90%;
-    margin: auto;
-}
-
-.compra h2{
+.compraS h2{
     font-size: 30px;
     font-family: "Larsseit-Medium";
 }
 
-.compra p{
+.compraS p{
     font-size: 14px;
 }
 
@@ -376,22 +367,19 @@ div .col-6{
     padding-top: 19.6px;
 }
 
-.ticket p{
+.pLCarrito{
     font-size: 12px;
     margin: 0px;
 }
 
-.ticket .col-6 .align-self-end p{
+.catorcepx{
     font-size: 14px;
     font-family: "Larsseit-Medium";
     margin-bottom: 4.9px;
 }
 
-.ticket .col-6 .align-self-end p.diezSeispx{
-    font-size: 16px;
-    margin-bottom: 4.9px;
-}
-.ticket .col-6 .align-self-end .price p.diezSeispx{
+.diezSeispx{
+    font-family: "Larsseit-Medium";
     font-size: 16px;
     margin-bottom: 4.9px;
 }
