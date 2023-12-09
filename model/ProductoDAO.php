@@ -2,6 +2,7 @@
 include_once('config/DataBase.php');
 include_once('model/Smoothie.php');
 include_once('model/Boles.php');
+include_once('model/Usuario.php');
 
 
 class ProductoDAO{
@@ -126,11 +127,11 @@ class ProductoDAO{
 
 
     public static function insertarbbdd($nombre,$precio,$descripcion,$tipo,$categoria,$imagen){
-        //preparamos la consulta
+        //preparamos la conexion
         $con = DataBase::connect();
 
         // Usar una sentencia preparada con marcadores de posición
-        $stmt = $con->prepare("INSERT INTO `productos` (`nombre`, `precio`, `descripcion`, `tipo`, `id_categoria`, `imagen`) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO productos (nombre, precio, descripcion, tipo, id_categoria, imagen) VALUES (?, ?, ?, ?, ?, ?)");
 
         // Vincular los valores a los marcadores de posición
         $stmt->bind_param("sdssis", $nombre, $precio, $descripcion, $tipo, $categoria, $imagen);
@@ -143,4 +144,27 @@ class ProductoDAO{
         return $result;
     }
 
+
+    public static function getUserByEmail($correo, $contra){
+        //preparamos la conexion
+        $con = DataBase::connect();
+
+        //preparamos la consulta
+        $stmt = $con->prepare("SELECT * FROM usuarios WHERE email=? and contra=?");
+
+        //vinculamos los valores a los marcadores de posicion
+        $stmt->bind_param("ss", $correo, $contra);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        //cerramos la conexion
+        $con->close();
+        
+        //Almacenamos el resultado en una lista y devolvemos el resultado
+        $usuario = $result->fetch_object('Usuario');
+
+        return $usuario;
+    }
 }

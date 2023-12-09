@@ -5,6 +5,7 @@ include_once('model/Pedido.php');
 
 class ProductoController{
 
+
     //carga de la pagina home
     public function index(){
         
@@ -36,6 +37,7 @@ class ProductoController{
 
     }
 
+    
     //Carga la pagina de carta y elementos necessarios de esta
     public function show_carta(){
         session_start();
@@ -51,16 +53,40 @@ class ProductoController{
         include_once 'view/footer.html';
     }
 
+
     //carga de la pagina de login y gestion de este
     public function login(){
+        session_start();
         //include del header
         include_once 'view/header.php';
         
         //include del login
-        include_once 'view/login.html';
+        include_once 'view/login.php';
         
         //include de el footer
         include_once 'view/footer.html';
+    }
+
+
+    //Funcion para iniciar sesion 
+    public function singIn(){
+
+        if(isset($_POST['inicioEmail'], $_POST['inicioPassword'])){
+            //Guardamos los valores que introduce el usuario en variables
+            $correo = $_POST['inicioEmail'];
+            $contra = $_POST['inicioPassword'];
+
+            //realizamos la consulta del correo en la base de datos
+            $usuario = ProductoDAO::getUserByEmail($correo, $contra);
+            var_dump($usuario);
+
+        }
+    }
+
+
+    //Funcion para registrarse
+    public function register(){
+
     }
 
 
@@ -76,6 +102,8 @@ class ProductoController{
         //include de el footer
         include_once 'view/footer.html';
     }
+
+
     /** 
     public function addCarrito(){
         
