@@ -15,7 +15,7 @@
                         </li>
                     </ul>
                     <div class="mx-auto">
-                        <a href="#">
+                        <a href=<?=url."?controller=producto"?>>
                             <img class="logo" src="./assets/icons/logo.png" alt="Logo Natura">
                         </a>
                     </div>
@@ -27,7 +27,7 @@
                             <input class="buscar" type="text" placeholder="Buscar">
                         </li>
                         <li class="nav-item">
-                            <a class="navlinkP" aria-current="page" href="login.html">Iniciar sesión</a>
+                            <a class="navlinkP" aria-current="page" href=<?=url."?controller=producto&action=login"?>>Iniciar sesión</a>
                         </li>
                         <li class="nav-item">
                             <a href="carrito.html">

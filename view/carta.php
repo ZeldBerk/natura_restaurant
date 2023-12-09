@@ -13,6 +13,8 @@
     <section class="mCarta container mx-auto">
         <h2>Todos Los Productos</h2>
         <div class="row">
+            <?php
+                foreach($allProducts as $product){?>
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <article class="producto">
                     <div class="imgProducto d-flex justify-content-center align-items-center">
@@ -24,11 +26,13 @@
                         </div>
                     </div>
                     <div class="productoTexto">
-                        <p>Smoothie sabor platano</p>
-                        <p>4.99 €</p>
+                        <p><?=$product->getNombre()?></p>
+                        <p><?=$product->getPrecio()?>€</p>
                     </div>
                 </article>
             </div>
+            <?php
+                }?>
         </div>
     </section>
 <div class="separacion_big"></div>
