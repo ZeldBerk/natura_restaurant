@@ -30,13 +30,14 @@
                             <a class="navlinkP" aria-current="page" href=<?=url."?controller=producto&action=login"?>>Iniciar sesión</a>
                         </li>
                         <li class="nav-item">
-                            <a href="carrito.html">
+                            <a href=<?=url."?controller=producto&action=carrito"?>>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                                     <g fill="none" fill-rule="evenodd" stroke="#004733">
                                         <path d="M3.585 5.554h12.678l1.585 12.142H2z"></path>
                                         <path d="M12.971 8.286v-4.2C12.971 2.38 11.607 1 9.924 1S6.876 2.381 6.876 4.085v4.2"></path>
                                     </g>
                                 </svg>
+                                <?=count($_SESSION['carrito'])?>
                             </a>
                         </li>
                     </ul>
