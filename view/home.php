@@ -16,14 +16,18 @@
                 <article class="articleS1L">
                     <img src="retocadas/smoothie_platano_home.png" alt="Smoothie de platano" class="img-fluid position-absolute top-0 end-0" style="z-index: 1; max-width: 325px; max-height: 406px; transform: scaleX(-1); padding: 4px;">
                     <h2 class="position-relative" style="z-index: 2;">NUEVOS SABORES A PROBAR</h2>
-                    <button class="position-relative" type="button" onclick="#">Nuevos Smoothies</button>
+                    <form action=<?=url."?controller=producto&action=show_carta"?> method="POST">
+                        <button class="position-relative" type="submit" name="show_carta">Nuevos Smoothies</button>
+                    </form>
                 </article>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 position-relative">
                 <article class="articleS1R">
                     <img src="retocadas/bol_fresas_home.png" alt="Bol con fresas trozos de coco y pipas de girasol" class="img-fluid position-absolute top-0 end-0" style="z-index: 1; max-width: 428px; max-height: 416px; transform: scaleY(-1); padding: 4px;">
                     <h2 class="position-relative" style="z-index: 2;">NUEVOS DESAYUNOS</h2>
-                    <button class="position-relative" type="button" onclick="#">Nuevos Desayunos</button>        
+                    <form action=<?=url."?controller=producto&action=show_carta"?> method="POST">
+                        <button class="position-relative" type="submit" name="show_carta">Nuevos Desayunos</button>
+                    </form>                
                 </article>
             </div>
         </div>
@@ -38,7 +42,9 @@
                         <div class="col-6">
                             <h2 class="position-relative" style="z-index: 2;">NUEVOS PRODUCTOS</h2>
                             <h2 class="position-relative">OTOÑALES</h2>
-                            <button class="position-relative" type="button" onclick="#">Sabores Otoño</button>    
+                            <form action=<?=url."?controller=producto&action=show_carta"?> method="POST">
+                                <button class="position-relative" type="submit" name="show_carta">Sabores Otoño</button>
+                            </form>   
                         </div>
                         <div class="col-3 d-flex align-items-center">
                             <img src="retocadas/smoothie_kiwi.png" alt="Smoothie de platano" class="img-fluid position-absolute " style="z-index: 1; max-width: 230px; max-height: 421px;">
@@ -54,7 +60,9 @@
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 text-center">
                 <article class="articleS2L" style="background-image: url('assets/images/fondoS2L.png'); background-size: cover; background-position: center;">
                     <h2 class="h2white">SMOOTHIES CLÁSICOS</h2>
-                    <button class="buttonWhite" type="button" onclick="#">Mejores Clásicos</button> 
+                    <form action=<?=url."?controller=producto&action=show_carta"?> method="POST">
+                        <button class="buttonWhite" type="submit" name="show_carta">Mejores Clásicos</button>
+                    </form>
                 </article>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 text-center">
@@ -90,7 +98,9 @@
                 </div>
             </div>
             <article class="col-sm-12 col-md-12 col-lg-2 col-xl-2 articulo_promo d-flex justify-content-center align-items-center">
-                <button type="button" onclick="#">Promociones</button>
+                <form action=<?=url."?controller=producto&action=show_carta"?> method="POST">
+                    <button class="position-relative" type="submit" name="show_carta">Promociones</button>
+                </form>
             </article>
             <div class="col-sm-12 col-md-12 col-lg-5 col-xl-5">
                 <div class="row">

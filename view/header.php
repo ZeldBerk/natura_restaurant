@@ -48,10 +48,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="nav nav-underline navbar-nav mr-manual mb-lg-0 mx-auto">
                         <li class="nav-item">
-                            <a class="menu" aria-current="page" href="carta.html">Carta</a>
+                            <a class="menu" aria-current="page" href=<?=url."?controller=producto&action=show_carta"?>>Carta</a>
                         </li>
                         <li class="nav-item">
-                            <a class="menu" href="#">Home</a>
+                            <a class="menu" href=<?=url."?controller=producto"?>>Home</a>
                         </li>
                     </ul>
                 </div>
