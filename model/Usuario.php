@@ -2,12 +2,12 @@
 
 class Usuario{
 
-        protected $user_id;
-        protected $nombre;
-        protected $apellido;
-        protected $email;
-        protected $rol;
-        protected $contra;
+        public $user_id;
+        public $nombre;
+        public $apellido;
+        public $email;
+        public $rol;
+        public $contra;
 
         public function __construct($user_id = null, $nombre = null, $apellido = null, $email = null, $rol = null, $contra = null){
             $this->user_id = $user_id;

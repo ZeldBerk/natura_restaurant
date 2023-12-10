@@ -157,14 +157,32 @@ class ProductoDAO{
 
         //ejecutamos la consulta
         $stmt->execute();
-        $result = $stmt->get_result();
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
+            $stmt->bind_result($user_id, $nombre, $apellido, $email, $rol, $contra);
+            $stmt->fetch();
 
-        //cerramos la conexion
-        $con->close();
-        
-        //Almacenamos el resultado en una lista y devolvemos el resultado
-        $usuario = $result->fetch_object('Usuario');
+            // Creamos un array asociativo con los datos del usuario
+            $usuario = [
+                'user_id' => $user_id,
+                'nombre' => $nombre,
+                'apellido' => $apellido,
+                'email' => $email,
+                'rol' => $rol,
+                'contra' => $contra,
+            ];
 
-        return $usuario;
+            // Cerramos la conexión
+            $con->close();
+
+            // Retornamos el array asociativo con los datos del usuario
+            return $usuario;
+        } else {
+            // Cerramos la conexión en caso de que no haya resultados
+            $con->close();
+
+            // Retornamos null si no hay resultados
+            return null;
+        }
     }
 }

@@ -71,6 +71,7 @@ class ProductoController{
     //Funcion para iniciar sesion 
     public function singIn(){
 
+        //Si se pasan los dos parametros correctamente empezamos el login
         if(isset($_POST['inicioEmail'], $_POST['inicioPassword'])){
             //Guardamos los valores que introduce el usuario en variables
             $correo = $_POST['inicioEmail'];
@@ -78,8 +79,23 @@ class ProductoController{
 
             //realizamos la consulta del correo en la base de datos
             $usuario = ProductoDAO::getUserByEmail($correo, $contra);
-            var_dump($usuario);
+            
+            if ($contra === $usuario['contra'] ) {
+                session_regenerate_id();
+                $_SESSION['loggedin'] = TRUE;
+                $_SESSION['name'] = $usuario['nombre'];
+                $_SESSION['id'] = $usuario['user_id'];
 
+                header("Location:".url.'?controller=producto');
+
+            } else {
+        
+                // usuario incorrecto
+                header("Location:".url.'?controller=producto&action=login');
+
+            }
+        
+        
         }
     }
 
