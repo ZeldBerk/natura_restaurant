@@ -15,7 +15,7 @@ class ProductoController{
             // Se está intentando agregar un producto al carrito
 
             // Verificamos si el usuario está autenticado
-            if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE){
+            if(!isset($_SESSION['loggedin'])){
                 // Redirigir a la página de inicio de sesión si no está autenticado
                 header("Location:".url.'?controller=producto&action=login');
                 return; // Terminamos la ejecución para evitar que se siga procesando la solicitud
@@ -29,6 +29,7 @@ class ProductoController{
                 $product = ProductoDAO::getProductById($id_product);
                 $pedido = new Pedido($product);
                 array_push($_SESSION['carrito'], $pedido);
+                header("Location:".url.'?controller=producto&action=show_carta');
             }
 
         }
@@ -47,7 +48,7 @@ class ProductoController{
     //funcion para poner el header
     public function header(){
         // Verificamos si el usuario está autenticado para insertar un header u otro
-        if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE){
+        if(!isset($_SESSION['loggedin'])){
             // Insertamos el header 1 si no se ha hecho el inicio de sesión
             include_once 'view/header.php';
         } else {
@@ -77,7 +78,7 @@ class ProductoController{
     public function login(){
         session_start();
         //include del header
-        include_once 'view/header.php';
+        $this->header();
         
         //include del login
         include_once 'view/login.php';
@@ -89,7 +90,7 @@ class ProductoController{
 
     //Funcion para iniciar sesion 
     public function singIn(){
-
+        session_start();
         //Si se pasan los dos parametros correctamente empezamos el login
         if(isset($_POST['inicioEmail'], $_POST['inicioPassword'])){
             //Guardamos los valores que introduce el usuario en variables
@@ -100,10 +101,12 @@ class ProductoController{
             $usuario = ProductoDAO::getUserByEmail($correo, $contra);
             
             if ($contra === $usuario['contra'] ) {
-                session_regenerate_id();
-                $_SESSION['loggedin'] = TRUE;
-                $_SESSION['name'] = $usuario['nombre'];
-                $_SESSION['id'] = $usuario['user_id'];
+
+                $nombre = $usuario['nombre'];
+                $user_id = $usuario['user_id'];
+                
+                $_SESSION['loggedin']['name'] = $nombre;
+                $_SESSION['loggedin']['id'] = $user_id;
 
                 header("Location:".url.'?controller=producto');
 
@@ -112,8 +115,6 @@ class ProductoController{
                 header("Location:".url.'?controller=producto&action=login');
 
             }
-        
-        
         }
     }
 
@@ -128,7 +129,7 @@ class ProductoController{
     public function carrito(){
         session_start();
         //include del header
-        include_once 'view/header.php';
+        $this->header();
         
         //include del login
         include_once 'view/carrito.html';
