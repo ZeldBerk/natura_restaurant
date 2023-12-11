@@ -6,43 +6,62 @@ include_once('model/Pedido.php');
 class ProductoController{
 
 
-    //carga de la pagina home
+    //cargamos la pagina de home
     public function index(){
-        
-        //iniciamos la session para guadar cosas en el carrito
+        // Iniciamos la sesión para guardar cosas en el carrito y verificar si el usuario ha iniciado sesión
         session_start();
 
-        if(!isset($_SESSION['carrito'])){
-            $_SESSION['carrito'] = array();
-        }else{
-            if(isset($_POST['id'])){
-                $id_product = $_POST['id'];
+        if(isset($_POST['id'])){
+            // Se está intentando agregar un producto al carrito
 
-                $product = ProductoDAO::getProductById($id_product);
-
-                $pedido = new Pedido($product);
-
-                array_push($_SESSION['carrito'], $pedido);
+            // Verificamos si el usuario está autenticado
+            if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE){
+                // Redirigir a la página de inicio de sesión si no está autenticado
+                echo "no has iniciado sesion";
+                header("Location:".url.'?controller=producto&action=login');
+                return; // Terminamos la ejecución para evitar que se siga procesando la solicitud
             }
+
+            // El usuario está autenticado, continuamos con la lógica para agregar al carrito
+            if(!isset($_SESSION['carrito'])){
+                $_SESSION['carrito'] = array();
+            }
+
+            $id_product = $_POST['id'];
+            $product = ProductoDAO::getProductById($id_product);
+            $pedido = new Pedido($product);
+            array_push($_SESSION['carrito'], $pedido);
         }
 
-        //include del header
-        include_once 'view/header.php';
-        
-        //include de la home
-        include_once 'view/home.php';
-        
-        //include de el footer
-        include_once 'view/footer.html';
+        //incluimos el header
+        $this->header();
 
+        // Include de la home
+        include_once 'view/home.php';
+
+        // Include del footer
+        include_once 'view/footer.html';
     }
 
     
+    //funcion para poner el header
+    public function header(){
+        // Verificamos si el usuario está autenticado para insertar un header u otro
+        if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE){
+            // Insertamos el header 1 si no se ha hecho el inicio de sesión
+            include_once 'view/header.php';
+        } else {
+            // Insertamos el header 2 si la sesión está iniciada
+            include_once 'view/header2.php';
+        }
+    }
+
+
     //Carga la pagina de carta y elementos necessarios de esta
     public function show_carta(){
         session_start();
         //include del header
-        include_once 'view/header.php';
+        $this->header();
         
         //Recojemos todos los productos para mostrarlos en el carrito
         $allProducts = ProductoDAO::getAllProducts();
@@ -89,7 +108,7 @@ class ProductoController{
                 header("Location:".url.'?controller=producto');
 
             } else {
-        
+                echo "usuario incorrecto";
                 // usuario incorrecto
                 header("Location:".url.'?controller=producto&action=login');
 
