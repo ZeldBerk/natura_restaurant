@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
+    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
     <title>Document</title>
 </head>
 

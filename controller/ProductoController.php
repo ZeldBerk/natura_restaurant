@@ -17,20 +17,20 @@ class ProductoController{
             // Verificamos si el usuario está autenticado
             if(!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== TRUE){
                 // Redirigir a la página de inicio de sesión si no está autenticado
-                echo "no has iniciado sesion";
                 header("Location:".url.'?controller=producto&action=login');
                 return; // Terminamos la ejecución para evitar que se siga procesando la solicitud
+            }else{
+                // El usuario está autenticado, continuamos con la lógica para agregar al carrito
+                if(!isset($_SESSION['carrito'])){
+                    $_SESSION['carrito'] = array();
+                }
+    
+                $id_product = $_POST['id'];
+                $product = ProductoDAO::getProductById($id_product);
+                $pedido = new Pedido($product);
+                array_push($_SESSION['carrito'], $pedido);
             }
 
-            // El usuario está autenticado, continuamos con la lógica para agregar al carrito
-            if(!isset($_SESSION['carrito'])){
-                $_SESSION['carrito'] = array();
-            }
-
-            $id_product = $_POST['id'];
-            $product = ProductoDAO::getProductById($id_product);
-            $pedido = new Pedido($product);
-            array_push($_SESSION['carrito'], $pedido);
         }
 
         //incluimos el header
@@ -108,7 +108,6 @@ class ProductoController{
                 header("Location:".url.'?controller=producto');
 
             } else {
-                echo "usuario incorrecto";
                 // usuario incorrecto
                 header("Location:".url.'?controller=producto&action=login');
 

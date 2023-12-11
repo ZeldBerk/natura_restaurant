@@ -16,7 +16,7 @@
                     </ul>
                     <div class="mx-auto">
                         <a href=<?=url."?controller=producto"?>>
-                            <img class="logo" src="./assets/icons/logo.png" alt="Logo Natura">
+                            <img class="logo" src="../assets/icons/logo.png" alt="Logo Natura">
                         </a>
                     </div>
                     <ul class="nav nav-underline navbar-nav mb-2 mb-lg-0 padB">
