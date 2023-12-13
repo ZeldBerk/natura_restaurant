@@ -100,6 +100,7 @@ class ProductoController{
             //realizamos la consulta del correo en la base de datos
             $usuario = ProductoDAO::getUserByEmail($correo);
             
+            //comprobamos que las contraseñas coincidan y iniciamos la sesion
             if ($contra === $usuario['contra'] ) {
 
                 $nombre = $usuario['nombre'];
@@ -111,7 +112,7 @@ class ProductoController{
                 header("Location:".url.'?controller=producto');
 
             } else {
-                // usuario incorrecto
+                // usuario incorrecto redirigimos a login de nuevo
                 header("Location:".url.'?controller=producto&action=login');
 
             }
@@ -153,6 +154,7 @@ class ProductoController{
 
                         header("Location:".url.'?controller=producto');
                     }else{
+                        //Contraseñas no coinciden redirigimos a login
                         header("Location:".url.'?controller=producto&action=login');
                     }
                 }
@@ -168,7 +170,7 @@ class ProductoController{
         $this->header();
         
         //include del login
-        include_once 'view/carrito.html';
+        include_once 'view/carrito.php';
         
         //include de el footer
         include_once 'view/footer.html';
