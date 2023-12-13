@@ -145,15 +145,15 @@ class ProductoDAO{
     }
 
 
-    public static function getUserByEmail($correo, $contra){
+    public static function getUserByEmail($correo){
         //preparamos la conexion
         $con = DataBase::connect();
 
         //preparamos la consulta
-        $stmt = $con->prepare("SELECT * FROM usuarios WHERE email=? and contra=?");
+        $stmt = $con->prepare("SELECT * FROM usuarios WHERE email=?");
 
         //vinculamos los valores a los marcadores de posicion
-        $stmt->bind_param("ss", $correo, $contra);
+        $stmt->bind_param("s", $correo);
 
         //ejecutamos la consulta
         $stmt->execute();
@@ -184,5 +184,25 @@ class ProductoDAO{
             // Retornamos null si no hay resultados
             return null;
         }
+    }
+
+    public static function registerUser($nombre, $apellido, $correo, $contra1){
+        //preparamos la conexion
+        $con = DataBase::connect();
+
+        // Usar una sentencia preparada con marcadores de posición
+        $stmt = $con->prepare("INSERT INTO usuarios (nombre, apellido, email, rol, contra) VALUES (?, ?, ?, ?, ?)");
+
+        //ponemos por defecto rol en usuer
+        $rol = "user";
+        // Vincular los valores a los marcadores de posición
+        $stmt->bind_param("sssss", $nombre, $apellido, $correo, $rol, $contra1);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $con->close();
+        return $result;
     }
 }

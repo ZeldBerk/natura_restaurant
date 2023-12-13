@@ -35,35 +35,35 @@
         <div class="col-sm-12 col-md-6">
             <div class="formulario bg-color5 rounded-3">
                 <h2 class="text-center mb-5 titulosLogin">Registrar-se</h2>
-                <form action=<?=url."?controller=producto&action=singIn"?> method="post">
+                <form action=<?=url."?controller=producto&action=register"?> method="post">
                     <div class="mb-3 row">
-                        <label for="nom" class="labelsLogin col-sm-12">Nombre:</label>
+                        <label for="nombre" class="labelsLogin col-sm-12">Nombre:</label>
                         <div class="col-sm-12 mb-3">
-                            <input type="text" class="form-control inputLogin" id="nom" name="nom" required>
+                            <input type="text" class="form-control inputLogin" id="nombre" name="nombre" required>
                         </div>
 
-                        <label for="cognom" class="labelsLogin col-sm-12">Apellido:</label>
+                        <label for="apellido" class="labelsLogin col-sm-12">Apellido:</label>
                         <div class="col-sm-12 mb-3">
-                            <input type="text" class="form-control inputLogin" id="cognom" name="cognom" required>
+                            <input type="text" class="form-control inputLogin" id="apellido" name="apellido" required>
                         </div>
 
-                        <label for="staticEmail" class="labelsLogin col-sm-12">Correo:</label>
+                        <label for="correo" class="labelsLogin col-sm-12">Correo:</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control inputLogin" id="staticEmail" name="staticEmail" required>
+                            <input type="text" class="form-control inputLogin" id="correo" name="correo" required>
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="inputPassword" class="labelsLogin col-sm-12">Contraseña:</label>
+                        <label for="contra1" class="labelsLogin col-sm-12">Contraseña:</label>
                         <div class="col-sm-12">
-                            <input type="password" class="form-control inputLogin" id="inputPassword" name="inputPassword" required>
+                            <input type="password" class="form-control inputLogin" id="contra1" name="contra1" required>
                         </div>
                     </div>
 
                     <div class="mb-3 row">
-                        <label for="inputPassword2" class="labelsLogin col-sm-12">Confirmar Contraseña:</label>
+                        <label for="contra2" class="labelsLogin col-sm-12">Confirmar Contraseña:</label>
                         <div class="col-sm-12">
-                            <input type="password" class="form-control inputLogin" id="inputPassword2" name="inputPassword2" required>
+                            <input type="password" class="form-control inputLogin" id="contra2" name="contra2" required>
                         </div>
                     </div>
 
