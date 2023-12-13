@@ -403,13 +403,27 @@ div .col-6{
 
 /*Estilos pagina de login y Crear cuenta*/
 
-.pagLogin{
-    width: 100%;
+.inputLogin {
+    border: 1px solid rgba(0, 71, 51, 0.5) !important;
+    background-color: transparent !important;
+    color: inherit !important;
+    transition: none !important;
+    border-radius: 0 !important; 
 }
 
-.login{
-    width: 90%;
-    margin: auto;
+.inputLogin:focus {
+    box-shadow: none !important;
+}
+
+.labelsLogin{
+    font-size: 14px;
+    font-family: "Larsseit-Ligth";
+    color: rgba(0,71,51,.7);
+}
+
+.titulosLogin{
+    font-family: "Larsseit-Medium";
+    font-size: 42px;
 }
 
 /*Estilos footer*/

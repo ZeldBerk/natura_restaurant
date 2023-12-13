@@ -121,7 +121,12 @@ class ProductoController{
 
     //Funcion para registrarse
     public function register(){
-
+        //comprobamos si no se ha iniciado una sesion previa
+        if(!isset($_SESSION['loggedin'])){
+            if(isset($_POST['nom'], $_POST['cognom'], $_POST['staticEmail'], $_POST['inputPassword'], $_POST['inputPassword2'])){
+                
+            }
+        }
     }
 
 
