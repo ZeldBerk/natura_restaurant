@@ -1,6 +1,7 @@
 <?php
 include_once('model/ProductoDAO.php');
 include_once('model/Pedido.php');
+include_once('utils/CalcularPrecios.php');
 
 
 class ProductoController{
@@ -166,9 +167,27 @@ class ProductoController{
     //carga de la pagina de carrito
     public function carrito(){
         session_start();
+
+        //gestion de las cantidades de cada producto
+        if(isset($_POST['Add'])){
+            //añadimos uno a la cantidad
+            $pedido = $_SESSION['carrito'][$_POST['Add']];
+            $pedido->setCantidad($pedido->getCantidad()+1);
+        }else if(isset($_POST['Del'])){
+            //quitamos uno a la cantidad
+            $pedido = $_SESSION['carrito'][$_POST['Del']];
+            if($pedido->getCantidad()==1){
+                unset($_SESSION['carrito'][$_POST['Del']]);
+                //debemos re-indexar el array
+                $_SESSION['carrito'] = array_values($_SESSION['carrito']);
+            }else{
+                $pedido->setCantidad($pedido->getCantidad()-1);
+            }
+        }
+
         //include del header
         $this->header();
-        
+
         //include del login
         include_once 'view/carrito.php';
         
