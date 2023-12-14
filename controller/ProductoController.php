@@ -82,6 +82,15 @@ class ProductoController{
             }else{
                 $pedido->setCantidad($pedido->getCantidad()-1);
             }
+        }else if(isset($_POST['delete'])){
+            unset($_SESSION['carrito'][$_POST['delete']]);
+            //debemos re-indexar el array
+            $_SESSION['carrito'] = array_values($_SESSION['carrito']);
+        }
+
+        if ((count($_SESSION['carrito'])) < 1){
+            header("Location:".url.'?controller=producto');
+            return;
         }
 
         //include del header
@@ -94,6 +103,11 @@ class ProductoController{
         include_once 'view/footer.html';
     }
 
+
+    //finalizar la compra
+    public function finalizarCompra(){
+        
+    }
 
     /** 
     public function addCarrito(){
