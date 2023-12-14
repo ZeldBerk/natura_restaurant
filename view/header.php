@@ -27,7 +27,7 @@
                             <input class="buscar" type="text" placeholder="Buscar">
                         </li>
                         <li class="nav-item">
-                            <a class="navlinkP" aria-current="page" href=<?=url."?controller=producto&action=login"?>>Iniciar sesión</a>
+                            <a class="navlinkP" aria-current="page" href=<?=url."?controller=user&action=login"?>>Iniciar sesión</a>
                         </li>
                         <li class="nav-item">
                             <a href=<?=url."?controller=producto&action=carrito"?>>
