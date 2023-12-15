@@ -116,7 +116,11 @@ class ProductoController{
         //pasamos los datos a la funcion para que haga el insert
         ProductoDAO::insertPedido($user_id, $estado, $fecha_actual, $total, $_SESSION['carrito']);
 
+        //eliminamos el carrito, y lo dejamos vacio
+        unset($_SESSION['carrito']);
 
+        //redirigimos al pagina home despues de cerrar el pedido
+        header("Location:".url.'?controller=producto');
     }
 
     /** 
