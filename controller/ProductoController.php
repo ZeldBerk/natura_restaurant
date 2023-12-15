@@ -106,7 +106,17 @@ class ProductoController{
 
     //finalizar la compra
     public function finalizarCompra(){
+        session_start();
+        //recojemos los valores que queremos insertar en la base de datos
+        $user_id = $_SESSION['loggedin']['id'];
+        $estado = "finalizado";
+        $fecha_actual = date('Y-m-d');
+        $total = CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']);
         
+        //pasamos los datos a la funcion para que haga el insert
+        ProductoDAO::insertPedido($user_id, $estado, $fecha_actual, $total, $_SESSION['carrito']);
+
+
     }
 
     /** 

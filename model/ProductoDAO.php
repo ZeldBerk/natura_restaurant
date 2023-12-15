@@ -143,4 +143,41 @@ class ProductoDAO{
         $con->close();
         return $result;
     }
+
+
+    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        // Usar una sentencia preparada con marcadores de posición
+        $stmt = $con->prepare("INSERT INTO pedidos (user_id, estado, date_pedido, total) VALUES (?, ?, ?, ?)");
+
+        // Vincular los valores a los marcadores de posición
+        $stmt->bind_param("issd", $user_id,$estado,$fecha_actual,$total);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        
+        //Recuperamos el id del pedido que acabamos de insertar
+        $ultimoInsertId = $con->insert_id;
+
+        foreach ($productos as $producto){
+
+            $productoId = $producto->getProducto()->getIdProducto();
+            $cantidad = $producto->getCantidad();
+
+            // Usar una sentencia preparada con marcadores de posición
+            $stmt = $con->prepare("INSERT INTO detallespedido (pedido_id, producto_id, cantidad) VALUES (?, ?, ?)");
+
+            // Vincular los valores a los marcadores de posición
+            $stmt->bind_param("iii", $ultimoInsertId, $productoId, $cantidad);
+
+            //ejecutamos la consulta
+            $stmt->execute();
+
+        }
+
+        $con->close();
+        return $ultimoInsertId;
+    }
 }
