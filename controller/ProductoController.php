@@ -55,8 +55,23 @@ class ProductoController{
         
         //Recojemos todos los productos para mostrarlos en el carrito
         $allProducts = ProductoDAO::getAllProducts();
+
         //include de la carta
-        include_once 'view/carta.php';
+        // Verificamos si el usuario está autenticado para insertar una carta u otro
+        if(isset($_SESSION['loggedin'])){
+            // verficamos si el usuario es admin
+            $rol = $_SESSION['loggedin']['rol'];
+            if($rol == "admin"){
+                //include de la carta del admin
+                include_once 'view/carta_admin.php';
+            }else{
+                //si no es admin se inserta la carta normal
+                include_once 'view/carta.php';
+            }
+        }else{
+            // Insertamos la carta normal si la sesión no está iniciada
+            include_once 'view/carta.php';
+        }
         
         //include de el footer
         include_once 'view/footer.html';
@@ -127,6 +142,88 @@ class ProductoController{
     }
 
     
+    //funciones de editar insertar y eliminar productos del admin
+    public function editar(){
+
+        $id_producto = $_POST['id'];
+        $product = ProductoDao::getProductById($id_producto);
+
+        //include del header
+        GeneralFunctions::header();
+
+        include_once 'view/editar_producto.php';
+        
+        //include de el footer
+        include_once 'view/footer.html';
+    }
+
+
+    public function saveChanges(){
+
+        //Verificamos que se pase lo necesario por POST
+        if (isset($_POST['id_producto']) && isset($_POST['nombre']) && isset($_POST['precio']) && isset($_POST['tipo']) && isset($_POST['categoria'])){
+
+            //Guardamos los valores recogido por post en variables
+            $id = $_POST['id_producto'];
+            $nombre = $_POST['nombre'];
+            $precio = $_POST['precio'];
+            $tipo = $_POST['tipo'];
+            $categoria = $_POST['categoria'];
+            $descripcion = $_POST['descripcion'];
+            $imagen = $_POST['imagen'];
+
+            //Pasamos los valores a la funcion para que actualize los productos
+            ProductoDAO::updateProduct($id,$nombre,$precio,$descripcion,$tipo,$categoria,$imagen);
+            
+        }
+        
+        header("Location:".url.'?controller=producto');
+    }
     
+
+    //mostrar formulario para insertar producto nuevo
+    public function insertar(){
+
+        include_once 'view/insertarProducto.php';
+
+    }
+
+
+    public function insertarbbdd(){
+
+        //Verificamos que se pase lo necesario por POST
+        if (isset($_POST['nombre']) && isset($_POST['precio']) && isset($_POST['tipo']) && isset($_POST['categoria'])){
+
+            //Guardamos los valores recogido por post en variables
+            $nombre = $_POST['nombre'];
+            $precio = $_POST['precio'];
+            $tipo = $_POST['tipo'];
+            $categoria = $_POST['categoria'];
+            $descripcion = $_POST['descripcion'];
+            $imagen = $_POST['imagen'];
+
+            //Pasamos los valores a la funcion para que actualize los productos
+            ProductoDAO::insertarbbdd($nombre,$precio,$descripcion,$tipo,$categoria,$imagen);
+            
+        }
+
+        header("Location:".url.'?controller=producto');
+
+    }
+
+
+    public function delete(){
+
+        //verificamos que se nos pase el id del producto
+        if(isset($_POST['id'])){
+            
+            //guardamos el id y se lo pasamos a la funcion para que lo elimine
+            $id_producto = $_POST['id'];
+            ProductoDao::deleteProduct($id_producto);
+        } 
+
+        //redirigimos el header
+        header("Location:".url.'?controller=producto');
+    }
 }
 ?>

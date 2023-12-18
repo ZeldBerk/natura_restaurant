@@ -35,9 +35,11 @@ class UserController{
 
                 $nombre = $usuario['nombre'];
                 $user_id = $usuario['user_id'];
+                $rol = $usuario['rol'];
                 
                 $_SESSION['loggedin']['name'] = $nombre;
                 $_SESSION['loggedin']['id'] = $user_id;
+                $_SESSION['loggedin']['rol'] = $rol;
 
                 header("Location:".url.'?controller=producto');
 
