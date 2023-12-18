@@ -69,5 +69,29 @@ class UserDAO{
         $con->close();
         return $result;
     }
+
+
+    public static function getUserById($id){
+        //preparamos la conexion
+        $con = DataBase::connect();
+
+        //preparamos la consulta
+        $stmt = $con->prepare("SELECT * FROM usuarios WHERE user_id=?");
+
+        //vinculamos los valores a los marcadores de posicion
+        $stmt->bind_param("i", $id);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        //Cerramos la conexión
+        $con->close();
+
+        //Almacenamos el resultado en una lista y devolvemos el resultado
+        $usuario = $result->fetch_object('Usuario');
+
+        return $usuario;
+    }
 }
 ?>

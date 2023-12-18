@@ -93,5 +93,20 @@ class UserController{
             }
         }
     }
+
+
+    //mostramos los datos de la cuenta del usuario
+    public function cuenta(){
+        session_start();
+        //include del header
+        GeneralFunctions::header();
+        
+        $usuario = UserDAO::getUserById();
+        //include del login
+        include_once 'view/cuentaUser.php';
+        
+        //include de el footer
+        include_once 'view/footer.html';
+    }
 }
 ?>
