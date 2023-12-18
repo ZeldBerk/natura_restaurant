@@ -91,18 +91,22 @@ class ProductoController{
             //quitamos uno a la cantidad
             $pedido = $_SESSION['carrito'][$_POST['Del']];
             if($pedido->getCantidad()==1){
+                //elimnamos el prodcuto del carrito
                 unset($_SESSION['carrito'][$_POST['Del']]);
                 //debemos re-indexar el array
                 $_SESSION['carrito'] = array_values($_SESSION['carrito']);
             }else{
+                //quitamos uno a la cantidad
                 $pedido->setCantidad($pedido->getCantidad()-1);
             }
+        //eliminamos el preducto del carrito sin importar la cantidad
         }else if(isset($_POST['delete'])){
             unset($_SESSION['carrito'][$_POST['delete']]);
             //debemos re-indexar el array
             $_SESSION['carrito'] = array_values($_SESSION['carrito']);
         }
 
+        //si el carrito esta vacio redirigimos a la home
         if ((count($_SESSION['carrito'])) < 1){
             header("Location:".url.'?controller=producto');
             return;
@@ -158,6 +162,7 @@ class ProductoController{
     }
 
 
+    //funcion para actualiza los productos
     public function saveChanges(){
 
         //Verificamos que se pase lo necesario por POST
@@ -177,7 +182,8 @@ class ProductoController{
             
         }
         
-        header("Location:".url.'?controller=producto');
+        //recargamos la carta
+        header("Location:".url.'?controller=producto&action=show_carta');
     }
     
 
@@ -189,6 +195,7 @@ class ProductoController{
     }
 
 
+    //funcion que inserta un nuevo producto en la base de datos
     public function insertarbbdd(){
 
         //Verificamos que se pase lo necesario por POST
@@ -207,11 +214,13 @@ class ProductoController{
             
         }
 
-        header("Location:".url.'?controller=producto');
+        //recargamos la carta
+        header("Location:".url.'?controller=producto&action=show_carta');
 
     }
 
 
+    //funcion que elimina un producto
     public function delete(){
 
         //verificamos que se nos pase el id del producto
@@ -222,8 +231,8 @@ class ProductoController{
             ProductoDao::deleteProduct($id_producto);
         } 
 
-        //redirigimos el header
-        header("Location:".url.'?controller=producto');
+        //recargamos la carta
+        header("Location:".url.'?controller=producto&action=show_carta');
     }
 }
 ?>
