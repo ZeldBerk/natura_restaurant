@@ -113,8 +113,11 @@ class ProductoController{
         $fecha_actual = date('Y-m-d');
         $total = CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']);
         
-        //pasamos los datos a la funcion para que haga el insert
-        ProductoDAO::insertPedido($user_id, $estado, $fecha_actual, $total, $_SESSION['carrito']);
+        //pasamos los datos a la funcion para que haga el insert i nos devuelva el id
+        $ultimoPedidoId = ProductoDAO::insertPedido($user_id, $estado, $fecha_actual, $total, $_SESSION['carrito']);
+
+        // guardamos el último ID de pedido como cookie asociada al usuario
+        setcookie('ultimo_pedido_'.$user_id, $ultimoPedidoId, time() + 120, "/");
 
         //eliminamos el carrito, y lo dejamos vacio
         unset($_SESSION['carrito']);
@@ -123,10 +126,7 @@ class ProductoController{
         header("Location:".url.'?controller=producto');
     }
 
-    /** 
-    public function addCarrito(){
-        
-    }
-    */    
+    
+    
 }
 ?>
