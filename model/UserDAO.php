@@ -1,6 +1,7 @@
 <?php
 include_once('config/DataBase.php');
-include_once('model/Usuario.php');
+include_once('model/user.php');
+include_once('model/admin.php');
 
 
 class UserDAO{
@@ -49,6 +50,35 @@ class UserDAO{
     }
 
 
+    public static function getUserById($id){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        $stmt = $con->prepare("SELECT rol FROM usuarios WHERE user_id=?");
+        $stmt->bind_param("i", $id);
+
+        //Ejecutamos la consulta y guardamos el 'rol' para poder indicar-le una clase al fetch_object
+        $stmt->execute();
+        $rol = $stmt->get_result()->fetch_object()->rol;
+
+        //Preparamos la consulta del usuario
+        $stmt = $con->prepare("SELECT * FROM usuarios WHERE user_id=?");
+        $stmt->bind_param("i", $id);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        //Cerramos la conexión
+        $con->close();
+
+        //Almacenamos el resultado en una lista y devolvemos el resultado
+        $usuario = $result->fetch_object($rol);
+
+        return $usuario;
+    }
+
+    
     //Funcion para registar un usuario a la base de datos
     public static function registerUser($nombre, $apellido, $correo, $contra1){
         //preparamos la conexion
@@ -68,30 +98,6 @@ class UserDAO{
 
         $con->close();
         return $result;
-    }
-
-
-    public static function getUserById($id){
-        //preparamos la conexion
-        $con = DataBase::connect();
-
-        //preparamos la consulta
-        $stmt = $con->prepare("SELECT * FROM usuarios WHERE user_id=?");
-
-        //vinculamos los valores a los marcadores de posicion
-        $stmt->bind_param("i", $id);
-
-        //ejecutamos la consulta
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        //Cerramos la conexión
-        $con->close();
-
-        //Almacenamos el resultado en una lista y devolvemos el resultado
-        $usuario = $result->fetch_object('Usuario');
-
-        return $usuario;
     }
 }
 ?>

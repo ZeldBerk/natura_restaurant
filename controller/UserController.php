@@ -101,7 +101,10 @@ class UserController{
         //include del header
         GeneralFunctions::header();
         
-        $usuario = UserDAO::getUserById();
+        //obtener datos del usuario logeado
+        $id = $_SESSION['loggedin']['id'];
+        $usuario = UserDAO::getUserById($id);
+
         //include del login
         include_once 'view/cuentaUser.php';
         

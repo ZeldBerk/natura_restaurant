@@ -2,7 +2,6 @@
 include_once('config/DataBase.php');
 include_once('model/Smoothie.php');
 include_once('model/Boles.php');
-include_once('model/Usuario.php');
 
 
 class ProductoDAO{

@@ -21,10 +21,6 @@
                 $this->imagen = $imagen;
         }
 
-       
-
-        //public abstract function calculaPrecioTotal($numDias);
-        //public abstract function devuelvePrecioDia();
 
         /**
          * Get the value of id_producto

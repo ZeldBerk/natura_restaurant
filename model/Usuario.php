@@ -1,6 +1,6 @@
 <?php
 
-class Usuario{
+abstract class Usuario{
 
         protected $user_id;
         protected $nombre;
@@ -9,7 +9,7 @@ class Usuario{
         protected $rol;
         protected $contra;
 
-        public function __construct($user_id = null, $nombre = null, $apellido = null, $email = null, $rol = null, $contra = null){
+        public function __construct($user_id, $nombre, $apellido, $email, $rol, $contra){
             $this->user_id = $user_id;
             $this->nombre = $nombre;
             $this->apellido = $apellido;
