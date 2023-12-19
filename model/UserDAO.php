@@ -12,39 +12,36 @@ class UserDAO{
         //preparamos la conexion
         $con = DataBase::connect();
 
-        //preparamos la consulta
-        $stmt = $con->prepare("SELECT * FROM usuarios WHERE email=?");
-
-        //vinculamos los valores a los marcadores de posicion
+        $stmt = $con->prepare("SELECT rol FROM usuarios WHERE email=?");
         $stmt->bind_param("s", $correo);
 
-        //ejecutamos la consulta
+        //Ejecutamos la consulta y guardamos el resultado
         $stmt->execute();
-        $stmt->store_result();
-        if ($stmt->num_rows > 0) {
-            $stmt->bind_result($user_id, $nombre, $apellido, $email, $rol, $contra);
-            $stmt->fetch();
+        $result = $stmt->get_result();
 
-            // Creamos un array asociativo con los datos del usuario
-            $usuario = [
-                'user_id' => $user_id,
-                'nombre' => $nombre,
-                'apellido' => $apellido,
-                'email' => $email,
-                'rol' => $rol,
-                'contra' => $contra,
-            ];
+        //Si tenemos algun resultado ejecutamos la segunda parte de la funcion
+        if ($result->num_rows > 0) {
+            //Guardamos el 'rol' para poder indicar-le una clase al fetch_object
+            $rol = $result->fetch_object()->rol;
 
-            // Cerramos la conexión
+            //Preparamos la consulta del usuario
+            $stmt = $con->prepare("SELECT * FROM usuarios WHERE email=?");
+            $stmt->bind_param("s", $correo);
+
+            //ejecutamos la consulta
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            //Almacenamos el resultado en una lista y devolvemos el resultado
+            $usuario = $result->fetch_object($rol);
+            //Cerramos la conexión
             $con->close();
 
-            // Retornamos el array asociativo con los datos del usuario
-            return $usuario;
         } else {
-            // Cerramos la conexión en caso de que no haya resultados
-            $con->close();
 
-            // Retornamos null si no hay resultados
+            //Cerramos la conexión
+            $con->close();
+            //Si no devuelve ninguna fila cerramos la funcion
             return null;
         }
     }
@@ -92,12 +89,18 @@ class UserDAO{
         // Vincular los valores a los marcadores de posición
         $stmt->bind_param("sssss", $nombre, $apellido, $correo, $rol, $contra1);
 
-        //ejecutamos la consulta
-        $stmt->execute();
-        $result = $stmt->get_result();
+        // Ejecutamos la consulta
+        $status = $stmt->execute();
 
+        //Recuperamos el id del usuario que acabamos de insertar
+        $ultimoInsertId = $con->insert_id;
+
+        //cerramos la conexion
         $con->close();
-        return $result;
+        
+        //almacenamos el ultimo usuario insertado y lo devolvemos
+        $usuario = self::getUserById($ultimoInsertId);
+        return $usuario;
     }
 }
 ?>

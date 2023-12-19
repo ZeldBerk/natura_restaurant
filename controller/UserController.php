@@ -32,14 +32,10 @@ class UserController{
             
             //comprobamos que las contraseñas coincidan y iniciamos la sesion
             if ($contra === $usuario['contra'] ) {
-
-                $nombre = $usuario['nombre'];
-                $user_id = $usuario['user_id'];
-                $rol = $usuario['rol'];
                 
-                $_SESSION['loggedin']['name'] = $nombre;
-                $_SESSION['loggedin']['id'] = $user_id;
-                $_SESSION['loggedin']['rol'] = $rol;
+                $_SESSION['loggedin']['name'] = $usuario->getNombre();
+                $_SESSION['loggedin']['id'] = $usuario->getUserId();
+                $_SESSION['loggedin']['rol'] = $usuario->getRol();
 
                 header("Location:".url.'?controller=producto');
 
@@ -70,19 +66,14 @@ class UserController{
                     //si las constraseñas cinciden hacemos el insert en las base de datos del usuario
                     if ($contra1 === $contra2){
                         //reggistramos el usuario e iniciamos sesion directamente
-                        UserDAO::registerUser($nombre, $apellido, $correo, $contra1);
+                        $usuario = UserDAO::registerUser($nombre, $apellido, $correo, $contra1);
                         
                         //iniciamos la sesion
                         session_start();
-
-                        //recojemos el id y el nombre para iniciar sesion e iniciamos la sesion
-                        $usuario = UserDAO::getUserByEmail($correo);
-
-                        $nombre = $usuario['nombre'];
-                        $user_id = $usuario['user_id'];
                         
-                        $_SESSION['loggedin']['name'] = $nombre;
-                        $_SESSION['loggedin']['id'] = $user_id;
+                        $_SESSION['loggedin']['name'] = $usuario->getNombre();
+                        $_SESSION['loggedin']['id'] = $usuario->getUserId();
+                        $_SESSION['loggedin']['rol'] = $usuario->getRol();
 
                         header("Location:".url.'?controller=producto');
                     }else{
