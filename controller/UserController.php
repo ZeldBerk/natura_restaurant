@@ -29,9 +29,10 @@ class UserController{
 
             //realizamos la consulta del correo en la base de datos
             $usuario = UserDAO::getUserByEmail($correo);
+            $contrabd = $usuario->getContra();
             
             //comprobamos que las contraseñas coincidan y iniciamos la sesion
-            if ($contra === $usuario['contra'] ) {
+            if ($contra == $contrabd) {
                 
                 $_SESSION['loggedin']['name'] = $usuario->getNombre();
                 $_SESSION['loggedin']['id'] = $usuario->getUserId();
@@ -70,7 +71,7 @@ class UserController{
                         
                         //iniciamos la sesion
                         session_start();
-                        
+
                         $_SESSION['loggedin']['name'] = $usuario->getNombre();
                         $_SESSION['loggedin']['id'] = $usuario->getUserId();
                         $_SESSION['loggedin']['rol'] = $usuario->getRol();
@@ -101,6 +102,20 @@ class UserController{
         
         //include de el footer
         include_once 'view/footer.html';
+    }
+
+
+    //Funion para gestionar el formulario de la cuenta
+    public function cambiosCuenta(){
+        session_start();
+
+        if(isset($_POST['cerrar'])){
+
+            // Destruimos la sesión
+            session_destroy();
+
+            header("Location:".url.'?controller=producto');
+        }
     }
 }
 ?>

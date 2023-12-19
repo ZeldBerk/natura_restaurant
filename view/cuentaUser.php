@@ -14,7 +14,7 @@
         <div class="col-12">
             <div class="formulario">
                 <h2 class="text-center mb-5 titulosLogin">Tu Cuenta</h2>
-                <form action=<?=url."?controller=producto&action=saveChanges"?> method="post">
+                <form action=<?=url."?controller=producto&action=cambiosCuenta"?> method="POST">
                     <div class="mb-3 row">
                         <label for="nombre" class="labelsLogin col-sm-12">Nombre:</label>
                         <div class="col-sm-12">
@@ -46,7 +46,8 @@
                             <input type="password" class="form-control inputLogin" name="contra" value="<?= $usuario->getContra()?>">
                         </div>
                     </div>
-                    <button type="submit" name="saveChanges" class="buttonDark">Guardar</button>
+                    <button type="submit" name="actualizar" class="buttonDark">Guardar</button>
+                    <button type="submit" name="cerrar" class="buttonDark">Cerrar Sesión</button>
                 </form>
             </div>
         </div>
