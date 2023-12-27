@@ -34,9 +34,11 @@ class UserDAO{
 
             //Almacenamos el resultado en una lista y devolvemos el resultado
             $usuario = $result->fetch_object($rol);
+        
             //Cerramos la conexión
             $con->close();
 
+            return $usuario;
         } else {
 
             //Cerramos la conexión

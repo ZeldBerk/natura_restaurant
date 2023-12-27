@@ -29,8 +29,10 @@ class UserController{
 
             //realizamos la consulta del correo en la base de datos
             $usuario = UserDAO::getUserByEmail($correo);
-            $contrabd = $usuario->getContra();
-            
+            //$contrabd = $usuario->getContra();
+            if ($usuario != null){
+                $contrabd = $usuario->getContra();
+            }
             //comprobamos que las contraseñas coincidan y iniciamos la sesion
             if ($contra == $contrabd) {
                 
