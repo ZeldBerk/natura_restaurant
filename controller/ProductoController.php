@@ -39,6 +39,32 @@ class ProductoController{
         //include del header
         GeneralFunctions::header();
 
+        // Verificamos si el usuario está autenticado
+        if(isset($_SESSION['loggedin'])){
+            //comprobamos is existe la cookie con su id
+            $user_id = $_SESSION['loggedin']['id'];
+            if(isset($_COOKIE['ultimo_pedido_'.$user_id])){
+                $ultimoPedido = $_COOKIE['ultimo_pedido_'.$user_id];
+                $pedidos = ProductoDAO::getUltPedido($ultimoPedido);
+
+                if(!isset($_SESSION['carrito'])){
+                    $_SESSION['carrito'] = array();
+                }
+                var_dump($pedidos);
+                foreach($pedidos as $pedido){
+                    $producto_id = $pedido['prodcutoId'];
+                    $cantidad = $pedido['cantidad'];
+
+                    $product = ProductoDAO::getProductById($producto_id);
+                    $pedido_carrito = new Pedido($product);
+                    $pedido_carrito->setCantidad($cantidad);
+                    array_push($_SESSION['carrito'], $pedido_carrito);
+
+                    header("Location:".url.'?controller=producto&action=carrito');
+                }
+            }
+        }
+
         // Include de la home
         include_once 'view/home.php';
 

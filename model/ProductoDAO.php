@@ -16,28 +16,6 @@ class ProductoDAO{
         
     }
 
-    /**
-    public static function getAllCategorias(){
-        //preparamos la consulta
-        $con = DataBase::connect();
-
-        $stmt = $con->prepare("SELECT id_categoria, nombre FROM categorias");
-
-        //ejecutamos la consulta
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        $con->close();
-
-        //almaceno el resultado en una lista
-        $listaCategorias = [];
-        while($categoriaDB = $result->fetch_object('Categorias')){
-            $listaCategorias[] = $categoriaDB;
-        }
-        
-        return $listaCategorias;
-    }
-    */
 
     public static function getAllByType($tipo){
 
@@ -179,4 +157,35 @@ class ProductoDAO{
         $con->close();
         return $ultimoInsertId;
     }
-}
+
+
+    //Funion que recupera los pedidos por su id
+    public static function getUltPedido($id){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        //Preparamos la consulta del pedido
+        $stmt = $con->prepare("SELECT producto_id, cantidad	 FROM detallespedido WHERE pedido_id=?");
+        $stmt->bind_param("i", $id);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->store_result();
+
+        $stmt->bind_result($productoId, $cantidad);
+
+        //Creamos una array asociativocon los datos del pedido
+        $pedido = array();
+            
+        while ($stmt->fetch()){
+            $pedido[] = ['prodcutoId' => $productoId, 'cantidad' => $cantidad];
+        }
+
+        //cerramos la conexion
+        $con->close();
+
+        //devolvemos el array de pedido
+        return $pedido;
+
+    }
+}   
