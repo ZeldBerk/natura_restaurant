@@ -104,5 +104,21 @@ class UserDAO{
         $usuario = self::getUserById($ultimoInsertId);
         return $usuario;
     }
+
+    public static function updateUser($id,$nombre,$apellido,$email){
+       
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        $stmt = $con->prepare("UPDATE usuarios SET nombre=? , apellido=? , email=? WHERE user_id =?");
+        $stmt->bind_param("sssi", $nombre,$apellido,$email,$id);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $con->close();
+        return $result;
+    }
 }
 ?>

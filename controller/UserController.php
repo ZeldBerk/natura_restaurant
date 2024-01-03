@@ -117,6 +117,24 @@ class UserController{
             session_destroy();
 
             header("Location:".url.'?controller=producto');
+        }elseif(isset($_POST['actualizar'])){
+
+            //Verificamos que se pase lo necesario por POST
+            if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['email'])){
+
+                //Guardamos los valores recogido por post en variables
+                $id = $_SESSION['loggedin']['id'];
+                $nombre = $_POST['nombre'];
+                $apellido = $_POST['apellido'];
+                $email = $_POST['email'];
+
+                //Pasamos los valores a la funcion para que actualize los productos
+                UserDAO::updateUser($id,$nombre,$apellido,$email);
+                
+            }
+
+            //recargamos la pagina de cuenta
+            header("Location:".url.'?controller=user&action=cuenta');
         }
     }
 }
