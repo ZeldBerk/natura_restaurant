@@ -18,7 +18,7 @@
             <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
                 <article class="producto">
                     <div class="imgProducto d-flex justify-content-center align-items-center">
-                        <img src="../assets/images/img.svg" alt="icono de imagen" type="image/svg+xml" width="100" height="100">
+                        <img src="../assets/images/<?=$product->getImagen()?>" alt="icono de imagen" type="image/svg+xml">
                         <div class="anadirCarrito">
                             <form action=<?=url."?controller=producto&action=addCarrito"?> method="POST">
                                 <input name="id" value="<?=$product->getIdProducto()?>" hidden />

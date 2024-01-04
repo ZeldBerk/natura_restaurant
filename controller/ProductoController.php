@@ -114,45 +114,49 @@ class ProductoController{
     //carga de la pagina de carrito
     public function carrito(){
         session_start();
-
-        //gestion de las cantidades de cada producto
-        if(isset($_POST['Add'])){
-            //añadimos uno a la cantidad
-            $pedido = $_SESSION['carrito'][$_POST['Add']];
-            $pedido->setCantidad($pedido->getCantidad()+1);
-        }else if(isset($_POST['Del'])){
-            //quitamos uno a la cantidad
-            $pedido = $_SESSION['carrito'][$_POST['Del']];
-            if($pedido->getCantidad()==1){
-                //elimnamos el prodcuto del carrito
-                unset($_SESSION['carrito'][$_POST['Del']]);
+        if(isset($_SESSION['carrito'])){
+            //gestion de las cantidades de cada producto
+            if(isset($_POST['Add'])){
+                //añadimos uno a la cantidad
+                $pedido = $_SESSION['carrito'][$_POST['Add']];
+                $pedido->setCantidad($pedido->getCantidad()+1);
+            }else if(isset($_POST['Del'])){
+                //quitamos uno a la cantidad
+                $pedido = $_SESSION['carrito'][$_POST['Del']];
+                if($pedido->getCantidad()==1){
+                    //elimnamos el prodcuto del carrito
+                    unset($_SESSION['carrito'][$_POST['Del']]);
+                    //debemos re-indexar el array
+                    $_SESSION['carrito'] = array_values($_SESSION['carrito']);
+                }else{
+                    //quitamos uno a la cantidad
+                    $pedido->setCantidad($pedido->getCantidad()-1);
+                }
+            //eliminamos el preducto del carrito sin importar la cantidad
+            }else if(isset($_POST['delete'])){
+                unset($_SESSION['carrito'][$_POST['delete']]);
                 //debemos re-indexar el array
                 $_SESSION['carrito'] = array_values($_SESSION['carrito']);
-            }else{
-                //quitamos uno a la cantidad
-                $pedido->setCantidad($pedido->getCantidad()-1);
             }
-        //eliminamos el preducto del carrito sin importar la cantidad
-        }else if(isset($_POST['delete'])){
-            unset($_SESSION['carrito'][$_POST['delete']]);
-            //debemos re-indexar el array
-            $_SESSION['carrito'] = array_values($_SESSION['carrito']);
-        }
 
-        //si el carrito esta vacio redirigimos a la home
-        if ((count($_SESSION['carrito'])) < 1){
-            header("Location:".url.'?controller=producto');
-            return;
-        }
-
-        //include del header
-        GeneralFunctions::header();
-
-        //include del login
-        include_once 'view/carrito.php';
+            //si el carrito esta vacio redirigimos a la home
+            if ((count($_SESSION['carrito'])) < 1){
+                header("Location:".url.'?controller=producto');
+                return;
+            }
         
-        //include de el footer
-        include_once 'view/footer.html';
+
+            //include del header
+            GeneralFunctions::header();
+
+            //include del login
+            include_once 'view/carrito.php';
+        
+            //include de el footer
+            include_once 'view/footer.html';
+        }else{
+            header("Location:".url.'?controller=producto');
+        }
     }
 
 
