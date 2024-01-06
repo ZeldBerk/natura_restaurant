@@ -29,8 +29,21 @@ class ProductoController{
     
                 $id_product = $_POST['id'];
                 $product = ProductoDAO::getProductById($id_product);
-                $pedido = new Pedido($product);
-                array_push($_SESSION['carrito'], $pedido);
+                
+                $existItem = null;
+                foreach($_SESSION['carrito'] as $item){
+                    if($item->getProducto()->getIdProducto() == $id_product){
+                        $existItem = $item;
+                    }
+                }
+
+                if($existItem){
+                    $existItem->setCantidad($existItem->getCantidad()+1);
+                }else{
+                    $pedido = new Pedido($product);
+                    array_push($_SESSION['carrito'], $pedido);
+                }
+                    
                 header("Location:".url.'?controller=producto&action=show_carta');
             }
 
