@@ -12,7 +12,7 @@
 <div class="separacion_big"></div>
     <section class="mCarta container mx-auto">
         <h2>Todos Los Productos</h2>
-        <form action=<?=url."?controller=producto&action=insertar"?> method="POST">
+        <form action="<?=url."?controller=producto&action=insertar"?>" method="POST">
             <button class="buttonDelete" type="submit" name="insertar">
             <svg width="30px" height="30px" viewBox="-51.2 -51.2 614.40 614.40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#004733" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"/>
@@ -29,7 +29,7 @@
                     <div class="imgProducto d-flex justify-content-center align-items-center">
                         <img src="../assets/images/img.svg" alt="icono de imagen" type="image/svg+xml" width="100" height="100">
                         <div class="anadirCarrito">
-                            <form action=<?=url."?controller=producto&action=editar"?> method="POST">
+                            <form action="<?=url."?controller=producto&action=editar"?>" method="POST">
                                 <input name="id" value="<?=$product->getIdProducto()?>" hidden />
                                 <button type="submit" name="editar" class="bCarrito">Editar Producto</button>
                             </form>
@@ -38,7 +38,7 @@
                     <div class="productoTexto">
                         <p><?=$product->getNombre()?></p>
                         <p><?=$product->getPrecio()?>€</p>
-                        <form action=<?=url."?controller=producto&action=delete"?> method="POST">
+                        <form action="<?=url."?controller=producto&action=delete"?>" method="POST">
                             <input name="id" value="<?=$product->getIdProducto()?>" hidden />
                             <button class="buttonDelete mt-auto" type="submit" name="delete">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13" xml:space="preserve">

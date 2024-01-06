@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../assets/css/full_estil.css" rel="stylesheet" type="text/css" media="screen">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/full_estil.css" type="text/css" media="screen">
     <title>Document</title>
 </head>
 <body class="">
@@ -15,7 +15,7 @@
                 <article class="articleS1L">
                     <img src="../assets/images/smoothie_platano_home.png" alt="Smoothie de platano" class="img-fluid position-absolute top-0 end-0" style="z-index: 1; max-width: 325px; max-height: 406px; transform: scaleX(-1); padding: 4px;">
                     <h2 class="position-relative" style="z-index: 2;">NUEVOS SABORES A PROBAR</h2>
-                    <form action=<?=url."?controller=producto&action=show_carta"?> method="POST">
+                    <form action="<?=url."?controller=producto&action=show_carta"?>2 method="POST">
                         <button class="position-relative" type="submit" name="show_carta">Nuevos Smoothies</button>
                     </form>
                 </article>
@@ -24,7 +24,7 @@
                 <article class="articleS1R">
                     <img src="../assets/images/bol_fresas_home.png" alt="Bol con fresas trozos de coco y pipas de girasol" class="img-fluid position-absolute top-0 end-0" style="z-index: 1; max-width: 428px; max-height: 416px; transform: scaleY(-1); padding: 4px;">
                     <h2 class="position-relative" style="z-index: 2;">NUEVOS DESAYUNOS</h2>
-                    <form action=<?=url."?controller=producto&action=show_carta"?> method="POST">
+                    <form action="<?=url."?controller=producto&action=show_carta"?>" method="POST">
                         <button class="position-relative" type="submit" name="show_carta">Nuevos Desayunos</button>
                     </form>                
                 </article>
@@ -41,7 +41,7 @@
                         <div class="col-6">
                             <h2 class="position-relative" style="z-index: 2;">NUEVOS PRODUCTOS</h2>
                             <h2 class="position-relative">OTOÑALES</h2>
-                            <form action=<?=url."?controller=producto&action=show_carta"?> method="POST">
+                            <form action="<?=url."?controller=producto&action=show_carta"?>" method="POST">
                                 <button class="position-relative" type="submit" name="show_carta">Sabores Otoño</button>
                             </form>   
                         </div>
@@ -59,7 +59,7 @@
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 text-center">
                 <article class="articleS2L" style="background-image: url('../assets/images/fondoS2L.png'); background-size: cover; background-position: center;">
                     <h2 class="h2white">SMOOTHIES CLÁSICOS</h2>
-                    <form action=<?=url."?controller=producto&action=show_carta"?> method="POST">
+                    <form action="<?=url."?controller=producto&action=show_carta"?>" method="POST">
                         <button class="buttonWhite" type="submit" name="show_carta">Mejores Clásicos</button>
                     </form>
                 </article>
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <article class="col-sm-12 col-md-12 col-lg-2 col-xl-2 articulo_promo d-flex justify-content-center align-items-center">
-                <form action=<?=url."?controller=producto&action=show_carta"?> method="POST">
+                <form action="<?=url."?controller=producto&action=show_carta"?>" method="POST">
                     <button class="position-relative" type="submit" name="show_carta">Promociones</button>
                 </form>
             </article>

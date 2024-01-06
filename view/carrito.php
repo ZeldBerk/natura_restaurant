@@ -35,14 +35,14 @@
                         <p class="mt-auto">Cantidad</p>
                     </div>
                     <div class="col-2 d-flex flex-column">
-                        <form class="mt-auto" action=<?=url."?controller=producto&action=carrito"?> method="POST">
+                        <form class="mt-auto" action="<?=url."?controller=producto&action=carrito"?>" method="POST">
                             <button class="butonCantidad" type="submit" name="Del" value=<?=$pos?>>-</button>
                             <label class="labelCantidad"><?=$pedido->getCantidad()?></label>
                             <button class="butonCantidad marginLeftBcantidad" type="submit" name="Add" value=<?=$pos?>>+</button>
                         </form>
                     </div>
                     <div class="col-5 d-flex flex-column justify-content-end">
-                        <form class="align-self-end" action=<?=url."?controller=producto&action=carrito"?> method="POST">
+                        <form class="align-self-end" action="<?=url."?controller=producto&action=carrito"?>" method="POST">
                             <button class="buttonDelete" type="submit" name="delete" value=<?=$pos?>>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 13" xml:space="preserve">
                                     <path d="M11.7 2H8.8V.5c0-.3-.2-.5-.5-.5H4.4c-.3 0-.5.2-.5.5V2H1c-.3 0-.5.2-.5.5s.2.5.5.5h.9v9c0 .3.2.5.5.5h8.2c.3 0 .5-.2.5-.5V3h.6c.3 0 .5-.2.5-.5S12 2 11.7 2zM4.9 1h2.9v1H4.9V1zm5.2 10.5H2.9V3h7.2v8.5z"></path>
@@ -95,7 +95,7 @@
                                     </div>
                                 </form>
                                 <div class="align-self-end">
-                                    <form action=<?=url."?controller=producto&action=finalizarCompra"?> method="POST">
+                                    <form action="<?=url."?controller=producto&action=finalizarCompra"?>" method="POST">
                                         <button class="buttonDark">Realizar compra | <?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></button>
                                     </form>
                                 </div>

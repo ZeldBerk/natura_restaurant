@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/full_estil.css" type="text/css" media="screen">
+    <title>Document</title>
+</head>
 <header>
     <div class="headerTopBar">
         <p>ENVÍO GRATIS EN PENÍNSULA A PARTIR DE 40€. ENVÍO ESTIMADO 24H-72H</p>
@@ -15,7 +25,7 @@
                         </li>
                     </ul>
                     <div class="mx-auto">
-                        <a href=<?=url."?controller=producto"?>>
+                        <a href="<?=url."?controller=producto"?>">
                             <img class="logo" src="../assets/icons/logo.png" alt="Logo Natura">
                         </a>
                     </div>
@@ -27,10 +37,10 @@
                             <input class="buscar" type="text" placeholder="Buscar">
                         </li>
                         <li class="nav-item">
-                            <a class="navlinkP" aria-current="page" href=<?=url."?controller=user&action=cuenta"?>><?=$_SESSION['loggedin']['name']?></a>
+                            <a class="navlinkP" aria-current="page" href="<?=url."?controller=user&action=cuenta"?>"><?=$_SESSION['loggedin']['name']?></a>
                         </li>
                         <li class="nav-item">
-                            <a href=<?=url."?controller=producto&action=carrito"?>>
+                            <a href="<?=url."?controller=producto&action=carrito"?>">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                                     <g fill="none" fill-rule="evenodd" stroke="#004733">
                                         <path d="M3.585 5.554h12.678l1.585 12.142H2z"></path>
@@ -49,10 +59,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="nav nav-underline navbar-nav mr-manual mb-lg-0 mx-auto">
                         <li class="nav-item">
-                            <a class="menu" aria-current="page" href=<?=url."?controller=producto&action=show_carta"?>>Carta</a>
+                            <a class="menu" aria-current="page" href="<?=url."?controller=producto&action=show_carta"?>">Carta</a>
                         </li>
                         <li class="nav-item">
-                            <a class="menu" href=<?=url."?controller=producto"?>>Home</a>
+                            <a class="menu" href="<?=url."?controller=producto"?>">Home</a>
                         </li>
                     </ul>
                 </div>

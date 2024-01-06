@@ -14,7 +14,7 @@
         <div class="col-12">
             <div class="formulario">
                 <h2 class="text-center mb-5 titulosLogin">Añadir Prodcuto</h2>
-                <form action=<?=url."?controller=producto&action=insertarbbdd"?> method="post">
+                <form action="<?=url."?controller=producto&action=insertarbbdd"?>" method="post">
                     <div class="mb-3 row">
                         <label for="nombre" class="labelsLogin col-sm-12">Nombre:</label>
                         <div class="col-sm-12">

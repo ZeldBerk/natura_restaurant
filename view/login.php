@@ -14,7 +14,7 @@
         <div class="col-sm-12 col-md-6">
             <div class="formulario">
                 <h2 class="text-center mb-5 titulosLogin">Inicia sesión</h2>
-                <form action=<?=url."?controller=user&action=singIn"?> method="post">
+                <form action="<?=url."?controller=user&action=singIn"?>" method="post">
                     <div class="mb-3 row">
                         <label for="inicioEmail" class="labelsLogin col-sm-12">Correo:</label>
                         <div class="col-sm-12">
@@ -35,7 +35,7 @@
         <div class="col-sm-12 col-md-6">
             <div class="formulario bg-color5 rounded-3">
                 <h2 class="text-center mb-5 titulosLogin">Registrar-se</h2>
-                <form action=<?=url."?controller=user&action=register"?> method="post">
+                <form action="<?=url."?controller=user&action=register"?>" method="post">
                     <div class="mb-3 row">
                         <label for="nombre" class="labelsLogin col-sm-12">Nombre:</label>
                         <div class="col-sm-12 mb-3">

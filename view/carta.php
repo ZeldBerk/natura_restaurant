@@ -20,7 +20,7 @@
                     <div class="imgProducto d-flex justify-content-center align-items-center">
                         <img src="../assets/images/<?=$product->getImagen()?>" alt="icono de imagen" type="image/svg+xml">
                         <div class="anadirCarrito">
-                            <form action=<?=url."?controller=producto&action=addCarrito"?> method="POST">
+                            <form action="<?=url."?controller=producto&action=addCarrito"?>" method="POST">
                                 <input name="id" value="<?=$product->getIdProducto()?>" hidden />
                                 <button type="submit" name="addCarrito" class="bCarrito">Añadir a la cesta</button>
                             </form>
