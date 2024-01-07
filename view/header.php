@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/full_estil.css" type="text/css" media="screen">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../assets/css/full_estil.css" type="text/css" media="screen"/>
     <title>Document</title>
 </head>
 <header>
@@ -26,7 +26,7 @@
                     </ul>
                     <div class="mx-auto">
                         <a href="<?=url."?controller=producto"?>">
-                            <img class="logo" src="../assets/icons/logo.png" alt="Logo Natura">
+                            <img class="logo" src="../assets/icons/logo.png" alt="Logo Natura"/>
                         </a>
                     </div>
                     <ul class="nav nav-underline navbar-nav mb-2 mb-lg-0 padB">
@@ -34,7 +34,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                                 <path fill="none" stroke="#004733" stroke-miterlimit="10" d="M17.52 17.521l-5.278-5.278S14 10.564 14 8s-1.989-6-6-6-6 3.415-6 6 2.053 6 6 6c2.755 0 4.242-1.757 4.242-1.757"></path>
                             </svg>
-                            <input class="buscar" type="text" placeholder="Buscar">
+                            <input class="buscar" type="text" placeholder="Buscar"/>
                         </li>
                         <li class="nav-item">
                             <a class="navlinkP" aria-current="page" href="<?=url."?controller=user&action=login"?>">Iniciar sesión</a>

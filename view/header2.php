@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/full_estil.css" type="text/css" media="screen">
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="../assets/css/full_estil.css" type="text/css" media="screen"/>
     <title>Document</title>
 </head>
 <header>
