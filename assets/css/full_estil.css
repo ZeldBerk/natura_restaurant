@@ -217,7 +217,11 @@ div .col-6{
 .navbar-toggler {
     position: relative;
     top: 5px;
-  }
+}
+
+.color_fondo_recuperar_pedido{
+    background-color: #295639;
+}
 
 /*Estilos articulos Section 1*/
 .articleS1L{
@@ -581,4 +585,20 @@ button:hover{
     background-color: #1E3E35;
     font-size: 14px;
     font-family: "Larsseit-Ligth";
+}
+
+.boton_recuperar{
+    padding: 5px;
+    height: auto;
+    width: auto;
+    border: none;
+    border-radius: 0;
+    color: #1E3E35;
+    background-color: #fff;
+    font-size: 14px;
+    font-family: "Larsseit-Ligth";
+}
+
+.boton_recuperar:hover{
+    background-color: #295639;
 }

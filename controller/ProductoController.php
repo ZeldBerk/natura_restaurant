@@ -49,8 +49,6 @@ class ProductoController{
 
         }
 
-        //include del header
-        GeneralFunctions::header();
 
         // Verificamos si el usuario está autenticado
         if(isset($_SESSION['loggedin'])){
@@ -61,6 +59,9 @@ class ProductoController{
                 include_once('view/recuperarPedido.php');
             }
         }
+
+        //include del header
+        GeneralFunctions::header();
 
         // Include de la home
         include_once 'view/home.php';
