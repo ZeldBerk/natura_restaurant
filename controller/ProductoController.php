@@ -241,8 +241,14 @@ class ProductoController{
     //mostrar formulario para insertar producto nuevo
     public function insertar(){
 
-        include_once 'view/insertarProducto.php';
+        //include del header
+        GeneralFunctions::header();
 
+        include_once 'view/insertarProducto.php';
+        
+        //include de el footer
+        include_once 'view/footer.html';
+        
     }
 
 
