@@ -206,6 +206,10 @@ div .col-6{
     
 }
 
+.carritoCount{
+    color: #004733;
+}
+
 /*Estilos articulos Section 1*/
 .articleS1L{
     min-height: 464px;

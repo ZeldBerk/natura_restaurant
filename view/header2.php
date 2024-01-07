@@ -40,14 +40,16 @@
                             <a class="navlinkP" aria-current="page" href="<?=url."?controller=user&action=cuenta"?>"><?=$_SESSION['loggedin']['name']?></a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?=url."?controller=producto&action=carrito"?>">
+                            <a href="<?=url."?controller=producto&action=carrito"?>" class="navlinkP">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                                     <g fill="none" fill-rule="evenodd" stroke="#004733">
                                         <path d="M3.585 5.554h12.678l1.585 12.142H2z"></path>
                                         <path d="M12.971 8.286v-4.2C12.971 2.38 11.607 1 9.924 1S6.876 2.381 6.876 4.085v4.2"></path>
                                     </g>
                                 </svg>
-                                <?= isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0 ?>
+                                <span class="carritoCount">
+                                    <?= (isset($_SESSION['carrito']) && count($_SESSION['carrito']) > 0) ? count($_SESSION['carrito']) : '' ?>
+                                </span>
                             </a>
                         </li>
                     </ul>
