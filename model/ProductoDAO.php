@@ -16,28 +16,6 @@ class ProductoDAO{
         
     }
 
-    /**
-    public static function getAllCategorias(){
-        //preparamos la consulta
-        $con = DataBase::connect();
-
-        $stmt = $con->prepare("SELECT id_categoria, nombre FROM categorias");
-
-        //ejecutamos la consulta
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        $con->close();
-
-        //almaceno el resultado en una lista
-        $listaCategorias = [];
-        while($categoriaDB = $result->fetch_object('Categorias')){
-            $listaCategorias[] = $categoriaDB;
-        }
-        
-        return $listaCategorias;
-    }
-    */
 
     public static function getAllByType($tipo){
 
@@ -126,11 +104,11 @@ class ProductoDAO{
 
 
     public static function insertarbbdd($nombre,$precio,$descripcion,$tipo,$categoria,$imagen){
-        //preparamos la consulta
+        //preparamos la conexion
         $con = DataBase::connect();
 
         // Usar una sentencia preparada con marcadores de posición
-        $stmt = $con->prepare("INSERT INTO `productos` (`nombre`, `precio`, `descripcion`, `tipo`, `id_categoria`, `imagen`) VALUES (?, ?, ?, ?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO productos (nombre, precio, descripcion, tipo, id_categoria, imagen) VALUES (?, ?, ?, ?, ?, ?)");
 
         // Vincular los valores a los marcadores de posición
         $stmt->bind_param("sdssis", $nombre, $precio, $descripcion, $tipo, $categoria, $imagen);
@@ -143,4 +121,71 @@ class ProductoDAO{
         return $result;
     }
 
-}
+
+    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        // Usar una sentencia preparada con marcadores de posición
+        $stmt = $con->prepare("INSERT INTO pedidos (user_id, estado, date_pedido, total) VALUES (?, ?, ?, ?)");
+
+        // Vincular los valores a los marcadores de posición
+        $stmt->bind_param("issd", $user_id,$estado,$fecha_actual,$total);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        
+        //Recuperamos el id del pedido que acabamos de insertar
+        $ultimoInsertId = $con->insert_id;
+
+        foreach ($productos as $producto){
+
+            $productoId = $producto->getProducto()->getIdProducto();
+            $cantidad = $producto->getCantidad();
+
+            // Usar una sentencia preparada con marcadores de posición
+            $stmt = $con->prepare("INSERT INTO detallespedido (pedido_id, producto_id, cantidad) VALUES (?, ?, ?)");
+
+            // Vincular los valores a los marcadores de posición
+            $stmt->bind_param("iii", $ultimoInsertId, $productoId, $cantidad);
+
+            //ejecutamos la consulta
+            $stmt->execute();
+
+        }
+
+        $con->close();
+        return $ultimoInsertId;
+    }
+
+
+    //Funion que recupera los pedidos por su id
+    public static function getUltPedido($id){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        //Preparamos la consulta del pedido
+        $stmt = $con->prepare("SELECT producto_id, cantidad	 FROM detallespedido WHERE pedido_id=?");
+        $stmt->bind_param("i", $id);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->store_result();
+
+        $stmt->bind_result($productoId, $cantidad);
+
+        //Creamos una array asociativocon los datos del pedido
+        $pedido = array();
+            
+        while ($stmt->fetch()){
+            $pedido[] = ['prodcutoId' => $productoId, 'cantidad' => $cantidad];
+        }
+
+        //cerramos la conexion
+        $con->close();
+
+        //devolvemos el array de pedido
+        return $pedido;
+
+    }
+}   
