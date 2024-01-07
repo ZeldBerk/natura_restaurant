@@ -12,9 +12,9 @@
                 <?php
                     $pos = 0;
                     foreach($_SESSION['carrito'] as $pedido){?>
-                    <div class="row">
-                        <div class="col-1">
-                            <img src="../assets/images/img.svg" alt="icono de imagen" type="image/svg+xml" width="64" height="64"/>
+                    <div class="row producto">
+                        <div class="col-1 d-flex justify-content-center align-items-center">
+                            <img src="../assets/images/carrito/<?=$pedido->getProducto()->getImagen()?>" alt="icono de imagen" type="image/svg+xml"/>
                         </div>
                         <div class="col-3 d-flex flex-column">
                             <p class="mb-auto sub"><?=$pedido->getProducto()->getNombre()?></p>

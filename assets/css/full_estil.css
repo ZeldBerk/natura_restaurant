@@ -345,7 +345,6 @@ div .col-6{
 
 .detallesC{
     padding: 29.4px;
-    padding-bottom: 49px;
     border-bottom: 2px solid #004733;
 }
 
@@ -356,6 +355,10 @@ div .col-6{
 .detallesC p{
     margin: 0px;
 
+}
+
+.producto{
+    margin-bottom: 19.6px;
 }
 
 .labelCantidad{
