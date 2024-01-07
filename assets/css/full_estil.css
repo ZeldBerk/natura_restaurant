@@ -210,6 +210,15 @@ div .col-6{
     color: #004733;
 }
 
+.navbar-collapse {
+    z-index: 1000;
+}
+
+.navbar-toggler {
+    position: relative;
+    top: 5px;
+  }
+
 /*Estilos articulos Section 1*/
 .articleS1L{
     min-height: 464px;
