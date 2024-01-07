@@ -76,12 +76,12 @@
                 <div class="row">
                     <div class="col-6 text-center">
                         <article class="articleS3L1">
-                            <img src="../assets/images/img.svg" alt="icono de imagen" type="image/svg+xml" width="100" height="100"/>
+                            <img src="../assets/images/smoothie_cacahuete_home.png" alt="icono de imagen" type="image/svg+xml"/>
                         </article>
                     </div>
                     <div class="col-6 text-center">
                         <article class="articleS3L2">
-                            <img src="../assets/images/img.svg" alt="icono de imagen" type="image/svg+xml" width="100" height="100"/>
+                            <img src="../assets/images/futas_home_s3.png" alt="icono de imagen" type="image/svg+xml"/>
                         </article>
                     </div>
                 </div>
@@ -95,12 +95,12 @@
                 <div class="row">
                     <div class="col-6 text-center">
                         <article class="articleS3R1">
-                            <img src="../assets/images/img.svg" alt="icono de imagen" type="image/svg+xml" width="100" height="100"/>
+                            <img src="../assets/images/futas_bosque_home_s3.png" alt="icono de imagen" type="image/svg+xml"/>
                         </article>
                     </div>
                     <div class="col-6 text-center">
                         <article class="articleS3R2">
-                            <img src="../assets/images/img.svg" alt="icono de imagen" type="image/svg+xml" width="100" height="100"/>
+                            <img src="../assets/images/arandanos_home.png" alt="icono de imagen" type="image/svg+xml"/>
                         </article>
                     </div>
                 </div>
