@@ -15,18 +15,21 @@
     <div class="container">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="nav nav-underline navbar-nav mr-manual mb-2 mb-lg-0 padB">
                         <li class="nav-item">
-                            <a class="navlinkP" aria-current="page" href="#">Sobre Natura</a>
+                            <a class="nav-link navlinkP" aria-current="page" href="#">Sobre Natura</a>
                         </li>
                         <li class="nav-item">
-                            <a class="navlinkP" href="#">Compromiso Natura</a>
+                            <a class="nav-link navlinkP" href="#">Compromiso Natura</a>
                         </li>
                     </ul>
-                    <div class="mx-auto">
+                    <div class="mx-auto d-flex justify-content-center align-items-center">
                         <a href="<?=url."?controller=producto"?>">
-                            <img class="logo" src="../assets/icons/logo.png" alt="Logo Natura">
+                            <img class="logo" src="../assets/icons/logo.png" alt="Logo Natura"/>
                         </a>
                     </div>
                     <ul class="nav nav-underline navbar-nav mb-2 mb-lg-0 padB">
@@ -34,13 +37,13 @@
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                                 <path fill="none" stroke="#004733" stroke-miterlimit="10" d="M17.52 17.521l-5.278-5.278S14 10.564 14 8s-1.989-6-6-6-6 3.415-6 6 2.053 6 6 6c2.755 0 4.242-1.757 4.242-1.757"></path>
                             </svg>
-                            <input class="buscar" type="text" placeholder="Buscar">
+                            <input class="buscar" type="text" placeholder="Buscar"/>
                         </li>
                         <li class="nav-item">
-                            <a class="navlinkP" aria-current="page" href="<?=url."?controller=user&action=cuenta"?>"><?=$_SESSION['loggedin']['name']?></a>
+                            <a class="nav-link navlinkP" aria-current="page" href="<?=url."?controller=user&action=login"?>"><?=$_SESSION['loggedin']['name']?></a>
                         </li>
                         <li class="nav-item">
-                            <a href="<?=url."?controller=producto&action=carrito"?>" class="navlinkP">
+                            <a href="<?=url."?controller=producto&action=carrito"?>" class="carrito-link">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20">
                                     <g fill="none" fill-rule="evenodd" stroke="#004733">
                                         <path d="M3.585 5.554h12.678l1.585 12.142H2z"></path>
