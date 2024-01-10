@@ -69,6 +69,9 @@
                         <li class="nav-item">
                             <a class="menu" href="<?=url."?controller=producto"?>">Home</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="menu" href="<?=url."?controller=producto&action=reviews"?>">Reseñas</a>
+                        </li>
                     </ul>
                 </div>
             </div>

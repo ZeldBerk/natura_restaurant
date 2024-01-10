@@ -291,5 +291,18 @@ class ProductoController{
         //recargamos la carta
         header("Location:".url.'?controller=producto&action=show_carta');
     }
+
+    
+    //mostramos la pagina de reseñas
+    public function reviews(){
+        
+        //include del header
+        GeneralFunctions::header();
+
+        include_once 'view/review.php';
+        
+        //include de el footer
+        include_once 'view/footer.html';
+    }
 }
 ?>
