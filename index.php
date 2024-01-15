@@ -1,6 +1,7 @@
 <?php
 include_once 'controller/ProductoController.php';
 include_once 'controller/UserController.php';
+include_once 'controller/ReviewController.php';
 include_once 'config/Parameters.php';
 
 if(!isset($_GET['controller'])){
