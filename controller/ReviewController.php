@@ -1,4 +1,5 @@
 <?php	
+include_once('model/ReviewDAO.php');
 
 class ReviewController{
 
