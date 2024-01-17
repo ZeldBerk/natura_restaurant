@@ -8,12 +8,7 @@ class Review{
     protected $valoracion;
     protected $nombre_usuario;
 
-    public function __construct($review_id,$user_id,$review,$valoracion,$nombre_usuario){
-        $this->review_id = $review_id;
-        $this->user_id = $user_id;
-        $this->review = $review;
-        $this->valoracion = $valoracion;
-        $this->nombre_usuario = $nombre_usuario;
+    public function __construct(){
     }
 
    

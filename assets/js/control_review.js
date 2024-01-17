@@ -1,3 +1,26 @@
+//link http://naturarestaurant.com/index.php/?controller=api&action=api
+document.addEventListener('DOMContentLoaded', function(){
+    fetch("http://naturarestaurant.com/index.php/?controller=api&action=api", {
+        method : 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            accion: 'mostrar_reviews',
+        }),
+    })
+    .then(response => {
+        return response.json();
+    })
+    .then(data => {
+        mostrarReviews(data);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+});
+
+
 // Función para convertir la puntuación en estrellas
 function convertirAPuntuacionEstrellas(puntuacion) {
     let estrellas = '';
@@ -11,29 +34,28 @@ function convertirAPuntuacionEstrellas(puntuacion) {
     return estrellas;
 }
 
-// Función para mostrar las reseñas
-function mostrarReseñas(reseñas) {
-    let reseñasContenedor = document.querySelector('.row');
-    reseñas.forEach(reseña => {
-        let reseñaDiv = document.createElement('div');
-        reseñaDiv.classList.add('reseña', 'col-sm-12', 'col-md-6', 'col-lg-4', 'col-xl-4');
-        reseñaDiv.innerHTML = `
-            <h3>${reseña.nombre}</h3>
-            <p>${reseña.comentario}</p>
-            <p>Puntuación: ${convertirAPuntuacionEstrellas(reseña.puntuacion)}</p>
+function mostrarReviews(reviews) {
+    let reviewsContenedor = document.querySelector('.row');
+    reviews.forEach(review => {
+        let reviewDiv = document.createElement('div');
+        reviewDiv.classList.add('review', 'col-sm-12', 'col-md-6', 'col-lg-4', 'col-xl-4');
+        reviewDiv.innerHTML = `
+            <h3>${review.nombre_usuario}</h3>
+            <p>${review.review}</p>
+            <p>Puntuación: ${convertirAPuntuacionEstrellas(review.valoracion)}</p>
         `;
-        reseñasContenedor.appendChild(reseñaDiv);
+        reviewsContenedor.appendChild(reviewDiv);
     });
 }
 
-let reseñas = [
-    {nombre: "pablito", comentario: "mala calidad", puntuacion: 2},
-    {nombre: "susanita", comentario: "buena atención al cliente", puntuacion: 4},
-    {nombre: "manolito", comentario: "Tiempo de reparto mejorable", puntuacion: 3},
-    {nombre: "manolito", comentario: "Tiempo de reparto mejorable", puntuacion: 3},
-    {nombre: "manolito", comentario: "Tiempo de reparto mejojlgfkyutdfydfludfludlyutdfljfludfultdflutflufrable", puntuacion: 3},
-    {nombre: "manolito", comentario: "Tiempo de hy7unhyju7hyjusekhfgiuagsluygfLWUejorable mejorable", puntuacion: 3},
-    {nombre: "manolito", comentario: "Tiempo de reparto m hy7unhyju7hyjusekhfgiuagsluygfLWUejorable", puntuacion: 3},
-];
+// let reseñas = [
+//     {nombre: "pablito", comentario: "mala calidad", puntuacion: 2},
+//     {nombre: "susanita", comentario: "buena atención al cliente", puntuacion: 4},
+//     {nombre: "manolito", comentario: "Tiempo de reparto mejorable", puntuacion: 3},
+//     {nombre: "manolito", comentario: "Tiempo de reparto mejorable", puntuacion: 3},
+//     {nombre: "manolito", comentario: "Tiempo de reparto mejojlgfkyutdfydfludfludlyutdfljfludfultdflutflufrable", puntuacion: 3},
+//     {nombre: "manolito", comentario: "Tiempo de hy7unhyju7hyjusekhfgiuagsluygfLWUejorable mejorable", puntuacion: 3},
+//     {nombre: "manolito", comentario: "Tiempo de reparto m hy7unhyju7hyjusekhfgiuagsluygfLWUejorable", puntuacion: 3},
+// ];
 
-mostrarReseñas(reseñas);
+// mostrarReseñas(reseñas);
