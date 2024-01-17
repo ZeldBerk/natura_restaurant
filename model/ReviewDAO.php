@@ -9,7 +9,7 @@ class ReviewDAO{
         //preparamos la consulta
         $con = DataBase::connect();
 
-        $stmt = $con->prepare("SELECT * FROM reviews");
+        $stmt = $con->prepare("SELECT r.*, u.nombre AS nombre_usuario FROM reviews r JOIN usuarios u ON r.user_id = u.user_id;");
         
         //ejecutamos la consulta
         $stmt->execute();

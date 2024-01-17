@@ -6,13 +6,17 @@ class Review{
     protected $user_id;
     protected $review;
     protected $valoracion;
+    protected $nombre_usuario;
 
-    public function __construct($review_id,$user_id,$review,$valoracion){
+    public function __construct($review_id,$user_id,$review,$valoracion,$nombre_usuario){
         $this->review_id = $review_id;
         $this->user_id = $user_id;
         $this->review = $review;
         $this->valoracion = $valoracion;
+        $this->nombre_usuario = $nombre_usuario;
     }
+
+   
 
     /**
      * Get the value of review_id
@@ -82,6 +86,24 @@ class Review{
     public function setValoracion($valoracion): self
     {
         $this->valoracion = $valoracion;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nombre_usuario
+     */
+    public function getNombreUsuario()
+    {
+        return $this->nombre_usuario;
+    }
+
+    /**
+     * Set the value of nombre_usuario
+     */
+    public function setNombreUsuario($nombre_usuario): self
+    {
+        $this->nombre_usuario = $nombre_usuario;
 
         return $this;
     }
