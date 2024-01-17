@@ -4,7 +4,7 @@ include_once('model/ReviewDAO.php');
 class ReviewController{
 
     //mostramos la pagina de reseñas
-    public function reviews(){
+    public function index(){
         
         //include del header
         GeneralFunctions::header();

@@ -70,7 +70,7 @@
                             <a class="menu" href="<?=url."?controller=producto"?>">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="menu" href="<?=url."?controller=review&action=reviews"?>">Reseñas</a>
+                            <a class="menu" href="<?=url."?controller=review"?>">Reseñas</a>
                         </li>
                     </ul>
                 </div>
