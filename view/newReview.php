@@ -12,9 +12,17 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <label for="valoracion" class="labelsLogin col-sm-12">Valoracion:</label>
-                            <div class="col-sm-12">
-                                <input type="text" class="form-control inputLogin" name="valoracion" required/>
+                            <div class="rating ">
+                                <input value="5" name="rate" id="star5" type="radio">
+                                <label title="text" for="star5"></label>
+                                <input value="4" name="rate" id="star4" type="radio">
+                                <label title="text" for="star4"></label>
+                                <input value="3" name="rate" id="star3" type="radio">
+                                <label title="text" for="star3"></label>
+                                <input value="2" name="rate" id="star2" type="radio">
+                                <label title="text" for="star2"></label>
+                                <input value="1" name="rate" id="star1" type="radio">
+                                <label title="text" for="star1"></label>
                             </div>
                         </div>
                         <button type="submit" name="insertReview" class="buttonDark">Añadir</button>
