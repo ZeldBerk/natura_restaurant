@@ -26,6 +26,25 @@ class APIController{
             echo json_encode($asComentarios, JSON_UNESCAPED_UNICODE);
             return;
             
+        }elseif($_POST["accion"] == 'insert_reviews'){
+            session_start();
+
+            //Guardamos los datos que pasaremos a la funcion para hacer el insert
+            $user_id = $_SESSION['loggedin']['id'];
+            $comentario = $_POST['comentario'];
+            $rate = $_POST['rate'];
+
+            //Llamada a la funcion que hace el insert 
+            ReviewDAO::insert_reviews($user_id, $comentario, $rate);
+
+            // Devuelve una respuesta adecuada (puede ser un mensaje de éxito o error)
+            $mensaje = [
+                'mensaje' => 'Comentario insertado con éxito'
+            ];
+            
+            echo json_encode($mensaje, JSON_UNESCAPED_UNICODE);
+            return;
+        
         }
     }
 }

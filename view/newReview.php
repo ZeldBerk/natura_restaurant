@@ -12,7 +12,7 @@
                             </div>
                         </div>
                         <div class="mb-3 row">
-                            <div class="rating ">
+                            <div class="rating">
                                 <input value="5" name="rate" id="star5" type="radio">
                                 <label title="text" for="star5"></label>
                                 <input value="4" name="rate" id="star4" type="radio">
@@ -25,10 +25,13 @@
                                 <label title="text" for="star1"></label>
                             </div>
                         </div>
-                        <button type="submit" name="insertReview" class="buttonDark">Añadir</button>
+                        <button id="insertReview" type="submit" name="insertReview" class="buttonDark">Añadir</button>
                     </form>
                 </div>
             </div>
+        </div>
+        <div id="msg">
+            
         </div>
     </section>
     <div class="separacion_big"></div>

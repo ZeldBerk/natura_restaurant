@@ -611,7 +611,7 @@ button:hover{
   }
   
   .rating:not(:checked) > label {
-    float: right;
+    float: left;
     cursor: pointer;
     font-size: 30px;
     color: #666;
