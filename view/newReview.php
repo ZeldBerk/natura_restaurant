@@ -30,9 +30,6 @@
                 </div>
             </div>
         </div>
-        <div id="msg">
-            
-        </div>
     </section>
     <div class="separacion_big"></div>
     <script src="../assets/js/insert_review.js"></script>

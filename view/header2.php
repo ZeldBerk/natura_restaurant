@@ -40,7 +40,7 @@
                             <input class="buscar" type="text" placeholder="Buscar"/>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link navlinkP" aria-current="page" href="<?=url."?controller=user&action=login"?>"><?=$_SESSION['loggedin']['name']?></a>
+                            <a class="nav-link navlinkP" aria-current="page" href="<?=url."?controller=user&action=cuenta"?>"><?=$_SESSION['loggedin']['name']?></a>
                         </li>
                         <li class="nav-item">
                             <a href="<?=url."?controller=producto&action=carrito"?>" class="carrito-link">
@@ -71,6 +71,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="menu" href="<?=url."?controller=review"?>">Reseñas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="menu" href="<?=url."?controller=producto&action=show_pedidos"?>">Ver Pedidos</a>
                         </li>
                     </ul>
                 </div>

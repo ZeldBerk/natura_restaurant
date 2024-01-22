@@ -188,4 +188,34 @@ class ProductoDAO{
         return $pedido;
 
     }
+
+
+    //Funcion que nos da todos los pedidos
+    public static function getAllPedidos($id){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        //Preparamos la consulta del pedido
+        $stmt = $con->prepare("SELECT pedido_id, date_pedido, total FROM pedidos WHERE user_id=?");
+        $stmt->bind_param("i", $id);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->store_result();
+
+        $stmt->bind_result($pedido_id, $date_pedido, $total);
+
+        //Creamos una array asociativocon los datos del pedido
+        $pedido = array();
+            
+        while ($stmt->fetch()){
+            $pedido[] = ['pedido_id' => $pedido_id, 'date_pedido' => $date_pedido, 'total' => $total];
+        }
+
+        //cerramos la conexion
+        $con->close();
+
+        //devolvemos el array de pedido
+        return $pedido;
+    }    
 }   

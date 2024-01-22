@@ -79,7 +79,7 @@ class ProductoController{
         if(!isset($_SESSION['carrito'])){
             $_SESSION['carrito'] = array();
         }
-        var_dump($pedidos);
+        
         foreach($pedidos as $pedido){
             $producto_id = $pedido['prodcutoId'];
             $cantidad = $pedido['cantidad'];
@@ -194,6 +194,73 @@ class ProductoController{
 
         //redirigimos al pagina home despues de cerrar el pedido
         header("Location:".url.'?controller=producto');
+    }
+
+
+    // mostrar la lista de pedidos
+    public function show_pedidos(){
+        session_start();
+        //include del header
+        GeneralFunctions::header();
+
+        //Recojemos todos los pedidos para mostrarlos
+        $user_id = $_SESSION['loggedin']['id'];
+        $allPedidos = ProductoDAO::getAllPedidos($user_id);
+
+        //include del login
+        include_once 'view/pedidos_user.php';
+        
+        //include de el footer
+        include_once 'view/footer.html';
+    }
+
+
+    //mostrar detalles del pedido
+    public function detalles_pedido(){
+        
+        //Comprobamos que nos pasen el id
+        if (isset($_POST['id'])){
+            session_start();
+            
+            //Recojemos todos los id de los productos 
+            $id_pedido = $_POST['id'];
+            $productos = ProductoDAO::getUltPedido($id_pedido);
+
+            if (!isset($_SESSION['pedidos'])) {
+                // Si no existe pedidos o está vacío, lo creamos o lo dejamos como está
+                $_SESSION['pedidos'] = array();
+            }else{
+                //so existe vaciamos la sesion
+                $_SESSION['pedidos'] = array();
+            }
+
+            foreach($productos as $producto){
+                $producto_id = $producto['prodcutoId'];
+                $cantidad = $producto['cantidad'];
+
+                $product = ProductoDAO::getProductById($producto_id);
+                $pedido_carrito = new Pedido($product);
+                $pedido_carrito->setCantidad($cantidad);
+                array_push($_SESSION['pedidos'], $pedido_carrito);
+
+            }
+            header("Location:".url.'?controller=producto&action=detalles_prodcuto');
+        }
+    }
+
+
+    //Mostramos el listado de productos
+    public function detalles_prodcuto(){
+        session_start();
+
+        //include del header
+        GeneralFunctions::header();
+
+        //include de los detalles de los productos
+        include_once 'view/detalles_productos_pedido.php';
+        
+        //include de el footer
+        include_once 'view/footer.html';
     }
 
     
