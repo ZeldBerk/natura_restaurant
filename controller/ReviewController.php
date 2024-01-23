@@ -17,25 +17,15 @@ class ReviewController{
     }
 
     public function newReview(){
-        session_start();
+        
+        //include del header
+        GeneralFunctions::header();
 
+        //mostramos el formulario si el usuario esta autenticado
+        include_once 'view/newReview.php';
 
-        // Verificamos si el usuario está autenticado
-        if(!isset($_SESSION['loggedin'])){
-            // Redirigir a la página de inicio de sesión si no está autenticado
-            header("Location:".url.'?controller=user&action=login');
-            return;
-        }else{
-            //include del header
-            GeneralFunctions::header();
-
-            //mostramos el formulario si el usuario esta autenticado
-            include_once 'view/newReview.php';
-
-            //include de el footer
+        //include de el footer
         include_once 'view/footer.html';
-        }
-
     }
 }
 ?>
