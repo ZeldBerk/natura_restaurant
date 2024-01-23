@@ -1,11 +1,5 @@
 <body>
     <section class="container-lg mt-5">
-        <div>
-            <form action="<?=url."?controller=review&action=newReview"?>" method="POST">
-                <button class="position-relative" type="submit" name="newReview">Dejar un comentario</button>
-            </form>   
-        </div>
-
         <div class="row">
             
         </div>
