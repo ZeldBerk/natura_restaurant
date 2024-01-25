@@ -47,15 +47,3 @@ function mostrarReviews(reviews) {
         reviewsContenedor.appendChild(reviewDiv);
     });
 }
-
-// let reseñas = [
-//     {nombre: "pablito", comentario: "mala calidad", puntuacion: 2},
-//     {nombre: "susanita", comentario: "buena atención al cliente", puntuacion: 4},
-//     {nombre: "manolito", comentario: "Tiempo de reparto mejorable", puntuacion: 3},
-//     {nombre: "manolito", comentario: "Tiempo de reparto mejorable", puntuacion: 3},
-//     {nombre: "manolito", comentario: "Tiempo de reparto mejojlgfkyutdfydfludfludlyutdfljfludfultdflutflufrable", puntuacion: 3},
-//     {nombre: "manolito", comentario: "Tiempo de hy7unhyju7hyjusekhfgiuagsluygfLWUejorable mejorable", puntuacion: 3},
-//     {nombre: "manolito", comentario: "Tiempo de reparto m hy7unhyju7hyjusekhfgiuagsluygfLWUejorable", puntuacion: 3},
-// ];
-
-// mostrarReseñas(reseñas);

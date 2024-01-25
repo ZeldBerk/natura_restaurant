@@ -122,15 +122,15 @@ class ProductoDAO{
     }
 
 
-    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos){
+    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos, $review_id=0){
         //preparamos la consulta
         $con = DataBase::connect();
 
         // Usar una sentencia preparada con marcadores de posición
-        $stmt = $con->prepare("INSERT INTO pedidos (user_id, estado, date_pedido, total) VALUES (?, ?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO pedidos (user_id, review_id, estado, date_pedido, total) VALUES (?, ?, ?, ?, ?)");
 
         // Vincular los valores a los marcadores de posición
-        $stmt->bind_param("issd", $user_id,$estado,$fecha_actual,$total);
+        $stmt->bind_param("iissd", $user_id,$review_id,$estado,$fecha_actual,$total);
 
         //ejecutamos la consulta
         $stmt->execute();

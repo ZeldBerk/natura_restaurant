@@ -25,6 +25,7 @@
                                 <label title="text" for="star1"></label>
                             </div>
                         </div>
+                        <input name="pedido_id" value="<?=$pedido_id?>" hidden />
                         <button id="insertReview" type="submit" name="insertReview" class="buttonDark">Añadir</button>
                     </form>
                 </div>

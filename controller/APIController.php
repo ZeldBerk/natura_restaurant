@@ -31,11 +31,12 @@ class APIController{
 
             //Guardamos los datos que pasaremos a la funcion para hacer el insert
             $user_id = $_SESSION['loggedin']['id'];
+            $pedido_id = $_POST['pedido_id'];
             $comentario = $_POST['comentario'];
             $rate = $_POST['rate'];
 
             //Llamada a la funcion que hace el insert 
-            ReviewDAO::insert_reviews($user_id, $comentario, $rate);
+            ReviewDAO::insert_reviews($user_id, $pedido_id, $comentario, $rate);
 
             // Devuelve una respuesta adecuada (puede ser un mensaje de éxito o error)
             $mensaje = [
@@ -45,6 +46,15 @@ class APIController{
             echo json_encode($mensaje, JSON_UNESCAPED_UNICODE);
             return;
         
+        }elseif($_POST["accion"] == 'permision_insert_review'){
+            $pedido_id = $_POST['pedido_id'];
+
+            $permission = ReviewDAO::getReviewByIdPedido($pedido_id);
+
+            $permiso = ['permiso' => $permission];
+
+            echo json_encode($permiso, JSON_UNESCAPED_UNICODE);
+            return;
         }
     }
 }

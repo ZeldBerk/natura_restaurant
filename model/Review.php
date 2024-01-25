@@ -4,6 +4,7 @@ class Review{
     
     protected $review_id;
     protected $user_id;
+    protected $pedido_id;
     protected $review;
     protected $valoracion;
     protected $nombre_usuario;

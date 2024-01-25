@@ -522,6 +522,11 @@ button:hover{
     font-family: "Larsseit-Medium";
 }
 
+/*Estilos listados pedidos*/
+.hidden {
+    display: none !important;
+}
+
 /*Boton compra*/
 
 .butonCantidad{

@@ -30,21 +30,62 @@ class ReviewDAO{
 
 
     //Funcion para insertar un nuevo comentario a la base de datos
-    public static function insert_reviews($user_id,$review,$valoracion){
+    public static function insert_reviews($user_id, $pedido_id, $review,$valoracion){
         //preparamos la conexion
         $con = DataBase::connect();
 
         // Usar una sentencia preparada con marcadores de posición
-        $stmt = $con->prepare("INSERT INTO reviews (user_id, review, valoracion) VALUES (?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO reviews (user_id, pedido_id, review, valoracion) VALUES (?, ?, ?, ?)");
 
         // Vincular los valores a los marcadores de posición
-        $stmt->bind_param("isi", $user_id,$review,$valoracion);
+        $stmt->bind_param("iisi", $user_id, $pedido_id, $review,$valoracion);
 
         //ejecutamos la consulta
         $stmt->execute();
+        
+        //insertar review_id en pedido
+        //Recuperamos el id del pedido que acabamos de insertar
+        $ultimoInsertId = $con->insert_id;
+        // Usar una sentencia preparada con marcadores de posición
+        $stmt = $con->prepare("UPDATE pedidos SET review_id = ? WHERE pedido_id = ?");
+
+        // Vincular los valores a los marcadores de posición
+        $stmt->bind_param("ii", $ultimoInsertId, $pedido_id);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+
         $result = $stmt->get_result();
 
         $con->close();
         return $result;
+    }
+
+
+    //funcion para sacar la review por id de pedido
+    public static function getReviewByIdPedido($pedido_id){
+        //preparamos la conexion
+        $con = DataBase::connect();
+
+        // Usar una sentencia preparada con marcadores de posición
+        $stmt = $con->prepare("SELECT review_id FROM pedidos WHERE pedido_id = ?");
+
+        // Vincular los valores a los marcadores de posición
+        $stmt->bind_param("i", $pedido_id);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        
+        // Vinculamos el resultado a una variable
+        $stmt->bind_result($review_id);
+
+        // Obtenemos el resultado
+        $stmt->fetch();
+
+        // Cerramos la conexión
+        $con->close();
+
+        // Devolvemos true si review_id es igual a cero, false en caso contrario
+        return ($review_id === 0);
     }
 }

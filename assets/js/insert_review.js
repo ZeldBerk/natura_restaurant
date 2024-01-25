@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener el formulario y el botón
-    const reviewForm = document.getElementById('reviewForm'); // Puedes descomentar esta línea si es necesario
     const addButton = document.getElementById('insertReview');
 
     // Agregar un event listener al botón
@@ -9,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault();
 
         // Obtener los datos del formulario
+        const pedido_id = document.querySelector('input[name="pedido_id"]').value;
         const comentario = document.querySelector('input[name="comentario"]').value;
         const rate = document.querySelector('input[name="rate"]:checked').value;
 
@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: new URLSearchParams({
                 accion: 'insert_reviews',
+                pedido_id: pedido_id,
                 comentario: comentario,
                 rate: rate,
             }),

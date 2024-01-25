@@ -23,10 +23,12 @@
                                 <button class="buttonDark">Ver detalles</button>
                             </form>
                         </div>
-                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3">
-                            <form action="<?=url."?controller=review&action=newReview"?>" method="POST">
-                                <button class="buttonDark" type="submit" name="newReview">Dejar comentario pedido</button>
-                            </form>   
+                        <div class="col-sm-12 col-md-4 col-lg-3 col-xl-3 showbutton">
+                            <form data-order-id="<?=$pedido['pedido_id']?>" action="<?=url."?controller=review&action=newReview"?>" method="POST">
+                                <input type="hidden" name="pedido_id" value="<?=$pedido['pedido_id']?>">
+                                <label for="newReview" class="labelNewCom">¡Ya tiene un comentario!</label>
+                                <button class="buttonDark botonNewCom" type="submit" name="newReview">Dejar comentario pedido</button>
+                            </form>
                         </div>
                     </div>
                 </article>
@@ -35,6 +37,6 @@
             }
             ?>
         </section>
-        
+        <script src="../assets/js/permision_insert_review.js"></script>
     <div class="separacion_big"></div>
 </body>

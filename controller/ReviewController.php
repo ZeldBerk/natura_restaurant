@@ -17,10 +17,16 @@ class ReviewController{
     }
 
     public function newReview(){
+        session_start();
         
         //include del header
         GeneralFunctions::header();
 
+        $pedido_id = null;
+        //Comprobamos que nos pasen el id
+        if (isset($_POST['pedido_id'])){
+            $pedido_id = $_POST['pedido_id'];
+        }
         //mostramos el formulario si el usuario esta autenticado
         include_once 'view/newReview.php';
 
