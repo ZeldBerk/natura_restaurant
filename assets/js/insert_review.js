@@ -25,11 +25,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 rate: rate,
             }),
         })
-        .then(response => {
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            console.log(data)
+            // Verificar si la operación fue exitosa
+            if (data.success) {
+                // Mostrar notificación de éxito
+                notie.alert({
+                    type: 'success',
+                    text: data.message,
+                    time: 2 // Tiempo en segundos para que la notificación se cierre automáticamente
+                });
+
+                // Puedes realizar otras acciones después del éxito, si es necesario
+            } else {
+                // Mostrar notificación de error si la operación no fue exitosa
+                notie.alert({
+                    type: 'error',
+                    text: data.message,
+                    time: 5 // Tiempo en segundos para que la notificación se cierre automáticamente
+                });
+            }
         })
         .catch(error => {
             console.error(error);

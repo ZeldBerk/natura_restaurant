@@ -31,34 +31,47 @@ class ReviewDAO{
 
     //Funcion para insertar un nuevo comentario a la base de datos
     public static function insert_reviews($user_id, $pedido_id, $review,$valoracion){
-        //preparamos la conexion
+       //preparamos la conexion
         $con = DataBase::connect();
 
         // Usar una sentencia preparada con marcadores de posición
         $stmt = $con->prepare("INSERT INTO reviews (user_id, pedido_id, review, valoracion) VALUES (?, ?, ?, ?)");
 
         // Vincular los valores a los marcadores de posición
-        $stmt->bind_param("iisi", $user_id, $pedido_id, $review,$valoracion);
+        $stmt->bind_param("iisi", $user_id, $pedido_id, $review, $valoracion);
 
         //ejecutamos la consulta
-        $stmt->execute();
-        
-        //insertar review_id en pedido
-        //Recuperamos el id del pedido que acabamos de insertar
-        $ultimoInsertId = $con->insert_id;
-        // Usar una sentencia preparada con marcadores de posición
-        $stmt = $con->prepare("UPDATE pedidos SET review_id = ? WHERE pedido_id = ?");
+        $insertSuccess = $stmt->execute();
 
-        // Vincular los valores a los marcadores de posición
-        $stmt->bind_param("ii", $ultimoInsertId, $pedido_id);
+        if ($insertSuccess) {
+            // Insertar review_id en pedido
+            // Recuperamos el id del pedido que acabamos de insertar
+            $ultimoInsertId = $con->insert_id;
 
-        //ejecutamos la consulta
-        $stmt->execute();
+            // Usar una sentencia preparada con marcadores de posición
+            $stmtUpdate = $con->prepare("UPDATE pedidos SET review_id = ? WHERE pedido_id = ?");
 
-        $result = $stmt->get_result();
+            // Vincular los valores a los marcadores de posición
+            $stmtUpdate->bind_param("ii", $ultimoInsertId, $pedido_id);
 
-        $con->close();
-        return $result;
+            // Ejecutamos la consulta
+            $stmtUpdate->execute();
+
+            // Cerrar la segunda consulta
+            $stmtUpdate->close();
+
+            // Cerrar la conexión
+            $con->close();
+
+            // Retorna true para indicar éxito
+            return true;
+        } else {
+            // Si hay un error en la primera consulta, cierra la conexión y retorna false
+            $stmt->close();
+            $con->close();
+
+            return false;
+        }
     }
 
 

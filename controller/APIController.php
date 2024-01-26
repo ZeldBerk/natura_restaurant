@@ -35,14 +35,22 @@ class APIController{
             $comentario = $_POST['comentario'];
             $rate = $_POST['rate'];
 
-            //Llamada a la funcion que hace el insert 
-            ReviewDAO::insert_reviews($user_id, $pedido_id, $comentario, $rate);
+            // Llamada a la función que hace el insert 
+            $insert_success = ReviewDAO::insert_reviews($user_id, $pedido_id, $comentario, $rate);
 
             // Devuelve una respuesta adecuada (puede ser un mensaje de éxito o error)
-            $mensaje = [
-                'mensaje' => 'Comentario insertado con éxito'
-            ];
-            
+            if ($insert_success) {
+                $mensaje = [
+                    'success' => true,
+                    'message' => 'Comentario insertado con éxito'
+                ];
+            } else {
+                $mensaje = [
+                    'success' => false,
+                    'message' => 'Error al insertar el comentario. Por favor, inténtalo de nuevo.'
+                ];
+            }
+
             echo json_encode($mensaje, JSON_UNESCAPED_UNICODE);
             return;
         
