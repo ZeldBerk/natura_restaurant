@@ -37,14 +37,14 @@ function showButton(response, form) {
         const permiso = response && response.permiso;
 
         // Toggle a class based on the value of permiso
-        if (permiso === false) {
+        if (permiso === true) {
             // Si permiso es true, muestra la etiqueta y oculta el botón
-            botonNewCom.classList.add('hidden');
-            labelNewCom.classList.remove('hidden');
-        } else {
-            // Si permiso no es true, muestra el botón y oculta la etiqueta
             labelNewCom.classList.add('hidden');
             botonNewCom.classList.remove('hidden');
+        } else {
+            // Si permiso no es true, muestra el botón y oculta la etiqueta
+            botonNewCom.classList.add('hidden');
+            labelNewCom.classList.remove('hidden');
         }
     } else {
         console.error('Elements not found in the form.');
