@@ -34,4 +34,5 @@
     </section>
     <div class="separacion_big"></div>
     <script src="../assets/js/insert_review.js"></script>
+    <script src="https://unpkg.com/notie"></script>
 </body>

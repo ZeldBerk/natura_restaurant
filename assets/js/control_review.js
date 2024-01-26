@@ -23,7 +23,8 @@ let data;
 
         document.getElementById('ordenarSelect').addEventListener('change', function () {
             const orden = this.value;
-            mostrarReviews(data, orden);
+            const valoracionesSeleccionadas = obtenerValoracionesSeleccionadas();
+            mostrarReviews(data, orden, valoracionesSeleccionadas);
         });
 
         // Añadir un evento de cambio a cada checkbox
@@ -31,7 +32,8 @@ let data;
         checkboxes.forEach(checkbox => {
             checkbox.addEventListener('change', function () {
                 const valoracionesSeleccionadas = obtenerValoracionesSeleccionadas();
-                mostrarReviews(data, document.getElementById('ordenarSelect').value, valoracionesSeleccionadas);
+                const orden = document.getElementById('ordenarSelect').value;
+                mostrarReviews(data, orden, valoracionesSeleccionadas);
             });
         });
     });
@@ -46,25 +48,31 @@ let data;
         let reviewsContenedor = document.querySelector('.show_reseñas');
         reviewsContenedor.innerHTML = '';
 
-        if (valoracionesFiltradas.length === 0) {
-            // Si no hay valoraciones seleccionadas, mostrar todas las reseñas
-            reviews.forEach(review => agregarReviewAlContenedor(review));
-        } else {
-            // Filtrar reseñas según las valoraciones seleccionadas
-            const reseñasFiltradas = reviews.filter(review => valoracionesFiltradas.includes(review.valoracion));
-            reseñasFiltradas.forEach(review => agregarReviewAlContenedor(review));
-        }
-    }
+        let reseñasFiltradas = [...reviews];
 
-    function agregarReviewAlContenedor(review) {
-        let reviewDiv = document.createElement('div');
-        reviewDiv.classList.add('review', 'col-sm-12', 'col-md-6', 'col-lg-4', 'col-xl-4');
-        reviewDiv.innerHTML = `
-            <h3>${review.nombre_usuario}</h3>
-            <p>${review.review}</p>
-            <p>Puntuación: ${convertirAPuntuacionEstrellas(review.valoracion)}</p>
-        `;
-        document.querySelector('.show_reseñas').appendChild(reviewDiv);
+        // Filtrar reseñas según las valoraciones seleccionadas
+        if (valoracionesFiltradas.length > 0) {
+            reseñasFiltradas = reseñasFiltradas.filter(review => valoracionesFiltradas.includes(review.valoracion));
+        }
+
+        // Ordenar reseñas según la opción seleccionada
+        if (orden === 'ascendente') {
+            reseñasFiltradas.sort((a, b) => a.valoracion - b.valoracion);
+        } else if (orden === 'descendente') {
+            reseñasFiltradas.sort((a, b) => b.valoracion - a.valoracion);
+        }
+
+        // Agregar las reseñas filtradas y ordenadas al contenedor
+        reseñasFiltradas.forEach(review => {
+            let reviewDiv = document.createElement('div');
+            reviewDiv.classList.add('review', 'col-sm-12', 'col-md-6', 'col-lg-4', 'col-xl-4');
+            reviewDiv.innerHTML = `
+                <h3>${review.nombre_usuario}</h3>
+                <p>${review.review}</p>
+                <p>Puntuación: ${convertirAPuntuacionEstrellas(review.valoracion)}</p>
+            `;
+            reviewsContenedor.appendChild(reviewDiv);
+        });
     }
 
     function convertirAPuntuacionEstrellas(puntuacion) {
