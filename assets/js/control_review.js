@@ -1,70 +1,62 @@
-// Declarar data en un ámbito más amplio
 let data;
 
-document.addEventListener('DOMContentLoaded', function () {
-    fetch("http://naturarestaurant.com/index.php/?controller=api&action=api", {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-            accion: 'mostrar_reviews',
-        }),
-    })
-    .then(response => {
-        return response.json();
-    })
-    .then(receivedData => {
-        // Asignar la data recibida a la variable data
-        data = receivedData;
-        
-        // Mostrar las reseñas al cargar la página
-        mostrarReviews(data);
-    })
-    .catch(error => {
-        console.error(error);
+    document.addEventListener('DOMContentLoaded', function () {
+        fetch("http://naturarestaurant.com/index.php/?controller=api&action=api", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                accion: 'mostrar_reviews',
+            }),
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(receivedData => {
+            data = receivedData;
+            mostrarReviews(data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+        document.getElementById('ordenarSelect').addEventListener('change', function () {
+            const orden = this.value;
+            mostrarReviews(data, orden);
+        });
+
+        // Añadir un evento de cambio a cada checkbox
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function () {
+                const valoracionesSeleccionadas = obtenerValoracionesSeleccionadas();
+                mostrarReviews(data, document.getElementById('ordenarSelect').value, valoracionesSeleccionadas);
+            });
+        });
     });
 
-    // Añadir un evento de cambio al desplegable
-    document.getElementById('ordenarSelect').addEventListener('change', function () {
-        // Obtener el valor seleccionado en el desplegable
-        const orden = this.value;
+    function obtenerValoracionesSeleccionadas() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        const valoracionesSeleccionadas = Array.from(checkboxes).map(checkbox => parseInt(checkbox.value));
+        return valoracionesSeleccionadas;
+    }
 
-        // Llamar a la función para mostrar las reseñas con el nuevo orden
-        mostrarReviews(data, orden);
-    });
-});
+    function mostrarReviews(reviews, orden, valoracionesFiltradas = []) {
+        let reviewsContenedor = document.querySelector('.show_reseñas');
+        reviewsContenedor.innerHTML = '';
 
-
-// Función para convertir la puntuación en estrellas
-function convertirAPuntuacionEstrellas(puntuacion) {
-    let estrellas = '';
-    for (let i = 1; i <= 5; i++) {
-        if (i <= puntuacion) {
-            estrellas += '★'; // Agrega una estrella llena
+        if (valoracionesFiltradas.length === 0) {
+            // Si no hay valoraciones seleccionadas, mostrar todas las reseñas
+            reviews.forEach(review => agregarReviewAlContenedor(review));
         } else {
-            estrellas += '☆'; // Agrega una estrella vacía
+            // Filtrar reseñas según las valoraciones seleccionadas
+            const reseñasFiltradas = reviews.filter(review => valoracionesFiltradas.includes(review.valoracion));
+            reseñasFiltradas.forEach(review => agregarReviewAlContenedor(review));
         }
     }
-    return estrellas;
-}
 
-// Función para mostrar reseñas con filtro de orden
-function mostrarReviews(reviews, orden) {
-    let reviewsContenedor = document.querySelector('.show_reseñas');
-    
-    // Limpia el contenedor antes de agregar las reseñas ordenadas
-    reviewsContenedor.innerHTML = '';
-
-    // Ordena las reseñas según la opción seleccionada
-    if (orden === 'ascendente') {
-        reviews.sort((a, b) => a.valoracion - b.valoracion);
-    } else if (orden === 'descendente') {
-        reviews.sort((a, b) => b.valoracion - a.valoracion);
-    }
-
-    // Agrega las reseñas ordenadas al contenedor
-    reviews.forEach(review => {
+    function agregarReviewAlContenedor(review) {
         let reviewDiv = document.createElement('div');
         reviewDiv.classList.add('review', 'col-sm-12', 'col-md-6', 'col-lg-4', 'col-xl-4');
         reviewDiv.innerHTML = `
@@ -72,6 +64,17 @@ function mostrarReviews(reviews, orden) {
             <p>${review.review}</p>
             <p>Puntuación: ${convertirAPuntuacionEstrellas(review.valoracion)}</p>
         `;
-        reviewsContenedor.appendChild(reviewDiv);
-    });
-}
+        document.querySelector('.show_reseñas').appendChild(reviewDiv);
+    }
+
+    function convertirAPuntuacionEstrellas(puntuacion) {
+        let estrellas = '';
+        for (let i = 1; i <= 5; i++) {
+            if (i <= puntuacion) {
+                estrellas += '★'; // Agrega una estrella llena
+            } else {
+                estrellas += '☆'; // Agrega una estrella vacía
+            }
+        }
+        return estrellas;
+    }
