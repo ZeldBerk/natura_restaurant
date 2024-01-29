@@ -122,7 +122,7 @@ class ProductoDAO{
     }
 
 
-    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos, $review_id=0){
+    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos, $puntos, $review_id=0){
         //preparamos la consulta
         $con = DataBase::connect();
 
@@ -153,6 +153,12 @@ class ProductoDAO{
             $stmt->execute();
 
         }
+
+        $stmt = $con->prepare("UPDATE usuarios SET puntos = puntos + ? WHERE user_id = ?");
+
+        $stmt->bind_param("ii", $puntos, $user_id);
+
+        $stmt->execute();
 
         $con->close();
         return $ultimoInsertId;
