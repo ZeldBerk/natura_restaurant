@@ -33,10 +33,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 notie.alert({
                     type: 'success',
                     text: data.message,
-                    time: 2 // Tiempo en segundos para que la notificación se cierre automáticamente
+                    time: 5 // Tiempo en segundos para que la notificación se cierre automáticamente
                 });
+                 // Redirigir la página después de 5 segundos
+                 setTimeout(function() {
+                    window.location.href = 'http://naturarestaurant.com/index.php/?controller=review';
+                }, 5000);
 
-                // Puedes realizar otras acciones después del éxito, si es necesario
             } else {
                 // Mostrar notificación de error si la operación no fue exitosa
                 notie.alert({
