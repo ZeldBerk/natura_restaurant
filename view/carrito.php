@@ -59,6 +59,7 @@
                                 <div class="col-8 d-flex flex-column justify-content-end">
                                     <div class="align-self-end">
                                         <p class="catorcepx">Subtotal</p>
+                                        <p class="catorcepx">Puntos</p>
                                         <p class="diezSeispx">Total</p>
                                     </div>
                                 </div>
@@ -66,6 +67,7 @@
                                     <div class="align-self-end">
                                         <div>
                                             <p class="catorcepx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
+                                            <p class="catorcepx"><?=CalcularPrecios::calcularPuntosPedido(CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']))?>
                                             <p class="diezSeispx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
                                         </div>
                                     </div>

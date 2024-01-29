@@ -10,5 +10,14 @@ class CalcularPrecios{
 
         return $preciototal;
     }
+
+    public static function calcularPuntosPedido($preciototal){
+        $puntos = 0;
+
+        // Cada 10 € equivaldran a 100 punts
+        $puntos += floor($preciototal / 10) * 100;
+
+        return $puntos;
+    }
 }
 ?>
