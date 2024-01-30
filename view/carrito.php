@@ -9,6 +9,7 @@
             </div>
             <div class="row compraS">
                 <article class="detallesC">
+                <input type="number" name="id_usuario" value="<?=$_SESSION['loggedin']['id'] ?>" hidden required/>
                 <?php
                     $pos = 0;
                     foreach($_SESSION['carrito'] as $pedido){?>
@@ -59,7 +60,7 @@
                                 <div class="col-8 d-flex flex-column justify-content-end">
                                     <div class="align-self-end">
                                         <p class="catorcepx">Subtotal</p>
-                                        <p class="catorcepx">Puntos</p>
+                                        <p class="catorcepx">Usar Puntos</p>
                                         <p class="diezSeispx">Total</p>
                                     </div>
                                 </div>
@@ -67,7 +68,11 @@
                                     <div class="align-self-end">
                                         <div>
                                             <p class="catorcepx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
-                                            <p class="catorcepx">+ <?=CalcularPrecios::calcularPuntosPedido(CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']))?>
+                                            <form action="" method="POST">
+                                                <button class="butonCantidad" type="submit" name="Del" value=<?=$pos?>>-</button>
+                                                <label class="catorcepx puntos"></label>
+                                                <button class="butonCantidad" type="submit" name="Add" value=<?=$pos?>>+</button>
+                                            </form>
                                             <p class="diezSeispx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
                                         </div>
                                     </div>
@@ -76,21 +81,12 @@
                             <div class="row">
                                 <div class="col-7"></div>
                                 <div class="col-5 d-flex flex-column justify-content-end">
-                                    <!-- <form class="codigoDescuento" action="">
-                                        <div class="row">
-                                            <div class="col-9">
-                                                <input type="text" class="inputCompra w-100" placeholder="Añadir código de descuento..."/>
-                                            </div>
-                                            <div class="col-3">
-                                                <button class="buttonCompra">Aplicar</button>
-                                            </div>
-                                        </div>
-                                    </form> -->
                                     <div class="align-self-end">
                                         <form action="<?=url."?controller=producto&action=finalizarCompra"?>" method="POST">
                                             <button class="buttonDark">Realizar compra | <?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></button>
                                         </form>
                                     </div>
+                                    <p class="catorcepx">Puntos ganados con esta compra: +<?=CalcularPrecios::calcularPuntosPedido(CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']))?>
                                 </div>
                             </div>
                         </div>
@@ -99,4 +95,6 @@
             </div>
         </section>
     <div class="separacion_big"></div>
+    <script src="../assets/js/show_puntos.js"></script>
+    <script src="../assets/js/control_puntos.js"></script>
 </body>

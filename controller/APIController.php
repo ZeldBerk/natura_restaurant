@@ -69,8 +69,6 @@ class APIController{
 
         } elseif ($_POST["accion"] == 'show_puntos') {
             
-            session_start();
-
             $user_id = $_POST['idUsuario'];
 
             $puntos = ProductoDAO::getPuntosById($user_id);
