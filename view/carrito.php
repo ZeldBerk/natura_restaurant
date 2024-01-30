@@ -76,7 +76,7 @@
                             <div class="row">
                                 <div class="col-7"></div>
                                 <div class="col-5 d-flex flex-column justify-content-end">
-                                    <form class="codigoDescuento" action="">
+                                    <!-- <form class="codigoDescuento" action="">
                                         <div class="row">
                                             <div class="col-9">
                                                 <input type="text" class="inputCompra w-100" placeholder="Añadir código de descuento..."/>
@@ -85,7 +85,7 @@
                                                 <button class="buttonCompra">Aplicar</button>
                                             </div>
                                         </div>
-                                    </form>
+                                    </form> -->
                                     <div class="align-self-end">
                                         <form action="<?=url."?controller=producto&action=finalizarCompra"?>" method="POST">
                                             <button class="buttonDark">Realizar compra | <?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></button>
