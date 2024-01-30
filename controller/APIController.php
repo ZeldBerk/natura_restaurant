@@ -1,5 +1,6 @@
 <?php
 include_once('model/ReviewDAO.php');
+include_once('model/ProductoDAO.php');
 /** IMPORTANTE**/
 //Cargar Modelos necesarios BBDD
 
@@ -27,6 +28,7 @@ class APIController{
             return;
             
         }elseif($_POST["accion"] == 'insert_reviews'){
+
             session_start();
 
             //Guardamos los datos que pasaremos a la funcion para hacer el insert
@@ -55,6 +57,7 @@ class APIController{
             return;
         
         }elseif($_POST["accion"] == 'permision_insert_review'){
+
             $pedido_id = $_POST['pedido_id'];
 
             $permission = ReviewDAO::getReviewByIdPedido($pedido_id);
@@ -63,6 +66,20 @@ class APIController{
 
             echo json_encode($permiso, JSON_UNESCAPED_UNICODE);
             return;
+
+        } elseif ($_POST["accion"] == 'show_puntos') {
+            
+            session_start();
+
+            $user_id = $_POST['idUsuario'];
+
+            $puntos = ProductoDAO::getPuntosById($user_id);
+        
+            $punto = ['puntos' => $puntos];
+        
+            echo json_encode($punto, JSON_UNESCAPED_UNICODE);
+            return;
+            
         }
     }
 }

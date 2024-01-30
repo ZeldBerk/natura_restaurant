@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     time: 5 // Tiempo en segundos para que la notificación se cierre automáticamente
                 });
                  // Redirigir la página después de 5 segundos
-                 setTimeout(function() {
+                setTimeout(function() {
                     window.location.href = 'http://naturarestaurant.com/index.php/?controller=review';
                 }, 5000);
 

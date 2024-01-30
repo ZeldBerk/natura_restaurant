@@ -224,4 +224,30 @@ class ProductoDAO{
         //devolvemos el array de pedido
         return $pedido;
     }    
+
+
+    // Función para extraer los puntos por id de usuario
+    public static function getPuntosById($user_id){
+        // Preparamos la conexión
+        $con = DataBase::connect();
+
+        // Preparamos la consulta del pedido
+        $stmt = $con->prepare("SELECT puntos FROM usuarios WHERE user_id = ?");
+        $stmt->bind_param("i", $user_id);
+
+        // Ejecutamos la consulta
+        $stmt->execute();
+
+        // Vinculamos el resultado a una variable
+        $stmt->bind_result($puntos);
+
+        // Obtenemos el valor de 'puntos'
+        $stmt->fetch();
+
+        // Cerramos la conexión
+        $con->close();
+
+        // Devolvemos los puntos
+        return $puntos;
+    }
 }   
