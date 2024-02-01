@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const idUsuario = document.querySelector('input[name="id_usuario"]').value;
+    const puntosLabel = document.getElementById('puntosLabel');
+    const puntosUsarInput = document.getElementById('puntosUsar');
 
     fetch("http://naturarestaurant.com/index.php/?controller=api&action=api", {
         method: 'POST',
@@ -10,13 +13,42 @@ document.addEventListener('DOMContentLoaded', function () {
             idUsuario: idUsuario,
         }),
     })
-    .then(response => {
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
         console.log(data);
+        insertarDatosEnPuntos(data);
     })
     .catch(error => {
         console.error(error);
     });
+
+    function insertarDatosEnPuntos(data) {
+        puntosLabel.textContent = data.puntos;
+        puntosUsarInput.value = data.puntos; // Inicialmente, no se usan puntos
+    }
+
+    document.getElementById('restarPuntos').addEventListener('click', restarPuntos);
+    document.getElementById('sumarPuntos').addEventListener('click', sumarPuntos);
+
+    function restarPuntos() {
+        let puntosUsar = parseInt(puntosUsarInput.value, 10);
+        if (puntosUsar > 0) {
+            puntosUsar -= 1;
+            puntosUsarInput.value = puntosUsar;
+            // Puedes mostrar la nueva cantidad de puntos en otro lugar si es necesario
+            console.log("Puntos a usar: " + puntosUsar);
+        }
+    }
+
+    function sumarPuntos() {
+        let puntosUsar = parseInt(puntosUsarInput.value, 10);
+        const puntosDisponibles = parseInt(puntosLabel.textContent, 10);
+        // Asegúrate de que el usuario no pueda usar más puntos de los que tiene
+        if (puntosUsar < puntosDisponibles) {
+            puntosUsar += 1;
+            puntosUsarInput.value = puntosUsar;
+            // Puedes mostrar la nueva cantidad de puntos en otro lugar si es necesario
+            console.log("Puntos a usar: " + puntosUsar);
+        }
+    }
 });

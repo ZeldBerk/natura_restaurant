@@ -69,9 +69,10 @@
                                         <div>
                                             <p class="catorcepx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
                                             <form action="" method="POST">
-                                                <button class="butonCantidad" type="submit" name="Del" value=<?=$pos?>>-</button>
-                                                <label class="catorcepx puntos"></label>
-                                                <button class="butonCantidad" type="submit" name="Add" value=<?=$pos?>>+</button>
+                                            <button class="butonCantidad" id="restarPuntos" type="button">-</button>
+                                            <label class="catorcepx puntos" id="puntosLabel"></label>
+                                            <input type="hidden" name="puntos_usar" id="puntosUsar" value="0" />
+                                            <button class="butonCantidad" id="sumarPuntos" type="button">+</button>
                                             </form>
                                             <p class="diezSeispx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
                                         </div>
@@ -95,6 +96,5 @@
             </div>
         </section>
     <div class="separacion_big"></div>
-    <script src="../assets/js/show_puntos.js"></script>
     <script src="../assets/js/control_puntos.js"></script>
 </body>
