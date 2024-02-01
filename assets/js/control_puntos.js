@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const idUsuario = document.querySelector('input[name="id_usuario"]').value;
     const puntosLabel = document.getElementById('puntosLabel');
     const puntosUsarInput = document.getElementById('puntosUsar');
+    let puntosDisponibles = 0;
 
     fetch("http://naturarestaurant.com/index.php/?controller=api&action=api", {
         method: 'POST',
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(data => {
         console.log(data);
         insertarDatosEnPuntos(data);
+        puntosDisponibles = data.puntos
     })
     .catch(error => {
         console.error(error);
@@ -37,18 +39,23 @@ document.addEventListener('DOMContentLoaded', function () {
             puntosUsarInput.value = puntosUsar;
             // Puedes mostrar la nueva cantidad de puntos en otro lugar si es necesario
             console.log("Puntos a usar: " + puntosUsar);
+            updatePuntos(puntosUsar);
         }
     }
 
     function sumarPuntos() {
         let puntosUsar = parseInt(puntosUsarInput.value, 10);
-        const puntosDisponibles = parseInt(puntosLabel.textContent, 10);
         // Asegúrate de que el usuario no pueda usar más puntos de los que tiene
         if (puntosUsar < puntosDisponibles) {
             puntosUsar += 1;
             puntosUsarInput.value = puntosUsar;
             // Puedes mostrar la nueva cantidad de puntos en otro lugar si es necesario
             console.log("Puntos a usar: " + puntosUsar);
+            updatePuntos(puntosUsar);
         }
+    }
+
+    function updatePuntos(puntos) {
+        puntosLabel.textContent = puntos;
     }
 });
