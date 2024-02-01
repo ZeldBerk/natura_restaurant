@@ -74,7 +74,8 @@
                                             <input type="hidden" name="puntos_usar" id="puntosUsar" value="0" />
                                             <button class="butonCantidad" id="sumarPuntos" type="button">+</button>
                                             </form>
-                                            <p class="diezSeispx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
+                                            <input type="number" name="precioSinPuntos" value="<?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?>" hidden required/>
+                                            <p class="diezSeispx" id="showPrecioTotal"></p>
                                         </div>
                                     </div>
                                 </div>
