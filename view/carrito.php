@@ -66,17 +66,20 @@
                                 </div>
                                 <div class="col-4 d-flex flex-column justify-content-end">
                                     <div class="align-self-end">
-                                        <div>
-                                            <p class="catorcepx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
-                                            <form action="" method="POST">
-                                            <button class="butonCantidad" id="restarPuntos" type="button">-</button>
-                                            <label class="catorcepx puntos" id="puntosLabel"></label>
-                                            <input type="hidden" name="puntos_usar" id="puntosUsar" value="0" />
-                                            <button class="butonCantidad" id="sumarPuntos" type="button">+</button>
-                                            </form>
-                                            <input type="number" name="precioSinPuntos" value="<?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?>" hidden required/>
-                                            <p class="diezSeispx" id="showPrecioTotal"></p>
-                                        </div>
+                                        <p class="catorcepx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
+                                        <form action="" method="POST" id="puntosForm">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="usarPuntosCheckbox" name="usar_puntos_checkbox">
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <button class="butonCantidad" id="restarPuntos" type="button">-</button>
+                                                <label class="catorcepx puntos" id="puntosLabel"></label>
+                                                <input type="hidden" name="puntos_usar" id="puntosUsar" value="0" />
+                                                <button class="butonCantidad" id="sumarPuntos" type="button">+</button>
+                                            </div>
+                                        </form>
+                                        <input type="number" name="precioSinPuntos" value="<?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?>" hidden required/>
+                                        <p class="diezSeispx" id="showPrecioTotal"></p>
                                     </div>
                                 </div>
                             </div>
