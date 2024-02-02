@@ -23,8 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(data => {
         puntosDisponibles = data.puntos;
         insertarDatosEnPuntos(data);
-        // Set the initial checkbox state based on points availability
-        usarPuntosCheckbox.checked = data.puntos > 0;
         // Manually call updatePrecioTotal to handle initial state
         updatePrecioTotal();
     })
