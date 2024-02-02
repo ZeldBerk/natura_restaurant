@@ -65,13 +65,20 @@ document.addEventListener('DOMContentLoaded', function () {
     function updatePrecioTotal() {
         const puntosUsar = parseInt(puntosUsarInput.value, 10);
         const precioSinPuntos = parseFloat(document.getElementsByName('precioSinPuntos')[0].value);
-        const equivalentAmount = puntosUsar * 0.01; // Each point is worth 0.01€
-        const precioTotal = precioSinPuntos - equivalentAmount;
-        showPrecioTotal.textContent = precioTotal.toFixed(2); // Format to two decimal places
+    
+        if (usarPuntosCheckbox.checked) {
+            // Aplicar descuento solo si el checkbox está marcado
+            const equivalentAmount = puntosUsar * 0.01; // Each point is worth 0.01€
+            const precioTotal = precioSinPuntos - equivalentAmount;
+            showPrecioTotal.textContent = precioTotal.toFixed(2);
+        } else {
+            // Si el checkbox no está marcado, mostrar el precio sin descuento
+            showPrecioTotal.textContent = precioSinPuntos.toFixed(2);
+        }
     
         // Update the text content of the button
         const button = document.querySelector('.buttonDark');
-        button.textContent = `Realizar compra | ${precioTotal.toFixed(2)}`;
+        button.textContent = `Realizar compra | ${showPrecioTotal.textContent}`;
     
         // Show or hide the points form and buttons based on checkbox state
         const puntosForm = document.getElementById('puntosForm');
@@ -80,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
     
         // Show or hide the puntosLabel based on checkbox state
         puntosLabel.style.display = usarPuntosCheckbox.checked ? 'inline-block' : 'none';
-
     }
 
     // Add an event listener to the checkbox to toggle points form visibility
