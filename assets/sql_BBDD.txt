@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-01-2024 a las 19:38:46
+-- Tiempo de generación: 03-02-2024 a las 15:44:57
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.5
 
@@ -14,6 +14,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `natura_restaurant`
 --
+CREATE DATABASE IF NOT EXISTS `natura_restaurant` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `natura_restaurant`;
 
 -- --------------------------------------------------------
 
@@ -81,7 +83,32 @@ INSERT INTO `detallespedido` (`detalles_id`, `pedido_id`, `producto_id`, `cantid
 (33, 19, 13, 4),
 (34, 20, 5, 2),
 (35, 21, 6, 2),
-(36, 21, 5, 1);
+(36, 21, 5, 1),
+(37, 22, 6, 1),
+(38, 23, 5, 2),
+(39, 24, 5, 1),
+(40, 25, 6, 1),
+(41, 27, 6, 1),
+(42, 27, 7, 1),
+(43, 28, 6, 1),
+(44, 29, 6, 1),
+(45, 29, 7, 1),
+(46, 29, 12, 2),
+(47, 29, 15, 10),
+(48, 29, 14, 2),
+(49, 30, 7, 1),
+(50, 31, 7, 1),
+(51, 31, 9, 1),
+(52, 31, 10, 1),
+(53, 32, 6, 1),
+(54, 33, 6, 1),
+(55, 33, 10, 1),
+(56, 34, 15, 11),
+(57, 35, 15, 1),
+(58, 36, 9, 1),
+(59, 37, 13, 6),
+(60, 38, 6, 1),
+(61, 39, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -92,6 +119,7 @@ INSERT INTO `detallespedido` (`detalles_id`, `pedido_id`, `producto_id`, `cantid
 CREATE TABLE `pedidos` (
   `pedido_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `review_id` int(11) NOT NULL,
   `estado` varchar(255) NOT NULL,
   `date_pedido` date NOT NULL,
   `total` decimal(10,2) NOT NULL
@@ -101,28 +129,46 @@ CREATE TABLE `pedidos` (
 -- Volcado de datos para la tabla `pedidos`
 --
 
-INSERT INTO `pedidos` (`pedido_id`, `user_id`, `estado`, `date_pedido`, `total`) VALUES
-(1, 2, 'finalizado', '2023-12-15', '4.99'),
-(2, 1, 'finalizado', '2023-12-15', '44.94'),
-(3, 1, 'finalizado', '2023-12-15', '44.94'),
-(4, 6, 'finalizado', '2023-12-15', '44.91'),
-(5, 1, 'finalizado', '2023-12-15', '24.96'),
-(6, 1, 'finalizado', '2023-12-15', '9.99'),
-(7, 2, 'finalizado', '2023-12-15', '24.97'),
-(8, 1, 'finalizado', '2023-12-18', '4.99'),
-(9, 7, 'finalizado', '2023-12-18', '4.99'),
-(10, 6, 'finalizado', '2024-01-02', '14.97'),
-(11, 6, 'finalizado', '2024-01-02', '14.97'),
-(12, 6, 'finalizado', '2024-01-02', '14.97'),
-(13, 6, 'finalizado', '2024-01-02', '14.97'),
-(14, 6, 'finalizado', '2024-01-02', '19.97'),
-(15, 3, 'finalizado', '2024-01-02', '4.99'),
-(16, 3, 'finalizado', '2024-01-02', '4.99'),
-(17, 6, 'finalizado', '2024-01-02', '4.99'),
-(18, 3, 'finalizado', '2024-01-02', '4.99'),
-(19, 3, 'finalizado', '2024-01-02', '44.95'),
-(20, 6, 'finalizado', '2024-01-03', '9.98'),
-(21, 6, 'finalizado', '2024-01-03', '14.97');
+INSERT INTO `pedidos` (`pedido_id`, `user_id`, `review_id`, `estado`, `date_pedido`, `total`) VALUES
+(1, 2, 0, 'finalizado', '2023-12-15', '4.99'),
+(2, 1, 0, 'finalizado', '2023-12-15', '44.94'),
+(3, 1, 0, 'finalizado', '2023-12-15', '44.94'),
+(4, 6, 21, 'finalizado', '2023-12-15', '44.91'),
+(5, 1, 0, 'finalizado', '2023-12-15', '24.96'),
+(6, 1, 0, 'finalizado', '2023-12-15', '9.99'),
+(7, 2, 0, 'finalizado', '2023-12-15', '24.97'),
+(8, 1, 0, 'finalizado', '2023-12-18', '4.99'),
+(9, 7, 0, 'finalizado', '2023-12-18', '4.99'),
+(10, 6, 30, 'finalizado', '2024-01-02', '14.97'),
+(11, 6, 27, 'finalizado', '2024-01-02', '14.97'),
+(12, 6, 29, 'finalizado', '2024-01-02', '14.97'),
+(13, 6, 22, 'finalizado', '2024-01-02', '14.97'),
+(14, 6, 32, 'finalizado', '2024-01-02', '19.97'),
+(15, 3, 18, 'finalizado', '2024-01-02', '4.99'),
+(16, 3, 20, 'finalizado', '2024-01-02', '4.99'),
+(17, 6, 23, 'finalizado', '2024-01-02', '4.99'),
+(18, 3, 25, 'finalizado', '2024-01-02', '4.99'),
+(19, 3, 19, 'finalizado', '2024-01-02', '44.95'),
+(20, 6, 0, 'finalizado', '2024-01-03', '9.98'),
+(21, 6, 0, 'finalizado', '2024-01-03', '14.97'),
+(22, 6, 0, 'finalizado', '2024-01-08', '4.99'),
+(23, 6, 0, 'finalizado', '2024-01-08', '9.98'),
+(24, 6, 0, 'finalizado', '2024-01-15', '4.99'),
+(25, 6, 0, 'finalizado', '2024-01-19', '4.99'),
+(26, 4, 0, 'preubas', '2024-01-02', '50.00'),
+(27, 3, 24, 'finalizado', '2024-01-26', '9.98'),
+(28, 3, 28, 'finalizado', '2024-01-29', '4.99'),
+(29, 6, 31, 'finalizado', '2024-01-29', '149.84'),
+(30, 6, 0, 'finalizado', '2024-01-29', '4.99'),
+(31, 6, 0, 'finalizado', '2024-01-29', '14.97'),
+(32, 6, 0, 'finalizado', '2024-01-29', '4.99'),
+(33, 6, 0, 'finalizado', '2024-02-02', '9.98'),
+(34, 6, 0, 'finalizado', '2024-02-02', '109.89'),
+(35, 6, 0, 'finalizado', '2024-02-02', '9.99'),
+(36, 6, 0, 'finalizado', '2024-02-02', '4.99'),
+(37, 6, 0, 'finalizado', '2024-02-03', '59.94'),
+(38, 6, 0, 'finalizado', '2024-02-03', '4.99'),
+(39, 6, 0, 'finalizado', '2024-02-03', '4.99');
 
 -- --------------------------------------------------------
 
@@ -145,7 +191,7 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `precio`, `descripcion`, `tipo`, `id_categoria`, `imagen`) VALUES
-(5, 'Smoothie de platano ', '4.99', 'Smoothe de sabor platano', 'Smoothie', 1, 'smoothie_platano.png'),
+(5, 'Smoothie de platano ', '4.99', 'Smoothe de sabor platano', 'Smoothie', 1, ''),
 (6, 'Smoothie de cacahuete', '4.99', 'Smoothie de crema de cacahuete', 'Smoothie', 1, 'smoothie_cacahuete.png'),
 (7, 'Smoothie de frutos del bosque', '4.99', 'Smoothie de frutas del bosque', 'Smoothie', 1, 'smoothie_frutos_del_bosque.png'),
 (8, 'Smoothie de kiwi', '4.99', 'Smoothie de kiwi y espinacas', 'Smoothie', 1, 'smoothie_kiwi_2.png'),
@@ -160,6 +206,50 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `precio`, `descripcion`, `tipo
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `reviews`
+--
+
+CREATE TABLE `reviews` (
+  `review_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `pedido_id` int(11) NOT NULL,
+  `review` varchar(255) NOT NULL,
+  `valoracion` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `reviews`
+--
+
+INSERT INTO `reviews` (`review_id`, `user_id`, `pedido_id`, `review`, `valoracion`) VALUES
+(1, 6, 0, 'buena atención al cliente', 4),
+(2, 2, 0, 'Tiempos de entrega mejorables', 3),
+(3, 3, 0, 'Bien, pero falta mas variedad de productos', 3),
+(4, 4, 0, 'pagina web bastante good', 5),
+(13, 6, 4, 'pruebas ', 2),
+(14, 6, 4, 'pruebas', 2),
+(15, 3, 15, 'pruebas de putas ', 5),
+(16, 3, 15, 'VWADFADFABEBEABVFSVSADVASD', 4),
+(17, 3, 15, 'prueba de comentario', 5),
+(18, 3, 15, 'prueba de comentario del isac you kown', 3),
+(19, 3, 19, 'preubas del 19 de isac', 4),
+(20, 3, 16, 'preubas de los botoncitos', 5),
+(21, 6, 4, 'comentario al 4', 1),
+(22, 6, 13, 'preubas de comentarios mas largos para saber si se pone bien en la vista de los pedidos completos o se corta o se superponer mal', 2),
+(23, 6, 17, 'adf dfh ', 4),
+(24, 3, 27, 'comentario para la notie', 3),
+(25, 3, 18, 'comentario de prueba para la notie 2', 2),
+(26, 6, 10, 'preubas de las noties 3', 2),
+(27, 6, 11, 'qweqweqweqwe', 4),
+(28, 3, 28, 'awdfasgf', 4),
+(29, 6, 12, 'dfdsdg', 3),
+(30, 6, 10, 'asfawef', 3),
+(31, 6, 29, 'mucho cash', 5),
+(32, 6, 14, 'soidhfoghsoudf', 4);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -169,22 +259,23 @@ CREATE TABLE `usuarios` (
   `apellido` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `rol` varchar(255) NOT NULL,
-  `contra` varchar(255) NOT NULL
+  `contra` varchar(255) NOT NULL,
+  `puntos` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`user_id`, `nombre`, `apellido`, `email`, `rol`, `contra`) VALUES
-(1, 'admin', 'admin', 'admin@gmail.com', 'admin', 'admin'),
-(2, 'pau', 'salamanca', 'paust2001@gmail.com', 'admin', 'pau'),
-(3, 'isac', 'montes', 'isac@gmail.com', 'user', 'isac'),
-(4, 'edgar', 'edgar', 'edgar@gmail.com', 'user', 'edgar'),
-(5, 'nacho', 'nacho', 'nacho@gmail.com', 'user', 'nacho'),
-(6, 'manolo', 'escalapendra', 'manolo@gmail.com', 'user', 'manolo'),
-(7, 'marc', 'sala', 'marc@gmail.com', 'user', 'marc'),
-(13, 'pedro', 'pedro', 'pedro@gmail.com', 'user', 'pedro');
+INSERT INTO `usuarios` (`user_id`, `nombre`, `apellido`, `email`, `rol`, `contra`, `puntos`) VALUES
+(1, 'admin', 'admin', 'admin@gmail.com', 'admin', 'admin', 0),
+(2, 'pau', 'salamanca', 'paust2001@gmail.com', 'admin', 'pau', 0),
+(3, 'isac', 'montes', 'isac@gmail.com', 'user', 'isac', 0),
+(4, 'edgar', 'edgar', 'edgar@gmail.com', 'user', 'edgar', 0),
+(5, 'nacho', 'nacho', 'nacho@gmail.com', 'user', 'nacho', 0),
+(6, 'manolo', 'escalapendra', 'manolo@gmail.com', 'user', 'manolo', 188),
+(7, 'marc', 'sala', 'marc@gmail.com', 'user', 'marc', 0),
+(13, 'pedro', 'pedro', 'pedro@gmail.com', 'user', 'pedro', 0);
 
 --
 -- Índices para tablas volcadas
@@ -209,6 +300,12 @@ ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`);
 
 --
+-- Indices de la tabla `reviews`
+--
+ALTER TABLE `reviews`
+  ADD PRIMARY KEY (`review_id`);
+
+--
 -- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
@@ -222,19 +319,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `detallespedido`
 --
 ALTER TABLE `detallespedido`
-  MODIFY `detalles_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `detalles_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT de la tabla `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `pedido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `pedido_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT de la tabla `reviews`
+--
+ALTER TABLE `reviews`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
