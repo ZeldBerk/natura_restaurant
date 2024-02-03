@@ -1,8 +1,11 @@
+// Espera a que el DOM esté completamente cargado antes de ejecutar el código
 document.addEventListener('DOMContentLoaded', function() {
-    // Select all forms with the data-order-id attribute
+    // Selecciona todos los formularios con el atributo data-order-id
     document.querySelectorAll('form[data-order-id]').forEach(function(form) {
+        // Obtiene el valor del atributo data-order-id
         let pedido_id = form.getAttribute('data-order-id');
 
+        // Realiza una petición a la API para verificar el permiso de insertar una reseña
         fetch("http://naturarestaurant.com/index.php/?controller=api&action=api", {
             method: 'POST',
             headers: {
@@ -16,6 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(response => response.json())
         .then(data => {
             console.log(data);
+            // Llama a la función showButton para mostrar u ocultar elementos en el formulario
             showButton(data, form);
         })
         .catch(error => {
@@ -24,19 +28,20 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// Función para mostrar u ocultar elementos en el formulario basándose en la respuesta de la API
 function showButton(response, form) {
-    // Selecciona el contenedor específico dentro del formulario actual
+    // Selecciona elementos específicos dentro del formulario actual
     let botonNewCom = form.querySelector('.botonNewCom');
     let labelNewCom = form.querySelector('.labelNewCom');
 
     console.log('Response:', response);
 
-    // Check if elements exist before trying to manipulate them
+    // Verifica si los elementos existen antes de intentar manipularlos
     if (botonNewCom && labelNewCom) {
-        // Extract the permiso property from the response object
+        // Extrae la propiedad permiso del objeto de respuesta
         const permiso = response && response.permiso;
 
-        // Toggle a class based on the value of permiso
+        // Alterna una clase basada en el valor de permiso
         if (permiso === true) {
             // Si permiso es true, muestra la etiqueta y oculta el botón
             labelNewCom.classList.add('hidden');
@@ -47,7 +52,6 @@ function showButton(response, form) {
             labelNewCom.classList.remove('hidden');
         }
     } else {
-        console.error('Elements not found in the form.');
+        console.error('Elementos no encontrados en el formulario.');
     }
 }
-

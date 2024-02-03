@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Obtener valores iniciales y configuración
     const idUsuario = document.querySelector('input[name="id_usuario"]').value;
     const puntosLabel = document.getElementById('puntosLabel');
     const puntosUsarInput = document.getElementById('puntosUsar');
@@ -8,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const sumarPuntosButton = document.getElementById('sumarPuntos');
     let puntosDisponibles = 0;
 
-    // Fetch initial points data
+    // Obtener datos iniciales de puntos mediante una petición a la API
     fetch("http://naturarestaurant.com/index.php/?controller=api&action=api", {
         method: 'POST',
         headers: {
@@ -21,20 +22,23 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     .then(response => response.json())
     .then(data => {
+        // Al obtener la respuesta, actualizar valores iniciales y mostrar en la interfaz
         puntosDisponibles = data.puntos;
         insertarDatosEnPuntos(data);
-        // Manually call updatePrecioTotal to handle initial state
+        // Llamar manualmente a updatePrecioTotal para manejar el estado inicial
         updatePrecioTotal();
     })
     .catch(error => {
         console.error(error);
     });
 
+    // Función para insertar datos iniciales de puntos en la interfaz
     function insertarDatosEnPuntos(data) {
         puntosLabel.textContent = data.puntos;
         puntosUsarInput.value = data.puntos;
     }
 
+    // Función para restar puntos y actualizar la interfaz
     function restarPuntos() {
         let puntosUsar = parseInt(puntosUsarInput.value, 10);
         if (puntosUsar > 0) {
@@ -45,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Función para sumar puntos y actualizar la interfaz
     function sumarPuntos() {
         let puntosUsar = parseInt(puntosUsarInput.value, 10);
         if (puntosUsar < puntosDisponibles) {
@@ -55,13 +60,15 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    // Función para actualizar la visualización de los puntos
     function updatePuntos(puntos) {
-        // Show or hide the puntosLabel based on checkbox state
+        // Mostrar u ocultar el puntosLabel según el estado del checkbox
         puntosLabel.style.display = usarPuntosCheckbox.checked ? 'inline-block' : 'none';
-    
+        // Actualizar el contenido del puntosLabel con la cantidad de puntos
         puntosLabel.textContent = puntos;
     }
 
+    // Función para actualizar el precio total y la interfaz
     function updatePrecioTotal() {
         const puntosUsar = parseInt(puntosUsarInput.value, 10);
         const precioSinPuntos = parseFloat(document.getElementsByName('precioSinPuntos')[0].value);
@@ -71,6 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const equivalentAmount = puntosUsar * 0.01; // Cada punto vale 0.01€
             const precioTotal = precioSinPuntos - equivalentAmount;
             showPrecioTotal.textContent = precioTotal.toFixed(2);
+            // Actualizar el valor del input oculto con la cantidad de puntos a utilizar
             document.getElementById('puntosUtilizados').value = puntosUsar;
         } else {
             // Si el checkbox no está marcado, mostrar el precio sin descuento
@@ -91,9 +99,10 @@ document.addEventListener('DOMContentLoaded', function () {
         puntosLabel.style.display = usarPuntosCheckbox.checked ? 'inline-block' : 'none';
     }
 
-    // Add an event listener to the checkbox to toggle points form visibility
+    // Añadir un event listener al checkbox para alternar la visibilidad del formulario de puntos
     usarPuntosCheckbox.addEventListener('change', updatePrecioTotal);
 
+    // Añadir event listeners a los botones de restar y sumar puntos
     document.getElementById('restarPuntos').addEventListener('click', restarPuntos);
     document.getElementById('sumarPuntos').addEventListener('click', sumarPuntos);
 });
