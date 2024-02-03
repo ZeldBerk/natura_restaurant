@@ -122,7 +122,7 @@ class ProductoDAO{
     }
 
 
-    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos, $puntos, $review_id=0){
+    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos, $puntos_sumar, $review_id=0){
         //preparamos la consulta
         $con = DataBase::connect();
 
@@ -156,12 +156,30 @@ class ProductoDAO{
 
         $stmt = $con->prepare("UPDATE usuarios SET puntos = puntos + ? WHERE user_id = ?");
 
-        $stmt->bind_param("ii", $puntos, $user_id);
+        $stmt->bind_param("ii", $puntos_sumar, $user_id);
 
         $stmt->execute();
 
         $con->close();
         return $ultimoInsertId;
+    }
+
+
+    //Funcion para restar puntos usados en un pedido
+    public static function restarPuntosUser($puntos_restar, $user_id){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        $stmt = $con->prepare("UPDATE usuarios SET puntos = puntos - ? WHERE user_id = ?");
+
+        $stmt->bind_param("ii", $puntos_restar, $user_id);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $con->close();
+
+        return $result;
     }
 
 
