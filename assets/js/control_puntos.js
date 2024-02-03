@@ -65,27 +65,29 @@ document.addEventListener('DOMContentLoaded', function () {
     function updatePrecioTotal() {
         const puntosUsar = parseInt(puntosUsarInput.value, 10);
         const precioSinPuntos = parseFloat(document.getElementsByName('precioSinPuntos')[0].value);
-    
+
         if (usarPuntosCheckbox.checked) {
             // Aplicar descuento solo si el checkbox está marcado
-            const equivalentAmount = puntosUsar * 0.01; // Each point is worth 0.01€
+            const equivalentAmount = puntosUsar * 0.01; // Cada punto vale 0.01€
             const precioTotal = precioSinPuntos - equivalentAmount;
             showPrecioTotal.textContent = precioTotal.toFixed(2);
+            document.getElementById('puntosUtilizados').value = puntosUsar;
         } else {
             // Si el checkbox no está marcado, mostrar el precio sin descuento
             showPrecioTotal.textContent = precioSinPuntos.toFixed(2);
         }
-    
-        // Update the text content of the button
+
+        // Actualizar campos ocultos para enviar al formulario
+        document.getElementById('precioConDescuento').value = showPrecioTotal.textContent;
+
+        // Actualizar el texto del botón con el precio total
         const button = document.querySelector('.buttonDark');
         button.textContent = `Realizar compra | ${showPrecioTotal.textContent}`;
-    
-        // Show or hide the points form and buttons based on checkbox state
+
+        // Mostrar u ocultar elementos basados en el estado del checkbox
         const puntosForm = document.getElementById('puntosForm');
         restarPuntosButton.style.display = usarPuntosCheckbox.checked ? 'inline-block' : 'none';
         sumarPuntosButton.style.display = usarPuntosCheckbox.checked ? 'inline-block' : 'none';
-    
-        // Show or hide the puntosLabel based on checkbox state
         puntosLabel.style.display = usarPuntosCheckbox.checked ? 'inline-block' : 'none';
     }
 

@@ -87,8 +87,10 @@
                                 <div class="col-7"></div>
                                 <div class="col-5 d-flex flex-column justify-content-end">
                                     <div class="align-self-end">
-                                        <form action="<?=url."?controller=producto&action=finalizarCompra"?>" method="POST">
-                                            <button class="buttonDark">Realizar compra | <?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></button>
+                                        <form action="<?=url."?controller=producto&action=finalizarCompra"?>" method="POST" id="checkoutForm">
+                                            <input type="hidden" name="precioConDescuento" id="precioConDescuento" value="">
+                                            <input type="hidden" name="puntosUtilizados" id="puntosUtilizados" value="">
+                                            <button class="buttonDark">Realizar compra | <span id="showPrecioTotal"></span></button>
                                         </form>
                                     </div>
                                     <p class="catorcepx">Puntos ganados con esta compra: +<?=CalcularPrecios::calcularPuntosPedido(CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']))?>
