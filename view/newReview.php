@@ -11,7 +11,7 @@
                                 <input type="text" class="form-control inputLogin" name="comentario" required/>
                             </div>
                         </div>
-                        <div class="mb-3 row">
+                        <div class="mb-3 row fit_content">
                             <div class="rating">
                                 <input value="5" name="rate" id="star5" type="radio">
                                 <label title="text" for="star5"></label>
