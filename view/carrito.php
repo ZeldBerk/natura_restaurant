@@ -103,4 +103,6 @@
         </section>
     <div class="separacion_big"></div>
     <script src="../assets/js/control_puntos.js"></script>
+    <script src="../assets/QrCode/qrcode.min.js"></script>
+    <script src="../assets/js/generador_qr.js"></script>
 </body>

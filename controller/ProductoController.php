@@ -361,5 +361,17 @@ class ProductoController{
         //recargamos la carta
         header("Location:".url.'?controller=producto&action=show_carta');
     }
+
+    public function detallesQR(){
+        session_start();
+
+        //include del header
+        GeneralFunctions::header();
+
+        
+        
+        //include de el footer
+        include_once 'view/footer.html';
+    }
 }
 ?>
