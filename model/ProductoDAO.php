@@ -1,5 +1,5 @@
 <?php
-include_once('config/DataBase.php');
+include_once('config/dataBase.php');
 include_once('model/Smoothie.php');
 include_once('model/Boles.php');
 
