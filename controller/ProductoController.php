@@ -368,7 +368,38 @@ class ProductoController{
         //include del header
         GeneralFunctions::header();
 
-        
+        //Comprobamos que nos pasen el id
+        if (isset($_GET['idUsuario'])){
+
+            //recojemos id de usuario
+            $idUsuario = $_GET['idUsuario'];
+
+            //recojemos el id del ultimo pedido realizado por el usuario
+            $id_pedido = ProductoDAO::getUltPedidoUser($idUsuario);
+            //Recojemos todos los id de los productos
+            $productos = ProductoDAO::getUltPedido($id_pedido);
+
+            if (!isset($_SESSION['pedidos'])) {
+                // Si no existe pedidos o está vacío, lo creamos o lo dejamos como está
+                $_SESSION['pedidos'] = array();
+            }else{
+                //so existe vaciamos la sesion
+                $_SESSION['pedidos'] = array();
+            }
+
+            foreach($productos as $producto){
+                $producto_id = $producto['prodcutoId'];
+                $cantidad = $producto['cantidad'];
+
+                $product = ProductoDAO::getProductById($producto_id);
+                $pedido_carrito = new Pedido($product);
+                $pedido_carrito->setCantidad($cantidad);
+                array_push($_SESSION['pedidos'], $pedido_carrito);
+
+            }
+            //include vista detalles pedido
+            include_once 'view/detalles_pedido_qr.php';
+        }
         
         //include de el footer
         include_once 'view/footer.html';

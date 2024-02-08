@@ -268,4 +268,30 @@ class ProductoDAO{
         // Devolvemos los puntos
         return $puntos;
     }
+
+
+    // Función para extraer el el ultimo id de pedido del usuario
+    public static function getUltPedidoUser($user_id){
+        // Preparamos la conexión
+        $con = DataBase::connect();
+
+        // Preparamos la consulta del pedido_id
+        $stmt = $con->prepare("SELECT pedido_id FROM pedidos WHERE user_id = ? ORDER BY pedido_id DESC LIMIT 1;");
+        $stmt->bind_param("i", $user_id);
+
+        // Ejecutamos la consulta
+        $stmt->execute();
+
+        // Vinculamos el resultado a una variable
+        $stmt->bind_result($id_pedido);
+
+        // Obtenemos el valor de 'puntos'
+        $stmt->fetch();
+
+        // Cerramos la conexión
+        $con->close();
+
+        // Devolvemos los puntos
+        return $id_pedido;
+    }
 }   

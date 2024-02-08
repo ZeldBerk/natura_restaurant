@@ -1,9 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
+    //recojer id de usuario
+    const idUsuario = document.querySelector('input[name="id_usuario"]').value;
+
     document.getElementById('checkoutForm').addEventListener('submit', function (event) {
         event.preventDefault(); // Evita que el formulario se envíe normalmente
 
         // Obtén el contenido que deseas en el código QR (en este caso, la URL)
-        const url = 'http://naturarestaurant.com/index.php/?controller=producto&action=detallesQR';
+        const url = 'http://naturarestaurant.com/index.php/?controller=producto&action=detallesQR&idUsuario=' + idUsuario;
 
         // Genera el código QR en una nueva instancia de QRCode
         const qr = new QRCode(document.createElement('div'), {
