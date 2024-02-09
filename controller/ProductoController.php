@@ -183,10 +183,10 @@ class ProductoController{
         $fecha_actual = date('Y-m-d');
         $total = $_POST['precioConDescuento'];
         $puntos_sumar = CalcularPrecios::calcularPuntosPedido(CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']));        
-        $puntos_restar = $_POST['puntosUtilizados'];
+        $puntos_restar = $_POST['puntosUtilizados']; //Puntos que se han usado en la compra
 
         //pasamos los datos a la funcion para que haga el insert i nos devuelva el id
-        $ultimoPedidoId = ProductoDAO::insertPedido($user_id, $estado, $fecha_actual, $total, $_SESSION['carrito'], $puntos_sumar);
+        $ultimoPedidoId = ProductoDAO::insertPedido($user_id, $estado, $fecha_actual, $total, $_SESSION['carrito'], $puntos_sumar, $puntos_restar);
         
         ProductoDAO::restarPuntosUser($puntos_restar, $user_id);        
         // guardamos el último ID de pedido como cookie asociada al usuario
@@ -375,7 +375,13 @@ class ProductoController{
             $idUsuario = $_GET['idUsuario'];
 
             //recojemos el id del ultimo pedido realizado por el usuario
-            $id_pedido = ProductoDAO::getUltPedidoUser($idUsuario);
+            $result_array = ProductoDAO::getUltPedidoUser($idUsuario);
+            //guardo los datos del array en variables
+            $id_pedido = $result_array['id_pedido'];
+            $puntos_usados = $result_array['puntos_usados'];
+            $propina = $result_array['propina'];
+            $total = $result_array['total'];
+            $date_pedido = $result_array['date_pedido'];
             //Recojemos todos los id de los productos
             $productos = ProductoDAO::getUltPedido($id_pedido);
 

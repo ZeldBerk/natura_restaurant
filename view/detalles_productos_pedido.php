@@ -3,8 +3,7 @@
         <section class="container">
             <div class="row compraS">
                 <article class="col-12">
-                    <h2>Resumen de compra</h2>
-                    <p>Revisa tu pedido antes de continuar.</p>
+                    <h2>Detalles del pedido</h2>
                 </article>
             </div>
             <div class="row compraS">

@@ -4,7 +4,7 @@
             <div class="row compraS">
                 <article class="col-12">
                     <h2>Resumen de compra</h2>
-                    <p>Revisa tu pedido antes de continuar.</p>
+                    <p>Fecha: <?=$date_pedido?></p>
                 </article>
             </div>
             <div class="row compraS">
@@ -35,9 +35,9 @@
                 <article class="ticket">
                     <div class="row d-flex flex-column">
                         <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
-                            <form action="<?=url."?controller=producto&action=show_pedidos"?>" method="POST">
-                                <button class="buttonDark">Volver atras</button>
-                            </form>
+                            <p>Total: <?=$total?> €</p>
+                            <p>Puntos usados: <?=$puntos_usados?></p>
+                            <p>Propina: <?=$propina?> €</p>
                         </div>
                     </div>
                 </article>
