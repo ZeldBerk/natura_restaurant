@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="col-4 d-flex flex-column justify-content-end">
                                     <div class="align-self-end">
-                                        <p class="catorcepx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
+                                        <p class="catorcepx" id="precioTotalOriginal"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
                                         <form action="" method="POST" id="puntosForm">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" id="usarPuntosCheckbox" name="usar_puntos_checkbox">
@@ -90,8 +90,19 @@
                                         <form action="<?=url."?controller=producto&action=finalizarCompra"?>" method="POST" id="checkoutForm">
                                             <input type="hidden" name="precioConDescuento" id="precioConDescuento" value="">
                                             <input type="hidden" name="puntosUtilizados" id="puntosUtilizados" value="">
+                                            <input type="hidden" name="propinaAplicada" id="propinaAplicada" value="">
                                             <button class="buttonDark">Realizar compra | <span id="showPrecioTotal"></span></button>
                                         </form>
+                                    </div>
+                                    <div class="separacion_lite"></div>
+                                    <div class="col-8 d-flex flex-column justify-content-end">
+                                        <p class="catorcepx">Propinas:</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="propinaCheckbox" name="propinaCheckbox">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-end">
+                                        <input type="number" name="propina" id="propina" value="3">
                                     </div>
                                     <p class="catorcepx">Puntos ganados con esta compra: +<?=CalcularPrecios::calcularPuntosPedido(CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']))?>
                                 </div>
@@ -102,7 +113,7 @@
             </div>
         </section>
     <div class="separacion_big"></div>
-    <script src="../assets/js/control_puntos.js"></script>
+    <script src="../assets/js/control_precio.js"></script>
     <script src="../assets/QrCode/qrcode.min.js"></script>
     <script src="../assets/js/generador_qr.js"></script>
 </body>
