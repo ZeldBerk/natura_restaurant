@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Obtener valores iniciales y configuración
-    const propina_porcentage = document.getElementById('propina').value;
+    let propina_porcentage = 3;
     const idUsuario = document.querySelector('input[name="id_usuario"]').value;
     const puntosLabel = document.getElementById('puntosLabel');
     const puntosUsarInput = document.getElementById('puntosUsar');
@@ -91,7 +91,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (propinaCheckbox.checked) {
             // Aplicar propina solo si el checkbox está marcado
             const propina = (propina_porcentage/100) * precioSinPuntos;
-            console.log(propina);
             const precioTotal = precioSinPuntos + propina;
             showPrecioTotal.textContent = precioTotal.toFixed(2);
             // Actualizar el valor del input oculto con la cantidad de la propina
@@ -118,6 +117,18 @@ document.addEventListener('DOMContentLoaded', function () {
     // Añadir un event listener al checkbox para alternar la visibilidad del formulario de puntos
     usarPuntosCheckbox.addEventListener('change', updatePrecioTotal);
     propinaCheckbox.addEventListener('change', updatePrecioTotal);
+    // Añadir event listener al input de propina para el evento 'input'
+    propinaInput.addEventListener('input', function(event) {
+        // Obtener el nuevo valor directamente del evento
+        propina_porcentage = parseFloat(event.target.value);
+        if (!isNaN(propina_porcentage)) {
+            // Si el valor del input de propina es un número válido, actualizar la propina
+            console.log(propina_porcentage);
+            propinaInput.value = propina_porcentage; // Actualizar el valor del input (opcional)
+            updatePrecioTotal();
+        }
+    });
+
 
     // Añadir event listeners a los botones de restar y sumar puntos
     document.getElementById('restarPuntos').addEventListener('click', restarPuntos);

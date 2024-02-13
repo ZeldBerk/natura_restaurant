@@ -122,7 +122,7 @@ class ProductoDAO{
     }
 
 
-    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos, $puntos_sumar, $puntos_restar, $propina=0.00, $review_id=0){
+    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos, $puntos_sumar, $puntos_restar, $propina, $review_id=0){
         //preparamos la consulta
         $con = DataBase::connect();
 

@@ -102,7 +102,7 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-column justify-content-end">
-                                        <input type="number" name="propina" id="propina" value="3">
+                                        <input type="number" name="propina" id="propina" value="3" min="1" max="100">
                                     </div>
                                     <p class="catorcepx">Puntos ganados con esta compra: +<?=CalcularPrecios::calcularPuntosPedido(CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']))?>
                                 </div>
