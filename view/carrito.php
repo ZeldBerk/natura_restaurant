@@ -115,5 +115,6 @@
     <div class="separacion_big"></div>
     <script src="../assets/js/control_precio.js"></script>
     <script src="../assets/QrCode/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="../assets/js/generador_qr.js"></script>
 </body>
