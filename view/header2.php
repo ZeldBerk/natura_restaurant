@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../assets/css/full_estil.css" type="text/css" media="screen"/>
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
+    <script src="../assets/QrCode/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
 </head>
 <header>

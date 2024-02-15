@@ -8,27 +8,34 @@ document.addEventListener('DOMContentLoaded', function () {
         // Obtén el contenido que deseas en el código QR (en este caso, la URL)
         const url = 'http://naturarestaurant.com/index.php/?controller=producto&action=detallesQR&idUsuario=' + idUsuario;
 
-        // Genera el código QR en una nueva instancia de QRCode
+        // Genera el código QR en una imagen
         const qr = new QRCode(document.createElement('div'), {
             text: url,
             width: 300,
             height: 300,
+            colorDark: '#000000',
+            colorLight: '#ffffff',
+            correctLevel: QRCode.CorrectLevel.H,
         });
 
-        // Crea un elemento HTML para contener el código QR
-        const qrContainer = document.createElement('div');
-        qrContainer.appendChild(qr._el);
-
-        // Utiliza SweetAlert para mostrar el código QR
-        Swal.fire({
-            title: 'Código QR',
-            html: qrContainer.innerHTML,
-            showCloseButton: true,
-            showConfirmButton: false,
-            allowOutsideClick: false, // Evita cerrar haciendo clic fuera del cuadro de alerta
-        }).then(() => {
-            // Cuando el usuario cierra la alerta, envía el formulario al backend para finalizar la compra
-            document.getElementById('checkoutForm').submit();
+        qr.makeImage()
+        .then(qrImage => {
+            // Utiliza SweetAlert para mostrar el código QR
+            Swal.fire({
+                title: 'Código QR',
+                imageUrl: qrImage.toDataURL(),
+                imageAlt: 'Código QR',
+                showCloseButton: true,
+                showConfirmButton: false,
+                allowOutsideClick: false,
+            }).then(() => {
+                // Cuando el usuario cierra la alerta, envía el formulario al backend para finalizar la compra
+                document.getElementById('checkoutForm').submit();
+            });
+        })
+        .catch(error => {
+            console.error('Error generating QR code image:', error);
         });
+    
     });
 });
