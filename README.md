@@ -4,10 +4,10 @@
 
 Bienvenido al proyecto de JavaScript, proyecto el cual añade las siguientes funcionalidades a la web creada en el modelo MVC, en PHP, HTML y CSS, que fue creada en el primer proyecto del curso, aqui estan los diferentes apartados que seran explicados respecto al proyrcto de JavaScript:
 
-- [Reseñas del Restaurante](#reseñas)
-- [Programa de Fidelidad](#fidelidad)
-- [QR para cada pedido](#qr)
-- [Filtro de Productos](#filtro)
+- [Reseñas del Restaurante](#reseñas-del-restaurante)
+- [Programa de Fidelidad](#programa-de-fidelidad)
+- [QR para cada pedido](#qr-para-cada-pedido)
+- [Filtro de Productos](#filtro-de-productos)
 
 ## Reseñas del Restaurante
 
