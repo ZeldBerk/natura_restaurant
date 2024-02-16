@@ -71,6 +71,8 @@ function cargarFiltrosGuardados() {
         valoracionesSeleccionadas.forEach(valoracion => {
             document.getElementById(`valoracion${valoracion}`).checked = true;
         });
+        // Después de cargar los filtros, llamamos a mostrarReviews
+        mostrarReviews(data, ordenGuardado, valoracionesSeleccionadas);
     }
 }
 
