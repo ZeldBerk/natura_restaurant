@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 allowOutsideClick: false
             }).then(() => {
                 // Redirigir a la página de inicio después de cerrar la alerta
-                window.location.href = 'URL_DE_INICIO'; // Reemplaza con la URL correcta de tu página de inicio
+                window.location.href = 'http://naturarestaurant.com/index.php/?controller=producto'; 
             });
         })
         .catch(error => {

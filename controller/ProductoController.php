@@ -192,7 +192,10 @@ class ProductoController{
         // Guardamos el último ID de pedido como cookie asociada al usuario
         setcookie('ultimo_pedido_'.$user_id, $ultimoPedidoId, time() + 120, "/");
         
-        echo json_encode(['success' => true, 'redirectUrl' => url.'?controller=producto']);
+        echo json_encode(['success' => true]);
+
+        unset($_SESSION['carrito']);
+
         exit();
     }
     
