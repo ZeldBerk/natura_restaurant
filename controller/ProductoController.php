@@ -79,7 +79,7 @@ class ProductoController{
         if(!isset($_SESSION['carrito'])){
             $_SESSION['carrito'] = array();
         }
-        var_dump($pedidos);
+        
         foreach($pedidos as $pedido){
             $producto_id = $pedido['prodcutoId'];
             $cantidad = $pedido['cantidad'];
@@ -174,26 +174,97 @@ class ProductoController{
     }
 
 
-    //finalizar la compra
     public function finalizarCompra(){
         session_start();
-        //recojemos los valores que queremos insertar en la base de datos
+        // Recolectamos los valores que queremos insertar en la base de datos
         $user_id = $_SESSION['loggedin']['id'];
         $estado = "finalizado";
         $fecha_actual = date('Y-m-d');
-        $total = CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']);
+        $total = $_POST['precioConDescuento'];
+        $puntos_sumar = CalcularPrecios::calcularPuntosPedido(CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']));        
+        $puntos_restar = $_POST['puntosUtilizados']; // Puntos que se han usado en la compra
+        $propina  = $_POST['propinaAplicada'];
+    
+        // Pasamos los datos a la función para que haga el insert y nos devuelva el id
+        $ultimoPedidoId = ProductoDAO::insertPedido($user_id, $estado, $fecha_actual, $total, $_SESSION['carrito'], $puntos_sumar, $puntos_restar, $propina);
         
-        //pasamos los datos a la funcion para que haga el insert i nos devuelva el id
-        $ultimoPedidoId = ProductoDAO::insertPedido($user_id, $estado, $fecha_actual, $total, $_SESSION['carrito']);
-
-        // guardamos el último ID de pedido como cookie asociada al usuario
+        ProductoDAO::restarPuntosUser($puntos_restar, $user_id);        
+        // Guardamos el último ID de pedido como cookie asociada al usuario
         setcookie('ultimo_pedido_'.$user_id, $ultimoPedidoId, time() + 120, "/");
+        
+        echo json_encode(['success' => true]);
 
-        //eliminamos el carrito, y lo dejamos vacio
         unset($_SESSION['carrito']);
 
-        //redirigimos al pagina home despues de cerrar el pedido
-        header("Location:".url.'?controller=producto');
+        exit();
+    }
+    
+
+
+    // mostrar la lista de pedidos
+    public function show_pedidos(){
+        session_start();
+        //include del header
+        GeneralFunctions::header();
+
+        //Recojemos todos los pedidos para mostrarlos
+        $user_id = $_SESSION['loggedin']['id'];
+        $allPedidos = ProductoDAO::getAllPedidos($user_id);
+
+        //include del login
+        include_once 'view/pedidos_user.php';
+        
+        //include de el footer
+        include_once 'view/footer.html';
+    }
+
+
+    //mostrar detalles del pedido
+    public function detalles_pedido(){
+        
+        //Comprobamos que nos pasen el id
+        if (isset($_POST['id'])){
+            session_start();
+            
+            //Recojemos todos los id de los productos 
+            $id_pedido = $_POST['id'];
+            $productos = ProductoDAO::getUltPedido($id_pedido);
+
+            if (!isset($_SESSION['pedidos'])) {
+                // Si no existe pedidos o está vacío, lo creamos o lo dejamos como está
+                $_SESSION['pedidos'] = array();
+            }else{
+                //so existe vaciamos la sesion
+                $_SESSION['pedidos'] = array();
+            }
+
+            foreach($productos as $producto){
+                $producto_id = $producto['prodcutoId'];
+                $cantidad = $producto['cantidad'];
+
+                $product = ProductoDAO::getProductById($producto_id);
+                $pedido_carrito = new Pedido($product);
+                $pedido_carrito->setCantidad($cantidad);
+                array_push($_SESSION['pedidos'], $pedido_carrito);
+
+            }
+            header("Location:".url.'?controller=producto&action=detalles_prodcuto');
+        }
+    }
+
+
+    //Mostramos el listado de productos
+    public function detalles_prodcuto(){
+        session_start();
+
+        //include del header
+        GeneralFunctions::header();
+
+        //include de los detalles de los productos
+        include_once 'view/detalles_productos_pedido.php';
+        
+        //include de el footer
+        include_once 'view/footer.html';
     }
 
     
@@ -290,6 +361,55 @@ class ProductoController{
 
         //recargamos la carta
         header("Location:".url.'?controller=producto&action=show_carta');
+    }
+
+    public function detallesQR(){
+        session_start();
+
+        //include del header
+        GeneralFunctions::header();
+
+        //Comprobamos que nos pasen el id
+        if (isset($_GET['idUsuario'])){
+
+            //recojemos id de usuario
+            $idUsuario = $_GET['idUsuario'];
+
+            //recojemos el id del ultimo pedido realizado por el usuario
+            $result_array = ProductoDAO::getUltPedidoUser($idUsuario);
+            //guardo los datos del array en variables
+            $id_pedido = $result_array['id_pedido'];
+            $puntos_usados = $result_array['puntos_usados'];
+            $propina = $result_array['propina'];
+            $total = $result_array['total'];
+            $date_pedido = $result_array['date_pedido'];
+            //Recojemos todos los id de los productos
+            $productos = ProductoDAO::getUltPedido($id_pedido);
+
+            if (!isset($_SESSION['pedidos'])) {
+                // Si no existe pedidos o está vacío, lo creamos o lo dejamos como está
+                $_SESSION['pedidos'] = array();
+            }else{
+                //so existe vaciamos la sesion
+                $_SESSION['pedidos'] = array();
+            }
+
+            foreach($productos as $producto){
+                $producto_id = $producto['prodcutoId'];
+                $cantidad = $producto['cantidad'];
+
+                $product = ProductoDAO::getProductById($producto_id);
+                $pedido_carrito = new Pedido($product);
+                $pedido_carrito->setCantidad($cantidad);
+                array_push($_SESSION['pedidos'], $pedido_carrito);
+
+            }
+            //include vista detalles pedido
+            include_once 'view/detalles_pedido_qr.php';
+        }
+        
+        //include de el footer
+        include_once 'view/footer.html';
     }
 }
 ?>

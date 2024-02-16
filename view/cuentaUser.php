@@ -6,10 +6,13 @@
                     <h2 class="text-center mb-5 titulosLogin">Tu Cuenta</h2>
                     <form action="<?=url."?controller=user&action=cambiosCuenta"?>" method="POST">
                         <div class="mb-3 row">
+                            <label class="labelsLogin col-sm-12 puntos">Puntos: </label>
+                        </div>
+                        <div class="mb-3 row">
                             <label for="nombre" class="labelsLogin col-sm-12">Nombre:</label>
                             <div class="col-sm-12">
                                 <input type="text" class="form-control inputLogin" name="nombre" value="<?= $usuario->getNombre()?>" required/>
-                                <input type="number" name="id_producto" value="<?= $usuario->getUserId()?>" hidden required/>
+                                <input type="number" name="id_usuario" value="<?= $usuario->getUserId()?>" hidden required/>
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -44,4 +47,5 @@
         </div>
     </section>
     <div class="separacion_big"></div>
+    <script src="../assets/js/show_puntos.js"></script>
 </body>

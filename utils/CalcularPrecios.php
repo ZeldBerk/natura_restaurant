@@ -10,5 +10,14 @@ class CalcularPrecios{
 
         return $preciototal;
     }
+
+    public static function calcularPuntosPedido($precioTotal){
+        $puntos = 0;
+
+        // Cada euro gastat equivale a un punto
+        $puntos += floor($precioTotal);
+
+        return $puntos;
+    }
 }
 ?>

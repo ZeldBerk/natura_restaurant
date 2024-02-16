@@ -9,6 +9,7 @@
             </div>
             <div class="row compraS">
                 <article class="detallesC">
+                <input type="number" name="id_usuario" value="<?=$_SESSION['loggedin']['id'] ?>" hidden required/>
                 <?php
                     $pos = 0;
                     foreach($_SESSION['carrito'] as $pedido){?>
@@ -59,36 +60,51 @@
                                 <div class="col-8 d-flex flex-column justify-content-end">
                                     <div class="align-self-end">
                                         <p class="catorcepx">Subtotal</p>
+                                        <p class="catorcepx">Usar Puntos</p>
                                         <p class="diezSeispx">Total</p>
                                     </div>
                                 </div>
                                 <div class="col-4 d-flex flex-column justify-content-end">
                                     <div class="align-self-end">
-                                        <div>
-                                            <p class="catorcepx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
-                                            <p class="diezSeispx"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
-                                        </div>
+                                        <p class="catorcepx" id="precioTotalOriginal"><?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></p>
+                                        <form action="" method="POST" id="puntosForm">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="usarPuntosCheckbox" name="usar_puntos_checkbox">
+                                            </div>
+                                            <div class="d-flex align-items-center">
+                                                <button class="butonCantidad" id="restarPuntos" type="button">-</button>
+                                                <label class="catorcepx puntos" id="puntosLabel"></label>
+                                                <input type="hidden" name="puntos_usar" id="puntosUsar" value="0" />
+                                                <button class="butonCantidad" id="sumarPuntos" type="button">+</button>
+                                            </div>
+                                        </form>
+                                        <input type="number" name="precioSinPuntos" value="<?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?>" hidden required/>
+                                        <p class="diezSeispx" id="showPrecioTotal"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-7"></div>
                                 <div class="col-5 d-flex flex-column justify-content-end">
-                                    <form class="codigoDescuento" action="">
-                                        <div class="row">
-                                            <div class="col-9">
-                                                <input type="text" class="inputCompra w-100" placeholder="Añadir código de descuento..."/>
-                                            </div>
-                                            <div class="col-3">
-                                                <button class="buttonCompra">Aplicar</button>
-                                            </div>
-                                        </div>
-                                    </form>
                                     <div class="align-self-end">
-                                        <form action="<?=url."?controller=producto&action=finalizarCompra"?>" method="POST">
-                                            <button class="buttonDark">Realizar compra | <?=CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito'])?></button>
+                                        <form action="<?=url."?controller=producto&action=finalizarCompra"?>" method="POST" id="checkoutForm">
+                                            <input type="hidden" name="precioConDescuento" id="precioConDescuento" value="">
+                                            <input type="hidden" name="puntosUtilizados" id="puntosUtilizados" value="">
+                                            <input type="hidden" name="propinaAplicada" id="propinaAplicada" value="">
+                                            <button class="buttonDark">Realizar compra | <span id="showPrecioTotal"></span></button>
                                         </form>
                                     </div>
+                                    <div class="separacion_lite"></div>
+                                    <div class="col-8 d-flex flex-column justify-content-end">
+                                        <p class="catorcepx">Propinas:</p>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="propinaCheckbox" name="propinaCheckbox">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-end">
+                                        <input type="number" name="propina" id="propina" value="3" min="1" max="100">
+                                    </div>
+                                    <p class="catorcepx">Puntos ganados con esta compra: +<?=CalcularPrecios::calcularPuntosPedido(CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']))?>
                                 </div>
                             </div>
                         </div>
@@ -97,4 +113,6 @@
             </div>
         </section>
     <div class="separacion_big"></div>
+    <script src="../assets/js/control_precio.js"></script>
+    <script src="../assets/js/generador_qr.js"></script>
 </body>

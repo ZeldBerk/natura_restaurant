@@ -8,14 +8,16 @@ abstract class Usuario{
         protected $email;
         protected $rol;
         protected $contra;
+        protected $puntos = 0;
 
-        public function __construct($user_id, $nombre, $apellido, $email, $rol, $contra){
+        public function __construct($user_id, $nombre, $apellido, $email, $rol, $contra, $puntos){
             $this->user_id = $user_id;
             $this->nombre = $nombre;
             $this->apellido = $apellido;
             $this->email = $email;
             $this->rol = $rol;
             $this->contra = $contra;
+            $this->puntos = $puntos;
         }
 
         /**
@@ -122,6 +124,24 @@ abstract class Usuario{
         public function setContra($contra): self
         {
                 $this->contra = $contra;
+
+                return $this;
+        }
+
+        /**
+         * Get the value of puntos
+         */
+        public function getPuntos()
+        {
+                return $this->puntos;
+        }
+
+        /**
+         * Set the value of puntos
+         */
+        public function setPuntos($puntos): self
+        {
+                $this->puntos = $puntos;
 
                 return $this;
         }

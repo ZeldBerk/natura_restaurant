@@ -6,6 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge"/>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../assets/css/full_estil.css" type="text/css" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/notie/dist/notie.min.css">
     <title>Document</title>
 </head>
 <header>
@@ -65,6 +66,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="menu" href="<?=url."?controller=producto"?>">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="menu" href="<?=url."?controller=review"?>">Reseñas</a>
                         </li>
                     </ul>
                 </div>

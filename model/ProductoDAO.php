@@ -1,5 +1,5 @@
 <?php
-include_once('config/DataBase.php');
+include_once('config/dataBase.php');
 include_once('model/Smoothie.php');
 include_once('model/Boles.php');
 
@@ -122,15 +122,15 @@ class ProductoDAO{
     }
 
 
-    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos){
+    public static function insertPedido($user_id,$estado,$fecha_actual,$total, $productos, $puntos_sumar, $puntos_restar, $propina, $review_id=0){
         //preparamos la consulta
         $con = DataBase::connect();
 
         // Usar una sentencia preparada con marcadores de posición
-        $stmt = $con->prepare("INSERT INTO pedidos (user_id, estado, date_pedido, total) VALUES (?, ?, ?, ?)");
+        $stmt = $con->prepare("INSERT INTO pedidos (user_id, review_id, estado, date_pedido, total, puntos_usados, propina) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
         // Vincular los valores a los marcadores de posición
-        $stmt->bind_param("issd", $user_id,$estado,$fecha_actual,$total);
+        $stmt->bind_param("iissdid", $user_id,$review_id,$estado,$fecha_actual,$total, $puntos_restar, $propina);
 
         //ejecutamos la consulta
         $stmt->execute();
@@ -154,8 +154,32 @@ class ProductoDAO{
 
         }
 
+        $stmt = $con->prepare("UPDATE usuarios SET puntos = puntos + ? WHERE user_id = ?");
+
+        $stmt->bind_param("ii", $puntos_sumar, $user_id);
+
+        $stmt->execute();
+
         $con->close();
         return $ultimoInsertId;
+    }
+
+
+    //Funcion para restar puntos usados en un pedido
+    public static function restarPuntosUser($puntos_restar, $user_id){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        $stmt = $con->prepare("UPDATE usuarios SET puntos = puntos - ? WHERE user_id = ?");
+
+        $stmt->bind_param("ii", $puntos_restar, $user_id);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        $con->close();
+
+        return $result;
     }
 
 
@@ -187,5 +211,98 @@ class ProductoDAO{
         //devolvemos el array de pedido
         return $pedido;
 
+    }
+
+
+    //Funcion que nos da todos los pedidos
+    public static function getAllPedidos($id){
+        //preparamos la consulta
+        $con = DataBase::connect();
+
+        //Preparamos la consulta del pedido
+        $stmt = $con->prepare("SELECT pedido_id, date_pedido, total FROM pedidos WHERE user_id=?");
+        $stmt->bind_param("i", $id);
+
+        //ejecutamos la consulta
+        $stmt->execute();
+        $result = $stmt->store_result();
+
+        $stmt->bind_result($pedido_id, $date_pedido, $total);
+
+        //Creamos una array asociativocon los datos del pedido
+        $pedido = array();
+            
+        while ($stmt->fetch()){
+            $pedido[] = ['pedido_id' => $pedido_id, 'date_pedido' => $date_pedido, 'total' => $total];
+        }
+
+        //cerramos la conexion
+        $con->close();
+
+        //devolvemos el array de pedido
+        return $pedido;
+    }    
+
+
+    // Función para extraer los puntos por id de usuario
+    public static function getPuntosById($user_id){
+        // Preparamos la conexión
+        $con = DataBase::connect();
+
+        // Preparamos la consulta del pedido
+        $stmt = $con->prepare("SELECT puntos FROM usuarios WHERE user_id = ?");
+        $stmt->bind_param("i", $user_id);
+
+        // Ejecutamos la consulta
+        $stmt->execute();
+
+        // Vinculamos el resultado a una variable
+        $stmt->bind_result($puntos);
+
+        // Obtenemos el valor de 'puntos'
+        $stmt->fetch();
+
+        // Cerramos la conexión
+        $con->close();
+
+        // Devolvemos los puntos
+        return $puntos;
+    }
+
+
+    // Función para obtener el último ID de pedido del usuario
+    public static function getUltPedidoUser($user_id){
+        // Preparamos la conexión
+        $con = DataBase::connect();
+
+        // Verificamos la conexión
+        if ($con->connect_error) {
+            die("Conexión fallida: " . $con->connect_error);
+        }
+
+        // Preparamos la consulta del pedido_id
+        $stmt = $con->prepare("SELECT pedido_id, puntos_usados, propina, total, date_pedido FROM pedidos WHERE user_id = ? ORDER BY pedido_id DESC LIMIT 1;");
+        $stmt->bind_param("i", $user_id);
+
+        // Ejecutamos la consulta
+        $stmt->execute();
+
+        // Vinculamos el resultado a variables
+        $stmt->bind_result($id_pedido, $puntos_usados, $propina, $total, $date_pedido);
+
+        // Obtenemos los valores
+        $stmt->fetch();
+
+        // Cerramos la conexión
+        $con->close();
+
+        // Devolvemos un array asociativo con la información del pedido
+        return array(
+            'id_pedido' => $id_pedido,
+            'puntos_usados' => $puntos_usados,
+            'propina' => $propina,
+            'total' => $total,
+            'date_pedido' => $date_pedido
+        );
     }
 }   
