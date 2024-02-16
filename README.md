@@ -10,6 +10,7 @@ Bienvenido al proyecto de JavaScript, proyecto el cual añade las siguientes fun
 - [Filtro de Productos](#filtro)
 
 ## Reseñas del Restaurante
+
 Para hacer las reseñas del restaurante he creado una vista la cual contiene los filtros de las reseñas y el contenedor donde se insertan las reseñas. Para insertar las reseñas, como se puede observar en la imagen de abajo.
 
 Creo una variable para guardar las reseñas, hago un fetcha a la api para obtener las reseñas que se almacenan en la BBDD. 
@@ -52,9 +53,11 @@ Luego la api recoje los datos que se le han pasado por la api y el id del usuari
 
 ![alt text](image-8.png)
 
-Por ultimo dependiendo de la respuesta que recibe el fetch de la API, si es success, muestra una notificaccion 
+Por ultimo dependiendo de la respuesta que recibe el fetch de la API, si es success, muestra una notificaccion del noti.js con el mensaje que recibi de la api, despues de 5 segundos redirige a la pagina de reseñas para que se pueda ver la reseña que se acaba de añadir
 
 ![alt text](image-9.png)
 
 
-![alt text](image-10.png)
+## Programa de Fidelidad
+
+
