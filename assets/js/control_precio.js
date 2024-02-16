@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function () {
         propina_porcentage = parseFloat(event.target.value);
         if (!isNaN(propina_porcentage)) {
             // Si el valor del input de propina es un número válido, actualizar la propina
-            propinaInput.value = propina_porcentage; // Actualizar el valor del input (opcional)
+            propinaInput.value = propina_porcentage; // Actualizar el valor del input
             updatePrecioTotal();
         }
     });

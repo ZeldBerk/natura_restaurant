@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Realizar la solicitud AJAX para enviar el formulario
         const formData = new FormData(checkoutForm);
 
-        // Puedes usar la API Fetch para enviar el formulario de manera asíncrona
+        // Fetch para enviar el formulario de manera asíncrona
         fetch(checkoutForm.action, {
             method: checkoutForm.method,
             body: formData
@@ -16,14 +16,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!response.ok) {
                 throw new Error('Error al enviar el formulario');
             }
-            return response.json(); // Puedes ajustar esto según la respuesta esperada
+            return response.json();
         })
         .then(data => {
-            // Obtén el contenido que deseas en el código QR (en este caso, la URL)
+            // Obtener la url del qr
             const idUsuario = document.querySelector('input[name="id_usuario"]').value;
             const url = 'http://naturarestaurant.com/index.php/?controller=producto&action=detallesQR&idUsuario=' + idUsuario;
 
-            // Utiliza qrcodejs para generar el código QR
+            // Utilizr qrcodejs para generar el código QR
             const qrCode = new QRCode(document.createElement('div'), {
                 text: url,
                 width: 128,
@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         })
         .catch(error => {
-            // Manejar errores, puedes mostrar un mensaje de error si es necesario
             console.error(error);
         });
     });
