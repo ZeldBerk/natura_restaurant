@@ -174,31 +174,28 @@ class ProductoController{
     }
 
 
-    //finalizar la compra
     public function finalizarCompra(){
         session_start();
-        //recojemos los valores que queremos insertar en la base de datos
+        // Recolectamos los valores que queremos insertar en la base de datos
         $user_id = $_SESSION['loggedin']['id'];
         $estado = "finalizado";
         $fecha_actual = date('Y-m-d');
         $total = $_POST['precioConDescuento'];
         $puntos_sumar = CalcularPrecios::calcularPuntosPedido(CalcularPrecios::calculdorPrecioPedido($_SESSION['carrito']));        
-        $puntos_restar = $_POST['puntosUtilizados']; //Puntos que se han usado en la compra
+        $puntos_restar = $_POST['puntosUtilizados']; // Puntos que se han usado en la compra
         $propina  = $_POST['propinaAplicada'];
-
-        //pasamos los datos a la funcion para que haga el insert i nos devuelva el id
+    
+        // Pasamos los datos a la función para que haga el insert y nos devuelva el id
         $ultimoPedidoId = ProductoDAO::insertPedido($user_id, $estado, $fecha_actual, $total, $_SESSION['carrito'], $puntos_sumar, $puntos_restar, $propina);
         
         ProductoDAO::restarPuntosUser($puntos_restar, $user_id);        
-        // guardamos el último ID de pedido como cookie asociada al usuario
+        // Guardamos el último ID de pedido como cookie asociada al usuario
         setcookie('ultimo_pedido_'.$user_id, $ultimoPedidoId, time() + 120, "/");
-
-        //eliminamos el carrito, y lo dejamos vacio
-        unset($_SESSION['carrito']);
-
-        //redirigimos al pagina home despues de cerrar el pedido
-        header("Location:".url.'?controller=producto');
+        
+        echo json_encode(['success' => true, 'redirectUrl' => url.'?controller=producto']);
+        exit();
     }
+    
 
 
     // mostrar la lista de pedidos
