@@ -21,13 +21,19 @@ document.addEventListener('DOMContentLoaded', function () {
         // Convertir el canvas a datos de URL
         const qrCodeDataURL = canvas.toDataURL();
 
-        // Mostrar el código QR usando SweetAlert
+        // Mostrar el código QR usando SweetAlert con el botón de cierre
         Swal.fire({
             title: 'QR Detalles del Pedido',
             imageUrl: qrCodeDataURL,
             imageAlt: 'Código QR',
             showCancelButton: false,
-            showConfirmButton: false
+            showConfirmButton: false,
+            showCloseButton: true, // Mostrar el botón de cierre
+            allowOutsideClick: false, // Evitar que se cierre haciendo clic fuera del cuadro
+            willClose: () => {
+                // Enviar el formulario al cerrar el SweetAlert
+                document.getElementById('checkoutForm').submit();
+            }
         });
     });
 });
