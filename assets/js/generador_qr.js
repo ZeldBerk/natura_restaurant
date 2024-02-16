@@ -8,34 +8,26 @@ document.addEventListener('DOMContentLoaded', function () {
         // Obtén el contenido que deseas en el código QR (en este caso, la URL)
         const url = 'http://naturarestaurant.com/index.php/?controller=producto&action=detallesQR&idUsuario=' + idUsuario;
 
-        // Genera el código QR en una imagen
-        const qr = new QRCode(document.createElement('div'), {
+        // Utiliza qrcodejs para generar el código QR
+        const qrCode = new QRCode(document.createElement('div'), {
             text: url,
-            width: 300,
-            height: 300,
-            colorDark: '#000000',
-            colorLight: '#ffffff',
-            correctLevel: QRCode.CorrectLevel.H,
+            width: 128,
+            height: 128
         });
 
-        qr.makeImage()
-        .then(qrImage => {
-            // Utiliza SweetAlert para mostrar el código QR
-            Swal.fire({
-                title: 'Código QR',
-                imageUrl: qrImage.toDataURL(),
-                imageAlt: 'Código QR',
-                showCloseButton: true,
-                showConfirmButton: false,
-                allowOutsideClick: false,
-            }).then(() => {
-                // Cuando el usuario cierra la alerta, envía el formulario al backend para finalizar la compra
-                document.getElementById('checkoutForm').submit();
-            });
-        })
-        .catch(error => {
-            console.error('Error generating QR code image:', error);
+        // Acceder al lienzo (canvas) del código QR
+        const canvas = qrCode._el.childNodes[0];
+
+        // Convertir el canvas a datos de URL
+        const qrCodeDataURL = canvas.toDataURL();
+
+        // Mostrar el código QR usando SweetAlert
+        Swal.fire({
+            title: 'QR Detalles del Pedido',
+            imageUrl: qrCodeDataURL,
+            imageAlt: 'Código QR',
+            showCancelButton: false,
+            showConfirmButton: false
         });
-    
     });
 });
