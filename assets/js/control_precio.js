@@ -75,43 +75,37 @@ document.addEventListener('DOMContentLoaded', function () {
     function updatePrecioTotal() {
         const puntosUsar = parseInt(puntosUsarInput.value, 10);
         const precioSinPuntos = parseFloat(document.getElementsByName('precioSinPuntos')[0].value);
-
+        let precioTotal = precioSinPuntos;
+        
         if (usarPuntosCheckbox.checked) {
             // Aplicar descuento solo si el checkbox está marcado
             const equivalentAmount = puntosUsar * 0.01; // Cada punto vale 0.01€
-            const precioTotal = precioSinPuntos - equivalentAmount;
-            showPrecioTotal.textContent = precioTotal.toFixed(2);
+            precioTotal -= equivalentAmount;
             // Actualizar el valor del input oculto con la cantidad de puntos a utilizar
             document.getElementById('puntosUtilizados').value = puntosUsar;
-        } else {
-            // Si el checkbox no está marcado, mostrar el precio sin descuento
-            showPrecioTotal.textContent = precioSinPuntos.toFixed(2);
         }
 
         if (propinaCheckbox.checked) {
             // Aplicar propina solo si el checkbox está marcado
             const propina = (propina_porcentage/100) * precioSinPuntos;
-            const precioTotal = precioSinPuntos + propina;
-            showPrecioTotal.textContent = precioTotal.toFixed(2);
+            precioTotal += propina;
             // Actualizar el valor del input oculto con la cantidad de la propina
             document.getElementById('propinaAplicada').value = propina;
-        } else {
-            // Si el checkbox no está marcado, mostrar el precio sin descuento
-            showPrecioTotal.textContent = precioSinPuntos.toFixed(2);
         }
-
-        // Actualizar campos ocultos para enviar al formulario
-        document.getElementById('precioConDescuento').value = showPrecioTotal.textContent;
 
         // Actualizar el texto del botón con el precio total
         const button = document.querySelector('.buttonDark');
-        button.textContent = `Realizar compra | ${showPrecioTotal.textContent}`;
+        button.textContent = `Realizar compra | ${precioTotal.toFixed(2)}`;
 
         // Mostrar u ocultar elementos basados en el estado del checkbox
         restarPuntosButton.style.display = usarPuntosCheckbox.checked ? 'inline-block' : 'none';
         sumarPuntosButton.style.display = usarPuntosCheckbox.checked ? 'inline-block' : 'none';
         puntosLabel.style.display = usarPuntosCheckbox.checked ? 'inline-block' : 'none';
         propinaInput.style.display = propinaCheckbox.checked ? 'inline-block' : 'none';
+
+        // Mostrar el precio total en la interfaz
+        showPrecioTotal.textContent = precioTotal.toFixed(2);
+        document.getElementById('precioConDescuento').value = precioTotal;
     }
 
     // Añadir un event listener al checkbox para alternar la visibilidad del formulario de puntos
