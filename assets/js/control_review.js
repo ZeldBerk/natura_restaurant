@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
     .then(receivedData => {
         data = receivedData; // Almacenar los datos globalmente
         mostrarReviews(data); // Mostrar las reseñas al recibir los datos
+        cargarFiltrosGuardados(); // Cargar los filtros guardados al cargar la página
     })
     .catch(error => {
         console.error(error);
@@ -27,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('ordenarSelect').addEventListener('change', function () {
         const orden = this.value; // Obtener la opción de orden seleccionada
         const valoracionesSeleccionadas = obtenerValoracionesSeleccionadas();
+        guardarFiltrosEnLocalStorage(orden, valoracionesSeleccionadas); // Guardar filtros en localStorage
         mostrarReviews(data, orden, valoracionesSeleccionadas);
     });
 
@@ -36,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
         checkbox.addEventListener('change', function () {
             const valoracionesSeleccionadas = obtenerValoracionesSeleccionadas();
             const orden = document.getElementById('ordenarSelect').value;
+            guardarFiltrosEnLocalStorage(orden, valoracionesSeleccionadas); // Guardar filtros en localStorage
             mostrarReviews(data, orden, valoracionesSeleccionadas);
         });
     });
@@ -46,6 +49,29 @@ function obtenerValoracionesSeleccionadas() {
     const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
     const valoracionesSeleccionadas = Array.from(checkboxes).map(checkbox => parseInt(checkbox.value));
     return valoracionesSeleccionadas;
+}
+
+// Función para guardar los filtros en localStorage
+function guardarFiltrosEnLocalStorage(orden, valoracionesSeleccionadas) {
+    localStorage.setItem('ordenReviews', orden);
+    localStorage.setItem('valoracionesSeleccionadasReviews', JSON.stringify(valoracionesSeleccionadas));
+}
+
+// Función para cargar los filtros guardados desde localStorage al cargar la página
+function cargarFiltrosGuardados() {
+    const ordenGuardado = localStorage.getItem('ordenReviews');
+    const valoracionesSeleccionadasGuardadas = localStorage.getItem('valoracionesSeleccionadasReviews');
+
+    if (ordenGuardado) {
+        document.getElementById('ordenarSelect').value = ordenGuardado;
+    }
+
+    if (valoracionesSeleccionadasGuardadas) {
+        const valoracionesSeleccionadas = JSON.parse(valoracionesSeleccionadasGuardadas);
+        valoracionesSeleccionadas.forEach(valoracion => {
+            document.getElementById(`valoracion${valoracion}`).checked = true;
+        });
+    }
 }
 
 // Función para mostrar las reseñas en el contenedor
