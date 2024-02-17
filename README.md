@@ -102,4 +102,7 @@ Para mostrar los detalles del pedido del usuario una vez escanea el codigo QR, s
 
 ## Filtro de Productos
 
+Para realizar los filtros de los productos, se han añadido eventlisteners a los checkbox, para la deteccion del cambio de estado de estos, guardamos todos los productos en una variable y en funcion del checkbox que se marca, se muestran los productos que coincidan con el filtro seleccionado, tal y como se puede ver en el codigo que se muestra abajo.
 
+![alt text](image-19.png)
+![alt text](image-20.png)
