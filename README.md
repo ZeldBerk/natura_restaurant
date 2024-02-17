@@ -60,4 +60,30 @@ Por ultimo dependiendo de la respuesta que recibe el fetch de la API, si es succ
 
 ## Programa de Fidelidad
 
+Para hacer el programa de fidelidad, he añadido un chekbox en la vista original del carrito, para dedicir si se usan los puntos o no, si el checkbox es marcado se mostrara un pequeño formulario con los puntos disponibles y dos botones una para restar puntos y otro para sumar-los, para mostrar o esconder los puntos y para el manejo de estos he utilizado, tambien se ha añadido un sistema de propinas, con el mismo metodo que los puntos hay un checkbox para esconder o mostrar el formulario para subir y bajar las propinas, en el siguiente script se muestra como.
+
+![alt text](image-11.png)
+
+Como se puede observar la primera parte del codigo obtenemos y guardamos en variables, los valores inicales y los componentes que se usaran para manegar los puntos y las propinas. Seguidamente se usa un fecha para obtener los puntos que tiene disponibles el usuario, esto realiza una solicitud a la api, de la siguiente manera:
+
+![alt text](image-12.png)
+
+La api recibe el id de usuario a traves de post, y con este id se llama a la funcion que nos devuelve los puntos disponibles del usuario, y luego como en los casos anteriores guardamos el resultado en un array associativo, lo codificamos en json y lo enviamos. La respuesta obtenida por la api se maneja de la maner que se muestra en la captura de arriba. guadando los puntos en una variable y llamado a una funcion para que los ponga visibles en el carrito.
+
+En esta imagen encontramos la funcion que da el valor inicial de los puntos al formulario, y las funciones que se encargaran de suamr y restar los puntos que el usuario desea usar en funcion de los botones que pulse en el formualrio.
+
+![alt text](image-13.png)
+
+De las dos funciones que encontramos en la siguiente imagen, nos sirve para atualizar los puntos en el formulario asi como la visibilidad de la rtiqueta de estos, y la segunda funcion es la encargada de las principales funcionalidades de la gestion del precio final respecto a la propina que se aplique y los puntos de descuentos que se usen. Tal y como podemos observar, primero de todo se guardan lso puntos que deja marcados el usuario, por defecto todos los disponibles, luego de obtiene el precio total sin puntos ni propina, seguidamente encontramos dos condiciones, uan que calcula el precio en funcion de si el checkbox de los puntos esta marcado y la otra en funcion si el checkbox de las propinas esta marcado, luego indiferent5emente si se ha entrado en las condiciones se muestra el valor total de la compra en el boton, se muestran o se ocultan los formularios de puntos y propinas en funcion del estado de los checkboxs, y por ultimo se muestra el precio total en la interfaz.
+
+![alt text](image-14.png)
+
+Lo ultimo que se encuentra en este script son los eventlisteners, que comprueban si el estado del checkbox cambia, si es asi ejecuta la ultima funcion explicada arriba, luego encontramos otro eventlistener para ir actualizando el valor del porcentage de propina que el usuario quiera dejar, y por ultimo estan los eventlisteners para el formulario de los puntos, los botones que ejecutan las funciones de sumar o restar puntos.
+
+![alt text](image-15.png)
+
+
+## QR para cada pedido
+
+
 
