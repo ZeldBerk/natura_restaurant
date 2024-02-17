@@ -85,5 +85,21 @@ Lo ultimo que se encuentra en este script son los eventlisteners, que comprueban
 
 ## QR para cada pedido
 
+Para realizar el codigo QR que al ser escanneado nos redirige a una vista con los detalles del pedido realizado, se ha debido de cambiar la forma de enviar el formulario al Prodcutocontroller, para ello se ha echo lo siguiente.
+
+Primero de todo me guardo en una variable el formualrio que se lanza cuando se pulsa el boton de finalizar compra, se le añade un eventlistener al boton par que cuando se pulse el boton se ejecut el codigo que se ve en la imagen de abajo. Lo primero qu encontramos al ejecutra el boton es un prevent default, para evitar el envio imediato de este, luego se realiza una solicitud AJAX para envialr el formualrio, y seguidamente se hace un fetch para enviar el formulario de manera asincrona.
+
+![alt text](image-16.png)
+
+Luego se ejecuta la parte que genera el codigo QR, primero se obtiene el id del usuario que esta realizando la compra, y se guarda junto a la url que mostrara los detalles de la compra, seguidamente utilizo la libreria QRcodeJS para generar el QR, a este se la pasa la url que hemos guardado arriba y se especifica el tamaño de este, las dos siguientes linias son para poder mostrar la imagen del QR correctamente, y por ultimo se llama al sweet alert, par que muestre una alerta con el codigo QR, cuando esta alerta sea cerrada el usuario sera redirigido a la pagina home.
+
+![alt text](image-17.png)
+
+Para mostrar los detalles del pedido del usuario una vez escanea el codigo QR, se ha echo a traves del ProductoController ya exsitente, y cargando una vista nueva. Como se puede observar en la imagen de abajo, a traves del id de usuario que se pasa en la url del QR se realizan las consultas necessarias a la BBDD, para obtener los detalles del pedido, estos se guardan en variables, para que en la vista esten disponibles.
+
+![alt text](image-18.png)
+
+
+## Filtro de Productos
 
 
